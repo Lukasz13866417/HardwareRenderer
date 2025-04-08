@@ -1,0 +1,3 @@
+/home/lukasz/HardwareRenderer/build/CMakeFiles/app.dir
+/home/lukasz/HardwareRenderer/build/CMakeFiles/edit_cache.dir
+/home/lukasz/HardwareRenderer/build/CMakeFiles/rebuild_cache.dir
