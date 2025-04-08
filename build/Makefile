@@ -117,24 +117,66 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named app
+# Target rules for targets named app_default
 
 # Build rule for target.
-app: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 app
-.PHONY : app
+app_default: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 app_default
+.PHONY : app_default
 
 # fast build rule for target.
-app/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
-.PHONY : app/fast
+app_default/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/build
+.PHONY : app_default/fast
+
+#=============================================================================
+# Target rules for targets named app_nodebug
+
+# Build rule for target.
+app_nodebug: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 app_nodebug
+.PHONY : app_nodebug
+
+# fast build rule for target.
+app_nodebug/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_nodebug.dir/build.make CMakeFiles/app_nodebug.dir/build
+.PHONY : app_nodebug/fast
+
+#=============================================================================
+# Target rules for targets named app_no_console
+
+# Build rule for target.
+app_no_console: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 app_no_console
+.PHONY : app_no_console
+
+# fast build rule for target.
+app_no_console/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/build
+.PHONY : app_no_console/fast
+
+#=============================================================================
+# Target rules for targets named app_no_file
+
+# Build rule for target.
+app_no_file: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 app_no_file
+.PHONY : app_no_file
+
+# fast build rule for target.
+app_no_file/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/build
+.PHONY : app_no_file/fast
 
 main.o: main.cpp.o
 .PHONY : main.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_nodebug.dir/build.make CMakeFiles/app_nodebug.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -142,7 +184,10 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_nodebug.dir/build.make CMakeFiles/app_nodebug.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -150,15 +195,54 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_nodebug.dir/build.make CMakeFiles/app_nodebug.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+rendering_api/log/log.o: rendering_api/log/log.cpp.o
+.PHONY : rendering_api/log/log.o
+
+# target to build an object file
+rendering_api/log/log.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/rendering_api/log/log.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_nodebug.dir/build.make CMakeFiles/app_nodebug.dir/rendering_api/log/log.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/rendering_api/log/log.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.o
+.PHONY : rendering_api/log/log.cpp.o
+
+rendering_api/log/log.i: rendering_api/log/log.cpp.i
+.PHONY : rendering_api/log/log.i
+
+# target to preprocess a source file
+rendering_api/log/log.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/rendering_api/log/log.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_nodebug.dir/build.make CMakeFiles/app_nodebug.dir/rendering_api/log/log.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/rendering_api/log/log.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.i
+.PHONY : rendering_api/log/log.cpp.i
+
+rendering_api/log/log.s: rendering_api/log/log.cpp.s
+.PHONY : rendering_api/log/log.s
+
+# target to generate assembly for a file
+rendering_api/log/log.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/rendering_api/log/log.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_nodebug.dir/build.make CMakeFiles/app_nodebug.dir/rendering_api/log/log.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/rendering_api/log/log.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.s
+.PHONY : rendering_api/log/log.cpp.s
 
 rendering_api/rendering_pipeline/gpu_context.o: rendering_api/rendering_pipeline/gpu_context.cpp.o
 .PHONY : rendering_api/rendering_pipeline/gpu_context.o
 
 # target to build an object file
 rendering_api/rendering_pipeline/gpu_context.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_nodebug.dir/build.make CMakeFiles/app_nodebug.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o
 .PHONY : rendering_api/rendering_pipeline/gpu_context.cpp.o
 
 rendering_api/rendering_pipeline/gpu_context.i: rendering_api/rendering_pipeline/gpu_context.cpp.i
@@ -166,7 +250,10 @@ rendering_api/rendering_pipeline/gpu_context.i: rendering_api/rendering_pipeline
 
 # target to preprocess a source file
 rendering_api/rendering_pipeline/gpu_context.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/rendering_api/rendering_pipeline/gpu_context.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_nodebug.dir/build.make CMakeFiles/app_nodebug.dir/rendering_api/rendering_pipeline/gpu_context.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu_context.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu_context.cpp.i
 .PHONY : rendering_api/rendering_pipeline/gpu_context.cpp.i
 
 rendering_api/rendering_pipeline/gpu_context.s: rendering_api/rendering_pipeline/gpu_context.cpp.s
@@ -174,7 +261,10 @@ rendering_api/rendering_pipeline/gpu_context.s: rendering_api/rendering_pipeline
 
 # target to generate assembly for a file
 rendering_api/rendering_pipeline/gpu_context.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/rendering_api/rendering_pipeline/gpu_context.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_nodebug.dir/build.make CMakeFiles/app_nodebug.dir/rendering_api/rendering_pipeline/gpu_context.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu_context.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu_context.cpp.s
 .PHONY : rendering_api/rendering_pipeline/gpu_context.cpp.s
 
 # Help Target
@@ -185,10 +275,16 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... app"
+	@echo "... app_default"
+	@echo "... app_no_console"
+	@echo "... app_no_file"
+	@echo "... app_nodebug"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... rendering_api/log/log.o"
+	@echo "... rendering_api/log/log.i"
+	@echo "... rendering_api/log/log.s"
 	@echo "... rendering_api/rendering_pipeline/gpu_context.o"
 	@echo "... rendering_api/rendering_pipeline/gpu_context.i"
 	@echo "... rendering_api/rendering_pipeline/gpu_context.s"

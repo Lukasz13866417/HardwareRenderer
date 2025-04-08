@@ -189,10 +189,11 @@ CMakeFiles/app.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp \
  /usr/include/c++/13/bits/atomic_lockfree_defines.h \
  /usr/include/c++/13/backward/auto_ptr.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
- /usr/include/c++/13/pstl/execution_defs.h /usr/include/c++/13/cassert \
- /usr/include/assert.h /usr/include/c++/13/iostream \
- /usr/include/c++/13/ostream /usr/include/c++/13/ios \
- /usr/include/c++/13/bits/basic_ios.h \
+ /usr/include/c++/13/pstl/execution_defs.h \
+ /home/lukasz/HardwareRenderer/rendering_api/log/log.hpp \
+ /usr/include/c++/13/cassert /usr/include/assert.h \
+ /usr/include/c++/13/iostream /usr/include/c++/13/ostream \
+ /usr/include/c++/13/ios /usr/include/c++/13/bits/basic_ios.h \
  /usr/include/c++/13/bits/locale_facets.h /usr/include/c++/13/cwctype \
  /usr/include/wctype.h /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \

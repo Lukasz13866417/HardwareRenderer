@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/app_no_file.dir/main.cpp.o CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.o -o app_no_file  /usr/lib/x86_64-linux-gnu/libOpenCL.so /usr/lib/x86_64-linux-gnu/libSDL2.so /usr/lib/x86_64-linux-gnu/libSDL2_ttf.so 

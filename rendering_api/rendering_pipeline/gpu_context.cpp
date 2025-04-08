@@ -1,4 +1,5 @@
 #include "gpu_context.hpp"
+#include "../log/log.hpp"
 #include <CL/opencl.hpp>
 #include <iostream>
 #include <stdexcept>
@@ -23,7 +24,7 @@ bool initGPUContext()
     cl::Platform::get(&platforms);
     if (platforms.empty())
     {
-        std::cerr << "No OpenCL platforms found.\n";
+        ERR("No OpenCL platforms found.");
         return false;
     }
 
@@ -33,11 +34,11 @@ bool initGPUContext()
     g_platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);
     if (devices.empty())
     {
-        std::cerr << "No GPU devices found, trying CPU...\n";
+        ERR("No GPU devices found, trying CPU...");
         g_platform.getDevices(CL_DEVICE_TYPE_CPU, &devices);
         if (devices.empty())
         {
-            std::cerr << "No CPU devices found either.\n";
+            ERR("No CPU devices found either.");
             return false;
         }
     }
@@ -76,7 +77,7 @@ void ASSERT_CL_OK(cl_int code) {
     if (code == CL_SUCCESS)
         return;  // Everything is OK, do nothing.
 
-    const char* errStr = "Unknown OpenCL error";
+    std::string errStr = "Unknown OpenCL error";
     switch(code) {
         // run-time and JIT compiler errors
         case CL_DEVICE_NOT_FOUND:                     errStr = "CL_DEVICE_NOT_FOUND"; break;
@@ -134,6 +135,6 @@ void ASSERT_CL_OK(cl_int code) {
         default:                                      errStr = "Unknown OpenCL error"; break;
     }
     
-    std::cerr << "OpenCL error: " << errStr << " (" << code << ")" << std::endl;
+    ERR("OpenCL error: " + errStr + " (" + std::to_string(code) + ")");
     assert(false); 
 }

@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/lukasz/HardwareRenderer/main.cpp" "CMakeFiles/app.dir/main.cpp.o" "gcc" "CMakeFiles/app.dir/main.cpp.o.d"
+  "/home/lukasz/HardwareRenderer/rendering_api/log/log.cpp" "CMakeFiles/app.dir/rendering_api/log/log.cpp.o" "gcc" "CMakeFiles/app.dir/rendering_api/log/log.cpp.o.d"
   "/home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu_context.cpp" "CMakeFiles/app.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o" "gcc" "CMakeFiles/app.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o.d"
   )
 

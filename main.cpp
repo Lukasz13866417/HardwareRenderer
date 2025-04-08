@@ -1,11 +1,15 @@
 #include "rendering_api/rendering_pipeline/gpu_context.hpp"
+#include "rendering_api/log/log.hpp"
 #include<cassert>
 #include<iostream>
 
 int main(){
+
+    Logger::init();
+
     if(!initGPUContext()){
-        std::cerr<<"OpenCL init fail. Can't continue"<<std::endl;
+        ERR("OpenCL init fail. Can't continue");
     }else{
-        std::cerr<<"OpenCL init OK."<<std::endl;
+        INFO("OpenCL init OK.");
     }
 }
