@@ -24,7 +24,7 @@ void Logger::init() {
                           "Log started at: " + currentDateTime() + " " + "---------------------------------------- ";
     logMessage("INIT", ANSI_COLOR_GREEN, initMsg);
 }
-
+;
 void Logger::info(const std::string &msg) {
     logMessage("INFO", ANSI_COLOR_GREEN, msg);
 }

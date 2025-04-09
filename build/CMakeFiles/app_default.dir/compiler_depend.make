@@ -138,6 +138,7 @@ CMakeFiles/app_default.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp \
   /usr/include/c++/13/memory \
   /usr/include/c++/13/mutex \
   /usr/include/c++/13/new \
+  /usr/include/c++/13/optional \
   /usr/include/c++/13/ostream \
   /usr/include/c++/13/pstl/execution_defs.h \
   /usr/include/c++/13/pstl/glue_memory_defs.h \
@@ -612,6 +613,7 @@ CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o: /
   /usr/include/c++/13/memory \
   /usr/include/c++/13/mutex \
   /usr/include/c++/13/new \
+  /usr/include/c++/13/optional \
   /usr/include/c++/13/ostream \
   /usr/include/c++/13/pstl/execution_defs.h \
   /usr/include/c++/13/pstl/glue_memory_defs.h \
@@ -765,6 +767,8 @@ CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o: /
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/xmmintrin.h:
 
+/usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h:
+
 /usr/include/c++/13/functional:
 
 /usr/include/c++/13/ext/type_traits.h:
@@ -796,8 +800,6 @@ CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o: /
 /usr/include/c++/13/cerrno:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-least.h:
-
-/usr/include/c++/13/bits/vector.tcc:
 
 /usr/include/c++/13/bits/stl_function.h:
 
@@ -1014,6 +1016,10 @@ CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o: /
 /usr/include/c++/13/bits/istream.tcc:
 
 /usr/include/c++/13/bits/exception_ptr.h:
+
+/usr/include/c++/13/bits/vector.tcc:
+
+/usr/include/c++/13/optional:
 
 /usr/include/c++/13/bits/streambuf_iterator.h:
 
@@ -1286,5 +1292,3 @@ CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o: /
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h:

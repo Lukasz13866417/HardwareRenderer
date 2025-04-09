@@ -7,9 +7,12 @@ int main(){
 
     Logger::init();
 
-    if(!initGPUContext()){
+    std::optional<GPUContext> _gpuContext = initGPUContext();
+    if(!_gpuContext){
         ERR("OpenCL init fail. Can't continue");
-    }else{
-        INFO("OpenCL init OK.");
+        return 1;
     }
+    INFO("OpenCL init OK.");
+    GPUContext gpu_context = _gpuContext.value();
+    DEBUG("SOMETHING!");
 }

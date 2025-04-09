@@ -1,85 +1,78 @@
-#include "gpu_context.hpp"
 #include "../log/log.hpp"
+#include "gpu_context.hpp"
+
 #include <CL/opencl.hpp>
 #include <iostream>
 #include <stdexcept>
 #include <cassert>
 
-// Keep these in an anonymous namespace so they're private to this .cpp.
-namespace
+std::optional<GPUContext> initGPUContext()
 {
-    bool          g_initialized  = false;
-    cl::Context   g_context;
-    cl::CommandQueue g_commandQueue;
-    cl::Device    g_device;
-    cl::Platform  g_platform;
-}
-
-bool initGPUContext()
-{
-    if (g_initialized)
-        return true;
-
+    // Get all OpenCL platforms
     std::vector<cl::Platform> platforms;
     cl::Platform::get(&platforms);
     if (platforms.empty())
     {
         ERR("No OpenCL platforms found.");
-        return false;
+        return std::nullopt;
     }
 
-    g_platform = platforms[0];
+    // For simplicity, pick the first platform
+    cl::Platform platform = platforms.front();
 
+    // Get GPU devices
     std::vector<cl::Device> devices;
-    g_platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);
+    platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);
     if (devices.empty())
     {
-        ERR("No GPU devices found, trying CPU...");
-        g_platform.getDevices(CL_DEVICE_TYPE_CPU, &devices);
-        if (devices.empty())
-        {
-            ERR("No CPU devices found either.");
-            return false;
-        }
+        ERR("No GPU devices found on the platform.");
+        return std::nullopt;
     }
 
-    g_device = devices[0];
+    // For simplicity, pick the first device
+    cl::Device device = devices.front();
 
-    g_context = cl::Context({g_device});
+    // Create context with error checking using an error code pointer
+    cl_int err = CL_SUCCESS;
+    cl::Context context({ device }, nullptr, nullptr, nullptr, &err);
+    if(err != CL_SUCCESS)
+    {
+        ERR("Failed to create OpenCL context. Error code: " + std::to_string(err));
+        return std::nullopt;
+    }
 
-    g_commandQueue = cl::CommandQueue(g_context, g_device);
+    // Create command queue with error checking
+    cl::CommandQueue queue(context, device, 0, &err);
+    if(err != CL_SUCCESS)
+    {
+        ERR("Failed to create CommandQueue. Error code: " + std::to_string(err));
+        return std::nullopt;
+    }
 
-    g_initialized = true;
-    return true;
+    // All objects were created successfully. Return the GPUContext.
+    GPUContext contextObj(platform, device, context, queue);
+    return contextObj;
 }
 
-cl::CommandQueue getQueue()
-{
-    return g_commandQueue;
-}
 
-cl::Device getDevice()
-{
-    return g_device;
-}
+GPUContext::GPUContext(const cl::Platform&    platform,
+                       const cl::Device&      device,
+                       const cl::Context&     context,
+                       const cl::CommandQueue& queue)
+    : m_platform(platform)
+    , m_device(device)
+    , m_context(context)
+    , m_queue(queue)
+{} // I like to restrict ctors as much as possible
+// e.g. just storing the passed values.
 
-cl::Platform getPlatform()
-{
-    return g_platform;
-}
-
-bool isGPUContextInitialized()
-{
-    return g_initialized;
-}
-
-void ASSERT_CL_OK(cl_int code) {
+void __assert_cl_ok(cl_int code) {
     if (code == CL_SUCCESS)
         return;  // Everything is OK, do nothing.
 
     std::string errStr = "Unknown OpenCL error";
     switch(code) {
-        // run-time and JIT compiler errors
+        // run-time / JIT errors
         case CL_DEVICE_NOT_FOUND:                     errStr = "CL_DEVICE_NOT_FOUND"; break;
         case CL_DEVICE_NOT_AVAILABLE:                 errStr = "CL_DEVICE_NOT_AVAILABLE"; break;
         case CL_COMPILER_NOT_AVAILABLE:               errStr = "CL_COMPILER_NOT_AVAILABLE"; break;

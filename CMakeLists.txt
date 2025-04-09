@@ -30,7 +30,7 @@ add_app_target(app_default)
 
 # Zero logging
 add_app_target(app_nodebug)
-target_compile_definitions(app_nodebug PRIVATE LOG_ENABLE=0)
+target_compile_definitions(app_nodebug PRIVATE LOG_ENABLE=0 NO_CL_ASSERT=1)
 
 # Log only to file
 add_app_target(app_no_console)

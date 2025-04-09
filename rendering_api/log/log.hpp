@@ -50,9 +50,9 @@ private:
     #define ERR(msg)   Logger::error(msg)
 #else
     // If LOG_ENABLE=0, all logging calls are compiled out
-    #define INFO(msg)  do {} while(0)
-    #define DEBUG(msg) do {} while(0)
-    #define ERR(msg)   do {} while(0)
+    #define INFO(msg)  (void*)(nullptr)
+    #define DEBUG(msg) (void*)(nullptr)
+    #define ERR(msg)   (void*)(nullptr)
 #endif
 
 #endif // LOG_HPP
