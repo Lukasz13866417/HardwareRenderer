@@ -9,8 +9,10 @@ find_package(SDL2_ttf REQUIRED)
 function(add_app_target target_name)
     add_executable(${target_name}
         main.cpp
-        rendering_api/rendering_pipeline/gpu_context.cpp
+#        rendering_api/rendering_pipeline/gpu/gpu_context.cpp
+        rendering_api/rendering_pipeline/gpu/gpu_context.cpp
         rendering_api/util/log/log.cpp
+        rendering_api/util/math/math_util.cpp
     )
     target_include_directories(${target_name} PRIVATE 
         "${CMAKE_CURRENT_SOURCE_DIR}/rendering_api/rendering_pipeline"

@@ -83,19 +83,19 @@ CMakeFiles/app_default.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_default.dir/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/main.cpp -o CMakeFiles/app_default.dir/main.cpp.s
 
-CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o: CMakeFiles/app_default.dir/flags.make
-CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o: /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu_context.cpp
-CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o: CMakeFiles/app_default.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o -MF CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o.d -o CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o -c /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu_context.cpp
+CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o: CMakeFiles/app_default.dir/flags.make
+CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o: /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu/gpu_context.cpp
+CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o: CMakeFiles/app_default.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o -MF CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o.d -o CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o -c /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu/gpu_context.cpp
 
-CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu_context.cpp > CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.i
+CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu/gpu_context.cpp > CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.i
 
-CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu_context.cpp -o CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.s
+CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu/gpu_context.cpp -o CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.s
 
 CMakeFiles/app_default.dir/rendering_api/util/log/log.cpp.o: CMakeFiles/app_default.dir/flags.make
 CMakeFiles/app_default.dir/rendering_api/util/log/log.cpp.o: /home/lukasz/HardwareRenderer/rendering_api/util/log/log.cpp
@@ -111,24 +111,40 @@ CMakeFiles/app_default.dir/rendering_api/util/log/log.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_default.dir/rendering_api/util/log/log.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/rendering_api/util/log/log.cpp -o CMakeFiles/app_default.dir/rendering_api/util/log/log.cpp.s
 
+CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.o: CMakeFiles/app_default.dir/flags.make
+CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.o: /home/lukasz/HardwareRenderer/rendering_api/util/math/math_util.cpp
+CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.o: CMakeFiles/app_default.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.o -MF CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.o.d -o CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.o -c /home/lukasz/HardwareRenderer/rendering_api/util/math/math_util.cpp
+
+CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/HardwareRenderer/rendering_api/util/math/math_util.cpp > CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.i
+
+CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/rendering_api/util/math/math_util.cpp -o CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.s
+
 # Object files for target app_default
 app_default_OBJECTS = \
 "CMakeFiles/app_default.dir/main.cpp.o" \
-"CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o" \
-"CMakeFiles/app_default.dir/rendering_api/util/log/log.cpp.o"
+"CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o" \
+"CMakeFiles/app_default.dir/rendering_api/util/log/log.cpp.o" \
+"CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.o"
 
 # External object files for target app_default
 app_default_EXTERNAL_OBJECTS =
 
 app_default: CMakeFiles/app_default.dir/main.cpp.o
-app_default: CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o
+app_default: CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o
 app_default: CMakeFiles/app_default.dir/rendering_api/util/log/log.cpp.o
+app_default: CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.o
 app_default: CMakeFiles/app_default.dir/build.make
 app_default: /usr/lib/x86_64-linux-gnu/libOpenCL.so
 app_default: /usr/lib/x86_64-linux-gnu/libSDL2.so
 app_default: /usr/lib/x86_64-linux-gnu/libSDL2_ttf.so
 app_default: CMakeFiles/app_default.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable app_default"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable app_default"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/app_default.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

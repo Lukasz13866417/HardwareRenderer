@@ -1,4 +1,4 @@
-#include "rendering_api/rendering_pipeline/gpu_context.hpp"
+#include "rendering_api/rendering_pipeline/gpu/gpu_context.hpp"
 #include "rendering_api/util/log/log.hpp"
 #include<cassert>
 #include<iostream>

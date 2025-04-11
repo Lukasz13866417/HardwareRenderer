@@ -6,6 +6,9 @@
 #include <vector>
 #include <optional>
 #include <stdexcept>
+#ifdef NDEBUG
+#define NO_CL_ASSERT 1
+#endif
 #ifndef NO_CL_ASSERT
 #define NO_CL_ASSERT 0
 #endif

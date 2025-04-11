@@ -201,38 +201,38 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-rendering_api/rendering_pipeline/gpu_context.o: rendering_api/rendering_pipeline/gpu_context.cpp.o
-.PHONY : rendering_api/rendering_pipeline/gpu_context.o
+rendering_api/rendering_pipeline/gpu/gpu_context.o: rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o
+.PHONY : rendering_api/rendering_pipeline/gpu/gpu_context.o
 
 # target to build an object file
-rendering_api/rendering_pipeline/gpu_context.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o
-.PHONY : rendering_api/rendering_pipeline/gpu_context.cpp.o
+rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o
+.PHONY : rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o
 
-rendering_api/rendering_pipeline/gpu_context.i: rendering_api/rendering_pipeline/gpu_context.cpp.i
-.PHONY : rendering_api/rendering_pipeline/gpu_context.i
+rendering_api/rendering_pipeline/gpu/gpu_context.i: rendering_api/rendering_pipeline/gpu/gpu_context.cpp.i
+.PHONY : rendering_api/rendering_pipeline/gpu/gpu_context.i
 
 # target to preprocess a source file
-rendering_api/rendering_pipeline/gpu_context.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/rendering_api/rendering_pipeline/gpu_context.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu_context.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu_context.cpp.i
-.PHONY : rendering_api/rendering_pipeline/gpu_context.cpp.i
+rendering_api/rendering_pipeline/gpu/gpu_context.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.i
+.PHONY : rendering_api/rendering_pipeline/gpu/gpu_context.cpp.i
 
-rendering_api/rendering_pipeline/gpu_context.s: rendering_api/rendering_pipeline/gpu_context.cpp.s
-.PHONY : rendering_api/rendering_pipeline/gpu_context.s
+rendering_api/rendering_pipeline/gpu/gpu_context.s: rendering_api/rendering_pipeline/gpu/gpu_context.cpp.s
+.PHONY : rendering_api/rendering_pipeline/gpu/gpu_context.s
 
 # target to generate assembly for a file
-rendering_api/rendering_pipeline/gpu_context.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/rendering_api/rendering_pipeline/gpu_context.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu_context.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu_context.cpp.s
-.PHONY : rendering_api/rendering_pipeline/gpu_context.cpp.s
+rendering_api/rendering_pipeline/gpu/gpu_context.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.s
+.PHONY : rendering_api/rendering_pipeline/gpu/gpu_context.cpp.s
 
 rendering_api/util/log/log.o: rendering_api/util/log/log.cpp.o
 .PHONY : rendering_api/util/log/log.o
@@ -267,6 +267,39 @@ rendering_api/util/log/log.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/rendering_api/util/log/log.cpp.s
 .PHONY : rendering_api/util/log/log.cpp.s
 
+rendering_api/util/math/math_util.o: rendering_api/util/math/math_util.cpp.o
+.PHONY : rendering_api/util/math/math_util.o
+
+# target to build an object file
+rendering_api/util/math/math_util.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/rendering_api/util/math/math_util.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/rendering_api/util/math/math_util.cpp.o
+.PHONY : rendering_api/util/math/math_util.cpp.o
+
+rendering_api/util/math/math_util.i: rendering_api/util/math/math_util.cpp.i
+.PHONY : rendering_api/util/math/math_util.i
+
+# target to preprocess a source file
+rendering_api/util/math/math_util.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/rendering_api/util/math/math_util.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/rendering_api/util/math/math_util.cpp.i
+.PHONY : rendering_api/util/math/math_util.cpp.i
+
+rendering_api/util/math/math_util.s: rendering_api/util/math/math_util.cpp.s
+.PHONY : rendering_api/util/math/math_util.s
+
+# target to generate assembly for a file
+rendering_api/util/math/math_util.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/rendering_api/util/math/math_util.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/rendering_api/util/math/math_util.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/rendering_api/util/math/math_util.cpp.s
+.PHONY : rendering_api/util/math/math_util.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -282,12 +315,15 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... rendering_api/rendering_pipeline/gpu_context.o"
-	@echo "... rendering_api/rendering_pipeline/gpu_context.i"
-	@echo "... rendering_api/rendering_pipeline/gpu_context.s"
+	@echo "... rendering_api/rendering_pipeline/gpu/gpu_context.o"
+	@echo "... rendering_api/rendering_pipeline/gpu/gpu_context.i"
+	@echo "... rendering_api/rendering_pipeline/gpu/gpu_context.s"
 	@echo "... rendering_api/util/log/log.o"
 	@echo "... rendering_api/util/log/log.i"
 	@echo "... rendering_api/util/log/log.s"
+	@echo "... rendering_api/util/math/math_util.o"
+	@echo "... rendering_api/util/math/math_util.i"
+	@echo "... rendering_api/util/math/math_util.s"
 .PHONY : help
 
 
