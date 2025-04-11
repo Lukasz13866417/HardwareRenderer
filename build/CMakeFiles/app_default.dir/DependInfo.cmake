@@ -9,8 +9,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/lukasz/HardwareRenderer/main.cpp" "CMakeFiles/app_default.dir/main.cpp.o" "gcc" "CMakeFiles/app_default.dir/main.cpp.o.d"
-  "/home/lukasz/HardwareRenderer/rendering_api/log/log.cpp" "CMakeFiles/app_default.dir/rendering_api/log/log.cpp.o" "gcc" "CMakeFiles/app_default.dir/rendering_api/log/log.cpp.o.d"
   "/home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu_context.cpp" "CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o" "gcc" "CMakeFiles/app_default.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o.d"
+  "/home/lukasz/HardwareRenderer/rendering_api/util/log/log.cpp" "CMakeFiles/app_default.dir/rendering_api/util/log/log.cpp.o" "gcc" "CMakeFiles/app_default.dir/rendering_api/util/log/log.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

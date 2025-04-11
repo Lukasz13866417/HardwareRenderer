@@ -1,5 +1,5 @@
 /home/lukasz/HardwareRenderer/build/CMakeFiles/app_default.dir
-/home/lukasz/HardwareRenderer/build/CMakeFiles/app_nodebug.dir
+/home/lukasz/HardwareRenderer/build/CMakeFiles/app_no_debug.dir
 /home/lukasz/HardwareRenderer/build/CMakeFiles/app_no_console.dir
 /home/lukasz/HardwareRenderer/build/CMakeFiles/app_no_file.dir
 /home/lukasz/HardwareRenderer/build/CMakeFiles/edit_cache.dir

@@ -1,7 +1,8 @@
 CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o: \
  /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu_context.cpp \
  /usr/include/stdc-predef.h \
- /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/../log/log.hpp \
+ /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/../util/log/log.hpp \
+ /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/../util/log/log_config.hpp \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -194,14 +195,18 @@ CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o: \
  /usr/include/c++/13/backward/auto_ptr.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h /usr/include/c++/13/optional \
- /usr/include/c++/13/iostream /usr/include/c++/13/ostream \
+ /usr/include/c++/13/fstream /usr/include/c++/13/istream \
  /usr/include/c++/13/ios /usr/include/c++/13/bits/basic_ios.h \
  /usr/include/c++/13/bits/locale_facets.h /usr/include/c++/13/cwctype \
  /usr/include/wctype.h /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h \
  /usr/include/c++/13/bits/locale_facets.tcc \
- /usr/include/c++/13/bits/basic_ios.tcc \
- /usr/include/c++/13/bits/ostream.tcc /usr/include/c++/13/istream \
- /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/cassert \
- /usr/include/assert.h
+ /usr/include/c++/13/bits/basic_ios.tcc /usr/include/c++/13/ostream \
+ /usr/include/c++/13/bits/ostream.tcc \
+ /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/bits/codecvt.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
+ /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/sstream \
+ /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/iostream \
+ /usr/include/c++/13/cassert /usr/include/assert.h

@@ -64,7 +64,7 @@ CMAKE_BINARY_DIR = /home/lukasz/HardwareRenderer/build
 
 # The main recursive "all" target.
 all: CMakeFiles/app_default.dir/all
-all: CMakeFiles/app_nodebug.dir/all
+all: CMakeFiles/app_no_debug.dir/all
 all: CMakeFiles/app_no_console.dir/all
 all: CMakeFiles/app_no_file.dir/all
 .PHONY : all
@@ -75,7 +75,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/app_default.dir/clean
-clean: CMakeFiles/app_nodebug.dir/clean
+clean: CMakeFiles/app_no_debug.dir/clean
 clean: CMakeFiles/app_no_console.dir/clean
 clean: CMakeFiles/app_no_file.dir/clean
 .PHONY : clean
@@ -107,30 +107,30 @@ CMakeFiles/app_default.dir/clean:
 .PHONY : CMakeFiles/app_default.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/app_nodebug.dir
+# Target rules for target CMakeFiles/app_no_debug.dir
 
 # All Build rule for target.
-CMakeFiles/app_nodebug.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_nodebug.dir/build.make CMakeFiles/app_nodebug.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_nodebug.dir/build.make CMakeFiles/app_nodebug.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=13,14,15,16 "Built target app_nodebug"
-.PHONY : CMakeFiles/app_nodebug.dir/all
+CMakeFiles/app_no_debug.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=9,10,11,12 "Built target app_no_debug"
+.PHONY : CMakeFiles/app_no_debug.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/app_nodebug.dir/rule: cmake_check_build_system
+CMakeFiles/app_no_debug.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lukasz/HardwareRenderer/build/CMakeFiles 4
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/app_nodebug.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/app_no_debug.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lukasz/HardwareRenderer/build/CMakeFiles 0
-.PHONY : CMakeFiles/app_nodebug.dir/rule
+.PHONY : CMakeFiles/app_no_debug.dir/rule
 
 # Convenience name for target.
-app_nodebug: CMakeFiles/app_nodebug.dir/rule
-.PHONY : app_nodebug
+app_no_debug: CMakeFiles/app_no_debug.dir/rule
+.PHONY : app_no_debug
 
 # clean rule for target.
-CMakeFiles/app_nodebug.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_nodebug.dir/build.make CMakeFiles/app_nodebug.dir/clean
-.PHONY : CMakeFiles/app_nodebug.dir/clean
+CMakeFiles/app_no_debug.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/clean
+.PHONY : CMakeFiles/app_no_debug.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/app_no_console.dir
@@ -165,7 +165,7 @@ CMakeFiles/app_no_console.dir/clean:
 CMakeFiles/app_no_file.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=9,10,11,12 "Built target app_no_file"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=13,14,15,16 "Built target app_no_file"
 .PHONY : CMakeFiles/app_no_file.dir/all
 
 # Build rule for subdir invocation for target.

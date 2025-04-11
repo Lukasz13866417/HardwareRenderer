@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline -I/home/lukasz/HardwareRenderer/rendering_api/log -isystem /usr/include/SDL2
+CXX_INCLUDES = -I/home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline -I/home/lukasz/HardwareRenderer/rendering_api/util/log -isystem /usr/include/SDL2
 
 CXX_FLAGS = 
 

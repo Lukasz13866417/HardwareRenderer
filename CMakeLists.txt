@@ -10,11 +10,11 @@ function(add_app_target target_name)
     add_executable(${target_name}
         main.cpp
         rendering_api/rendering_pipeline/gpu_context.cpp
-        rendering_api/log/log.cpp
+        rendering_api/util/log/log.cpp
     )
     target_include_directories(${target_name} PRIVATE 
         "${CMAKE_CURRENT_SOURCE_DIR}/rendering_api/rendering_pipeline"
-        "${CMAKE_CURRENT_SOURCE_DIR}/rendering_api/log"
+        "${CMAKE_CURRENT_SOURCE_DIR}/rendering_api/util/log"
     )
     target_include_directories(${target_name} PRIVATE ${OpenCL_INCLUDE_DIRS})
     target_link_libraries(${target_name} PRIVATE ${OpenCL_LIBRARIES})
@@ -29,8 +29,8 @@ endfunction()
 add_app_target(app_default)
 
 # Zero logging
-add_app_target(app_nodebug)
-target_compile_definitions(app_nodebug PRIVATE LOG_ENABLE=0 NO_CL_ASSERT=1)
+add_app_target(app_no_debug)
+target_compile_definitions(app_no_debug PRIVATE LOG_ENABLE=0 NO_CL_ASSERT=1)
 
 # Log only to file
 add_app_target(app_no_console)

@@ -97,32 +97,32 @@ CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu_context.cpp.s: c
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu_context.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu_context.cpp -o CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu_context.cpp.s
 
-CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.o: CMakeFiles/app_no_file.dir/flags.make
-CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.o: /home/lukasz/HardwareRenderer/rendering_api/log/log.cpp
-CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.o: CMakeFiles/app_no_file.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.o -MF CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.o.d -o CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.o -c /home/lukasz/HardwareRenderer/rendering_api/log/log.cpp
+CMakeFiles/app_no_file.dir/rendering_api/util/log/log.cpp.o: CMakeFiles/app_no_file.dir/flags.make
+CMakeFiles/app_no_file.dir/rendering_api/util/log/log.cpp.o: /home/lukasz/HardwareRenderer/rendering_api/util/log/log.cpp
+CMakeFiles/app_no_file.dir/rendering_api/util/log/log.cpp.o: CMakeFiles/app_no_file.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/app_no_file.dir/rendering_api/util/log/log.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_no_file.dir/rendering_api/util/log/log.cpp.o -MF CMakeFiles/app_no_file.dir/rendering_api/util/log/log.cpp.o.d -o CMakeFiles/app_no_file.dir/rendering_api/util/log/log.cpp.o -c /home/lukasz/HardwareRenderer/rendering_api/util/log/log.cpp
 
-CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/HardwareRenderer/rendering_api/log/log.cpp > CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.i
+CMakeFiles/app_no_file.dir/rendering_api/util/log/log.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_no_file.dir/rendering_api/util/log/log.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/HardwareRenderer/rendering_api/util/log/log.cpp > CMakeFiles/app_no_file.dir/rendering_api/util/log/log.cpp.i
 
-CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/rendering_api/log/log.cpp -o CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.s
+CMakeFiles/app_no_file.dir/rendering_api/util/log/log.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_no_file.dir/rendering_api/util/log/log.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/rendering_api/util/log/log.cpp -o CMakeFiles/app_no_file.dir/rendering_api/util/log/log.cpp.s
 
 # Object files for target app_no_file
 app_no_file_OBJECTS = \
 "CMakeFiles/app_no_file.dir/main.cpp.o" \
 "CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o" \
-"CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.o"
+"CMakeFiles/app_no_file.dir/rendering_api/util/log/log.cpp.o"
 
 # External object files for target app_no_file
 app_no_file_EXTERNAL_OBJECTS =
 
 app_no_file: CMakeFiles/app_no_file.dir/main.cpp.o
 app_no_file: CMakeFiles/app_no_file.dir/rendering_api/rendering_pipeline/gpu_context.cpp.o
-app_no_file: CMakeFiles/app_no_file.dir/rendering_api/log/log.cpp.o
+app_no_file: CMakeFiles/app_no_file.dir/rendering_api/util/log/log.cpp.o
 app_no_file: CMakeFiles/app_no_file.dir/build.make
 app_no_file: /usr/lib/x86_64-linux-gnu/libOpenCL.so
 app_no_file: /usr/lib/x86_64-linux-gnu/libSDL2.so

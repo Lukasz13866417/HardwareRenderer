@@ -1,4 +1,4 @@
-CMakeFiles/app_nodebug.dir/main.cpp.o: \
+CMakeFiles/app_no_debug.dir/main.cpp.o: \
  /home/lukasz/HardwareRenderer/main.cpp /usr/include/stdc-predef.h \
  /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu_context.hpp \
  /usr/include/CL/opencl.hpp /usr/include/CL/opencl.h /usr/include/CL/cl.h \
@@ -190,7 +190,8 @@ CMakeFiles/app_nodebug.dir/main.cpp.o: \
  /usr/include/c++/13/backward/auto_ptr.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h /usr/include/c++/13/optional \
- /home/lukasz/HardwareRenderer/rendering_api/log/log.hpp \
+ /home/lukasz/HardwareRenderer/rendering_api/util/log/log.hpp \
+ /home/lukasz/HardwareRenderer/rendering_api/util/log/log_config.hpp \
  /usr/include/c++/13/cassert /usr/include/assert.h \
  /usr/include/c++/13/iostream /usr/include/c++/13/ostream \
  /usr/include/c++/13/ios /usr/include/c++/13/bits/basic_ios.h \

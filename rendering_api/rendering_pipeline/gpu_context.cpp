@@ -1,57 +1,65 @@
-#include "../log/log.hpp"
+#include "../util/log/log.hpp"
 #include "gpu_context.hpp"
-
+#include <fstream>
+#include <sstream>
+#include <string>
 #include <CL/opencl.hpp>
 #include <iostream>
 #include <stdexcept>
 #include <cassert>
 
+namespace hwr{
+
 std::optional<GPUContext> initGPUContext()
 {
-    // Get all OpenCL platforms
     std::vector<cl::Platform> platforms;
     cl::Platform::get(&platforms);
     if (platforms.empty())
     {
-        ERR("No OpenCL platforms found.");
+        HWR_ERR("No OpenCL platforms found.");
         return std::nullopt;
     }
 
-    // For simplicity, pick the first platform
     cl::Platform platform = platforms.front();
 
-    // Get GPU devices
     std::vector<cl::Device> devices;
     platform.getDevices(CL_DEVICE_TYPE_GPU, &devices);
     if (devices.empty())
     {
-        ERR("No GPU devices found on the platform.");
+        HWR_ERR("No GPU devices found on the platform.");
         return std::nullopt;
     }
 
-    // For simplicity, pick the first device
     cl::Device device = devices.front();
 
-    // Create context with error checking using an error code pointer
     cl_int err = CL_SUCCESS;
     cl::Context context({ device }, nullptr, nullptr, nullptr, &err);
     if(err != CL_SUCCESS)
     {
-        ERR("Failed to create OpenCL context. Error code: " + std::to_string(err));
+        HWR_ERR("Failed to create OpenCL context. Error code: " + std::to_string(err));
         return std::nullopt;
     }
 
-    // Create command queue with error checking
     cl::CommandQueue queue(context, device, 0, &err);
     if(err != CL_SUCCESS)
     {
-        ERR("Failed to create CommandQueue. Error code: " + std::to_string(err));
+        HWR_ERR("Failed to create CommandQueue. Error code: " + std::to_string(err));
         return std::nullopt;
     }
 
-    // All objects were created successfully. Return the GPUContext.
     GPUContext contextObj(platform, device, context, queue);
     return contextObj;
+}
+
+std::optional<std::string> getFileContent(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        HWR_ERR("Failed to open kernel source file: " + filename);
+        return std::nullopt;
+    }
+    std::stringstream ss;
+    ss << file.rdbuf();
+    return ss.str();
 }
 
 
@@ -128,6 +136,8 @@ void __assert_cl_ok(cl_int code) {
         default:                                      errStr = "Unknown OpenCL error"; break;
     }
     
-    ERR("OpenCL error: " + errStr + " (" + std::to_string(code) + ")");
+    HWR_ERR("OpenCL error: " + errStr + " (" + std::to_string(code) + ")");
     assert(false); 
+}
+
 }
