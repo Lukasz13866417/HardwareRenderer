@@ -29,6 +29,8 @@ endfunction()
 
 # Log both in file and console
 add_app_target(app_default)
+target_compile_definitions(app_default PRIVATE LOG_ENABLE=1 LOG_ENABLE_CONSOLE=1 LOG_ENABLE_FILE=1 NO_CL_ASSERT=0)
+
 
 # Zero logging
 add_app_target(app_no_debug)
@@ -36,8 +38,8 @@ target_compile_definitions(app_no_debug PRIVATE LOG_ENABLE=0 NO_CL_ASSERT=1)
 
 # Log only to file
 add_app_target(app_no_console)
-target_compile_definitions(app_no_console PRIVATE LOG_ENABLE_CONSOLE=0)
+target_compile_definitions(app_no_console PRIVATE LOG_ENABLE_CONSOLE=0 NO_CL_ASSERT=0)
 
 # Log only to console
 add_app_target(app_no_file)
-target_compile_definitions(app_no_file PRIVATE LOG_ENABLE_FILE=0)
+target_compile_definitions(app_no_file PRIVATE LOG_ENABLE_FILE=0 NO_CL_ASSERT=0)

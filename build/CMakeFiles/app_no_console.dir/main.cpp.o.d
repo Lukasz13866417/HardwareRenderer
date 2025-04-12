@@ -1,6 +1,7 @@
 CMakeFiles/app_no_console.dir/main.cpp.o: \
  /home/lukasz/HardwareRenderer/main.cpp /usr/include/stdc-predef.h \
  /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu/gpu_context.hpp \
+ /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu/./gpu_assert_macros_detail.hpp \
  /usr/include/CL/opencl.hpp /usr/include/CL/opencl.h /usr/include/CL/cl.h \
  /usr/include/CL/cl_version.h /usr/include/CL/cl_platform.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \

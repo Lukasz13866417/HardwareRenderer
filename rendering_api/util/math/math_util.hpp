@@ -5,22 +5,27 @@
 #include <cstddef>
 #include <type_traits>
 #include <cassert>
-#include <cmath> // for sqrt
+#include <cmath> 
 
 namespace hwr {
 
-    struct SimpleVec4 {
-        float x, y, z, w;
+    namespace detail {
+
+        struct SimpleVec4 {
+            float x, y, z, w;
+        };
+
+        struct SafeVec4 {
+            union {
+                float values[4];
+                struct { float x, y, z, w; };
+            };  
+        };
+
     };
 
-    struct SafeVec4 {
-        union {
-            float values[4];
-            struct { float x, y, z, w; };
-        };  
-    };
-
-    using vec4f = std::conditional_t<sizeof(SimpleVec4) == 16, SimpleVec4, SafeVec4>;
+    using vec4f = std::conditional_t<sizeof(detail::SimpleVec4) == 16,
+                                 detail::SimpleVec4, detail::SafeVec4>;
 
     static_assert(sizeof(vec4f) == 16, "vec4f must be exactly 16 bytes");
 

@@ -34,3 +34,45 @@
 [23:56:34.110] [INIT] ---------------------------------------- Log started at: 2025-04-11 23:56:34 ---------------------------------------- 
 [23:56:34.145] [INFO] OpenCL init OK.
 [23:56:34.145] [DEBUG] SOMETHING!
+[23:27:04.827] [INIT] ---------------------------------------- Log started at: 2025-04-12 23:27:04 ---------------------------------------- 
+[23:27:05.006] [INFO] OpenCL init OK.
+[23:27:05.006] [DEBUG] SOMETHING!
+[23:27:09.882] [INIT] ---------------------------------------- Log started at: 2025-04-12 23:27:09 ---------------------------------------- 
+[23:27:09.913] [INFO] OpenCL init OK.
+[23:27:09.913] [DEBUG] SOMETHING!
+[23:28:36.111] [INIT] ---------------------------------------- Log started at: 2025-04-12 23:28:36 ---------------------------------------- 
+[23:28:36.142] [INFO] OpenCL init OK.
+[23:28:36.142] [DEBUG] SOMETHING!
+[00:26:44.483] [INIT] ---------------------------------------- Log started at: 2025-04-13 00:26:44 ---------------------------------------- 
+[00:26:44.517] [INFO] OpenCL init OK.
+[00:26:44.517] [DEBUG] SOMETHING!
+[00:28:21.749] [INIT] ---------------------------------------- Log started at: 2025-04-13 00:28:21 ---------------------------------------- 
+[00:28:21.777] [INFO] OpenCL init OK.
+[00:28:21.777] [DEBUG] SOMETHING!
+[00:28:21.777] [ERROR] OpenCL error: Unknown OpenCL error (1)
+Situation: Hello
+[00:30:11.083] [INIT] ---------------------------------------- Log started at: 2025-04-13 00:30:11 ---------------------------------------- 
+[00:30:11.117] [INFO] OpenCL init OK.
+[00:30:11.117] [DEBUG] SOMETHING!
+[00:30:11.117] [ERROR] OpenCL error: Unknown OpenCL error (1)
+Situation: not specified
+[00:30:22.337] [INIT] ---------------------------------------- Log started at: 2025-04-13 00:30:22 ---------------------------------------- 
+[00:30:22.367] [INFO] OpenCL init OK.
+[00:30:22.367] [DEBUG] SOMETHING!
+[00:30:22.367] [ERROR] OpenCL error: Unknown OpenCL error (1)
+Situation: KEKW
+[00:39:16.628] [INIT] ---------------------------------------- Log started at: 2025-04-13 00:39:16 ---------------------------------------- 
+[00:39:16.665] [INFO] OpenCL init OK.
+[00:39:16.665] [DEBUG] SOMETHING!
+[00:39:16.665] [ERROR] OpenCL error: Unknown OpenCL error (1)
+Situation: KEKW
+[01:16:51.884] [INIT] ---------------------------------------- Log started at: 2025-04-13 01:16:51 ---------------------------------------- 
+[01:16:51.916] [INFO] OpenCL init OK.
+[01:16:51.916] [DEBUG] SOMETHING!
+[01:16:51.916] [ERROR] OpenCL error: Unknown OpenCL error (1)
+Situation: KEKW
+[01:17:01.463] [INIT] ---------------------------------------- Log started at: 2025-04-13 01:17:01 ---------------------------------------- 
+[01:17:01.498] [INFO] OpenCL init OK.
+[01:17:01.498] [DEBUG] SOMETHING!
+[01:17:01.498] [ERROR] OpenCL error: Unknown OpenCL error (1)
+Situation: KEKW

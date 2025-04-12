@@ -15,4 +15,6 @@ int main(){
     HWR_INFO("OpenCL init OK.");
     hwr::GPUContext gpu_context = _gpuContext.value();
     HWR_DEBUG("SOMETHING!");
+
+    HWR_ASSERT_CL_OK(1, "KEKW");
 }

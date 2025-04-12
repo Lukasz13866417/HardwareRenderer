@@ -62,7 +62,6 @@ std::optional<std::string> getFileContent(const std::string& filename) {
     return ss.str();
 }
 
-
 GPUContext::GPUContext(const cl::Platform&    platform,
                        const cl::Device&      device,
                        const cl::Context&     context,
@@ -71,10 +70,9 @@ GPUContext::GPUContext(const cl::Platform&    platform,
     , m_device(device)
     , m_context(context)
     , m_queue(queue)
-{} // I like to restrict ctors as much as possible
-// e.g. just storing the passed values.
+{}
 
-void __assert_cl_ok(cl_int code) {
+void __assert_cl_ok(cl_int code, const std::string& situation) {
     if (code == CL_SUCCESS)
         return;  // Everything is OK, do nothing.
 
@@ -136,7 +134,7 @@ void __assert_cl_ok(cl_int code) {
         default:                                      errStr = "Unknown OpenCL error"; break;
     }
     
-    HWR_ERR("OpenCL error: " + errStr + " (" + std::to_string(code) + ")");
+    HWR_ERR("OpenCL error: " + errStr + " (" + std::to_string(code) + ")\nSituation: "+situation);
     assert(false); 
 }
 
