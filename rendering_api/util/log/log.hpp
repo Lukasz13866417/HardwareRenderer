@@ -28,20 +28,20 @@ namespace hwr {
     #define HWR_FATAL(msg) hwr::detail::Fatal(msg)
     #define HWR_SUCCESS(msg) hwr::detail::Success(msg)
 #else
-    #define HWR_LOG_INIT() (void*)(nullptr)
-    #define HWR_INFO(msg)  (void*)(nullptr)
-    #define HWR_DEBUG(msg) (void*)(nullptr)
-    #define HWR_ERR(msg)   (void*)(nullptr)
+    #define HWR_LOG_INIT()  do {} while(0)
+    #define HWR_INFO(msg)   do {} while(0)
+    #define HWR_DEBUG(msg)  do {} while(0)
+    #define HWR_ERR(msg)    do {} while(0)
     #define HWR_FATAL(msg) throw std::runtime_error(msg)
-    #define HWR_SUCCESS(msg) (void*)(nullptr)
+    #define HWR_SUCCESS(msg)  do {} while(0)
 #endif
 
 #ifndef NDEBUG
     #define HWR_ASSERT(cond, msg) hwr::detail::Assert(cond, msg)
     #define HWR_ASSERT_CL_OK(code, when)     hwr::detail::Assert_CL_OK(code, when)
 #else
-    #define HWR_ASSERT(cond, msg)   (void*)(nullptr)
-    #define HWR_ASSERT_CL_OK(code, msg) (void*)(nullptr)
+    #define HWR_ASSERT(cond, msg)    do {} while(0)
+    #define HWR_ASSERT_CL_OK(code, msg)  do {} while(0)
 #endif
 
 #endif // LOG_HPP

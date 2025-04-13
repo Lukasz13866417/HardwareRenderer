@@ -66,4 +66,25 @@ namespace hwr {
         };
     }
 
+    std::string to_string(const vec4f& v) {
+        return "vec4f(" +
+            std::to_string(v.x) + ", " +
+            std::to_string(v.y) + ", " +
+            std::to_string(v.z) + ", " +
+            std::to_string(v.w) + ")";
+    }
+    
+    std::string to_string(const mat4f& m) {
+        std::string out = "mat4f(\n";
+        for (int i = 0; i < 4; ++i) {
+            out += "  [ ";
+            for (int j = 0; j < 4; ++j) {
+                out += std::to_string(m.m[i][j]) + (j < 3 ? ", " : "");
+            }
+            out += " ]\n";
+        }
+        out += ")";
+        return out;
+    }
+
 } // namespace hwr

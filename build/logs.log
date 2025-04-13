@@ -105,3 +105,18 @@ Situation: KEKW
 [22:58:37.105] [INFO] OpenCL init OK.
 [22:58:37.105] [DEBUG] SOMETHING!
 [22:58:37.105] [SUCCESS] Everything works because nothing's been tested
+[01:19:30.604] [INIT] ---------------------------------------- Log started at: 2025-04-14 01:19:30 ---------------------------------------- 
+[01:19:30.637] [INFO] OpenCL init OK.
+[01:19:30.637] [DEBUG] SOMETHING!
+[01:19:30.637] [SUCCESS] Everything works because nothing's been tested
+[01:30:02.646] [INIT] ---------------------------------------- Log started at: 2025-04-14 01:30:02 ---------------------------------------- 
+[01:30:02.675] [INFO] OpenCL init OK.
+[01:30:02.675] [DEBUG] SOMETHING!
+[01:30:02.675] [SUCCESS] Everything works because nothing's been tested
+[01:39:48.752] [INIT] ---------------------------------------- Log started at: 2025-04-14 01:39:48 ---------------------------------------- 
+[01:39:48.780] [INFO] OpenCL init OK.
+[01:39:48.781] [DEBUG] SOMETHING!
+[01:39:48.781] [SUCCESS] Everything works because nothing's been tested.
+[01:39:48.781] [SUCCESS] All purpose buffer has been created.
+[01:39:48.781] [SUCCESS] Some vector data has been read.
+[01:39:48.781] [INFO] The end.

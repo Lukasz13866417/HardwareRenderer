@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include <type_traits>
 #include <algorithm> 
+#include <span>
 
 namespace hwr {
 
@@ -14,12 +15,12 @@ namespace hwr {
 template<typename T>
 class BaseBuffer {
 protected:
-    cl::Buffer m_buffer;
     size_t m_size;
     const GPUContext& m_ctx;
+    cl::Buffer m_buffer;
 
     BaseBuffer(const GPUContext& ctx, size_t elementCount)
-        : m_ctx(ctx), m_size(elementCount)
+        : m_size(elementCount),m_ctx(ctx)
     {
         static_assert(std::is_trivially_copyable<T>::value, 
                             "T must be trivially copyable");
@@ -53,19 +54,20 @@ constexpr inline bool has_flag() {
 }
 
 // Helper that translates user-friendly BufferFlags into OpenCL memory flags
-template<BufferFlag Target, BufferFlag... Flags>
+template<BufferFlag... Flags>
 constexpr inline cl_mem_flags deduceFlags(){
     // Deduce device (GPU) access flags:
     constexpr bool gpuRead  = has_flag<GPU_READ, Flags...>();
     constexpr bool gpuWrite = has_flag<GPU_WRITE, Flags...>();
     cl_mem_flags clFlags = 0;
-    if (gpuRead && !gpuWrite)
+    if (gpuRead && !gpuWrite){
         clFlags |= CL_MEM_READ_ONLY;
-    else if (gpuWrite && !gpuRead)
+    } else if (gpuWrite && !gpuRead){
         clFlags |= CL_MEM_WRITE_ONLY;
-    else
+    } else{
         clFlags |= CL_MEM_READ_WRITE; // Default: both read & write.
         // Same as in OpenCL - default flag is CL_MEM_READ_WRITE.
+    }
 
     // Deduce host access flags:
     constexpr bool hostRead  = has_flag<HOST_READ, Flags...>();
@@ -82,20 +84,21 @@ constexpr inline cl_mem_flags deduceFlags(){
 // template BufferFlag args. It allows using enqueueWriteBuffer() in writeFrom
 // and enqueueReadBuffer() in readTo() if allowed by the host flags.
 
-// TODO add move semantics if data is rvalue reference.
 template<typename T, BufferFlag... Flags>
 class GeneralBuffer : public BaseBuffer<T> {
 public:
     // 'data' is an optional vector to initialize the buffer.
     GeneralBuffer(const GPUContext& ctx, size_t elementCount, 
                   const std::vector<T> &data = {})
-    : BaseBuffer<T>(ctx, elementCount)
-    {
+    : BaseBuffer<T>(ctx, elementCount){
         
         cl_mem_flags clFlags = deduceFlags<Flags...>();
         // Use initial data if provided:
-        T* hostPtr = nullptr;
+        const T* hostPtr = nullptr;
         if (!data.empty()) {
+            if (data.size() != elementCount) {
+                HWR_FATAL("GeneralBuffer: Data size doesn't match element count");
+            }
             clFlags |= CL_MEM_COPY_HOST_PTR;
             hostPtr = data.data();
         }
@@ -105,7 +108,31 @@ public:
             ctx.getContext(),
             clFlags,
             sizeof(T) * elementCount,
-            hostPtr
+            // OpenCL wants void* anyway.
+            const_cast<void*>(static_cast<const void*>(hostPtr))
+        );
+    }
+
+    GeneralBuffer(const GPUContext& ctx, size_t elementCount, 
+        const std::span<const T> &data)
+    : BaseBuffer<T>(ctx, elementCount){
+
+        cl_mem_flags clFlags = deduceFlags<Flags...>();
+        // Use initial data if provided:
+        if (data.size() != elementCount) {
+            HWR_FATAL("GeneralBuffer: Data size doesn't match element count");
+        }
+        clFlags |= CL_MEM_COPY_HOST_PTR;
+
+        const T* hostPtr = data.data();
+        
+        // Create the OpenCL buffer.
+        this->m_buffer = cl::Buffer(
+        ctx.getContext(),
+        clFlags,
+        sizeof(T) * elementCount,
+        // OpenCL wants void* anyway.
+        const_cast<void*>(static_cast<const void*>(hostPtr))
         );
     }
 
@@ -117,13 +144,44 @@ public:
         if (data.size() != this->m_size) {
             HWR_FATAL("GeneralBuffer::writeFrom size mismatch");
         }
+        #ifndef NDEBUG
+            cl_int err = this->m_ctx.getQueue().enqueueWriteBuffer(
+                this->m_buffer, CL_TRUE, 0,
+                sizeof(T) * this->m_size,
+                data.data()
+            );
+            HWR_ASSERT_CL_OK(err, "GeneralBuffer::writeFrom");
+        #else // to prevent warning about unused err
+            this->m_ctx.getQueue().enqueueWriteBuffer(
+                this->m_buffer, CL_TRUE, 0,
+                sizeof(T) * this->m_size,
+                data.data()
+            );
+        #endif
+    }
 
-        cl_int err = this->m_ctx.getQueue().enqueueWriteBuffer(
-            this->m_buffer, CL_TRUE, 0,
-            sizeof(T) * this->m_size,
-            data.data()
-        );
-        HWR_ASSERT_CL_OK(err, "GeneralBuffer::writeFrom");
+
+    void writeFrom(std::span<const T> data) {
+        static_assert(has_flag<BufferFlag::Writable, Flags...>(),
+                    "writeFrom(span) called, but BufferFlag::Writable not set.");
+
+        if (data.size() != this->m_size) {
+            HWR_FATAL("GeneralBuffer::writeFrom(span) size mismatch");
+        }
+        #ifndef NDEBUG
+            cl_int err = this->m_ctx.getQueue().enqueueWriteBuffer(
+                this->m_buffer, CL_TRUE, 0,
+                sizeof(T) * this->m_size,
+                data.data()
+            );
+            HWR_ASSERT_CL_OK(err, "GeneralBuffer::writeFrom(span)");
+        #else
+            this->m_ctx.getQueue().enqueueWriteBuffer(
+                this->m_buffer, CL_TRUE, 0,
+                sizeof(T) * this->m_size,
+                data.data()
+            );
+        #endif
     }
 
     // copies data from the device buffer to a host vector.
@@ -132,14 +190,71 @@ public:
                       "readTo() called, but BufferFlag::Readable not set.");
 
         out.resize(this->m_size);
-        cl_int err = this->m_ctx.getQueue().enqueueReadBuffer(
-            this->m_buffer, CL_TRUE, 0,
-            sizeof(T) * this->m_size,
-            out.data()
-        );
-        HWR_ASSERT_CL_OK(err, "GeneralBuffer::readTo");
+        #ifndef NDEBUG
+            cl_int err = this->m_ctx.getQueue().enqueueReadBuffer(
+                this->m_buffer, CL_TRUE, 0,
+                sizeof(T) * this->m_size,
+                out.data()
+            );
+            HWR_ASSERT_CL_OK(err, "GeneralBuffer::readTo");
+        #else
+            this->m_ctx.getQueue().enqueueReadBuffer(
+                this->m_buffer, CL_TRUE, 0,
+                sizeof(T) * this->m_size,
+                out.data()
+            );
+        #endif
+    }
+
+    void readTo(std::span<T> out) {
+        static_assert(has_flag<BufferFlag::Readable, Flags...>(),
+                      "readTo(span) called, but BufferFlag::Readable not set.");
+    
+        if (out.size() != this->m_size) {
+            HWR_FATAL("GeneralBuffer::readTo(span) size mismatch");
+        }
+        #ifndef NDEBUG
+            cl_int err = this->m_ctx.getQueue().enqueueReadBuffer(
+                this->m_buffer, CL_TRUE, 0,
+                sizeof(T) * this->m_size,
+                out.data()
+            );
+            HWR_ASSERT_CL_OK(err, "GeneralBuffer::readTo(span)");
+        #else
+            this->m_ctx.getQueue().enqueueReadBuffer(
+                this->m_buffer, CL_TRUE, 0,
+                sizeof(T) * this->m_size,
+                out.data()
+            );
+        #endif
     }
 };
+// nicer-looking aliases for some common flag configs
+template<typename T>
+using AllPurposeBuffer = GeneralBuffer<T, HOST_READ,HOST_WRITE,GPU_READ,GPU_WRITE>;
+
+template<typename T>
+using GPUOnlyBuffer = GeneralBuffer<T, GPU_READ,GPU_WRITE>;
+
+template<typename T>
+using ConstBuffer = GeneralBuffer<T, GPU_READ>;
+
+template<typename T>
+using ConstBufferHostReadable = GeneralBuffer<T, GPU_READ, HOST_READ>;
+
+template<typename T>
+using GPUProducedBuffer = GeneralBuffer<T, GPU_WRITE, HOST_READ>;
+
+template<typename T>
+using GPUProducedAndReadBuffer = GeneralBuffer<T, GPU_READ, GPU_WRITE, HOST_READ>;
+
+template<typename T>
+using HostProducedBuffer = GeneralBuffer<T, HOST_WRITE, GPU_READ>;
+
+template<typename T>
+using HostProducedAndReadBuffer = GeneralBuffer<T, HOST_READ, HOST_WRITE, GPU_READ>;
+
+
 template<typename T>
 class HostMappedBuffer; // Forward declaration
 
@@ -212,7 +327,7 @@ private:
     T* m_ptr = nullptr;
     bool m_isMapped = false;
     bool isThisMyPointer(T* what){
-        return m_isMapped && what == m_ptr;
+        return m_ptr != nullptr && m_isMapped && what == m_ptr;
     }
 
 public:
@@ -256,6 +371,7 @@ public:
     void unmap() {
         if (m_ptr) {
             cl_int err = m_ctx.getQueue().enqueueUnmapMemObject(m_buffer, m_ptr);
+            m_ctx.getQueue().flush();
             m_ptr = nullptr; 
             m_isMapped = false; // if user tries to use the pointer, they'll get error.
             HWR_ASSERT_CL_OK(err, "HostMappedBuffer::unmap - enqueueUnmapMemObject");

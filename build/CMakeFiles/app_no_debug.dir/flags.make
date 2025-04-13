@@ -6,5 +6,5 @@ CXX_DEFINES = -DNDEBUG
 
 CXX_INCLUDES = -I/home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline -I/home/lukasz/HardwareRenderer/rendering_api/util/log -isystem /usr/include/SDL2
 
-CXX_FLAGS = 
+CXX_FLAGS = -std=c++23 -Wall -Wextra -Wpedantic -Werror -O3 -Wconversion -Wsign-conversion -Wshadow
 

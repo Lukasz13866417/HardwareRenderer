@@ -54,9 +54,7 @@ namespace hwr {
                 std::string timeStr = currentTime();
                 std::string line = "[" + timeStr + "] [" + level + "] " + msg;
 
-                #if LOG_ENABLE_CONSOLE
                 std::cout << colorCode << line << ANSI_COLOR_RESET << std::endl;
-                #endif
 
                 #if LOG_ENABLE_FILE
                 if (g_logFile.is_open()) {

@@ -5,6 +5,17 @@ find_package(OpenCL REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)  # Disable compiler-specific extensions like GNU extensions
+
+set(COMMON_WARNINGS "-Wall" "-Wextra" "-Wpedantic" "-Werror" "-O3")
+
+# Add additional ones if you're using Clang or GCC
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    list(APPEND COMMON_WARNINGS "-Wconversion" "-Wsign-conversion" "-Wshadow")
+endif()
+
 # Define a helper function that sets up common target properties
 function(add_app_target target_name)
     add_executable(${target_name}
@@ -24,6 +35,7 @@ function(add_app_target target_name)
     target_include_directories(${target_name} PRIVATE ${SDL2_ttf_INCLUDE_DIRS})
     target_link_libraries(${target_name} PRIVATE ${SDL2_ttf_LIBRARIES})
     target_link_libraries(${target_name} PRIVATE SDL2_ttf::SDL2_ttf)
+    target_compile_options(${target_name} PRIVATE ${COMMON_WARNINGS})
 endfunction()
 
 # Log both in file and console

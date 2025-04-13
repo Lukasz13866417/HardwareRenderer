@@ -6,6 +6,7 @@
 #include <type_traits>
 #include <cassert>
 #include <cmath> 
+#include <string>
 
 namespace hwr {
 
@@ -15,6 +16,14 @@ namespace hwr {
             float x, y, z, w;
         };
 
+        // ISO C++ forbids anonymous structs
+        // But here they greatly benefit simplicity
+
+        #if defined(__GNUC__) || defined(__clang__)
+        #   pragma GCC diagnostic push
+        #   pragma GCC diagnostic ignored "-Wpedantic"
+        #endif
+
         struct SafeVec4 {
             union {
                 float values[4];
@@ -22,6 +31,10 @@ namespace hwr {
             };  
         };
 
+        #if defined(__GNUC__) || defined(__clang__)
+        #   pragma GCC diagnostic pop
+        #endif
+            
     };
 
     using vec4f = std::conditional_t<sizeof(detail::SimpleVec4) == 16,
@@ -46,6 +59,10 @@ namespace hwr {
     mat4f mat_transpose(const mat4f& m);
     mat4f mat_mul(const mat4f& a, const mat4f& b);
     vec4f mat_mul_vec(const mat4f& m, const vec4f& v);
+
+    std::string to_string(const vec4f& v);
+    
+    std::string to_string(const mat4f& m);
 
 } // namespace hwr
 
