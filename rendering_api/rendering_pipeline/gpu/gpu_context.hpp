@@ -8,70 +8,54 @@
 #include <stdexcept>
 
 
+namespace hwr{
 
-namespace hwr {
-
-    // Forward declaration for friend class usage
+    // Forward declaration of GPUContext
     class GPUContext;
 
-    // Public API
     /**
     * \brief Create and initialize a GPUContext.
+    *
+    * \param kernelSource The kernel source string you want to build into the program.
+    * \param errorMsg If an error occurs, an error message is written to this string.
     * \return A GPUContext if successful; otherwise, std::nullopt.
     */
-    std::optional<GPUContext> initGPUContext();
-
-    /**
-    * \brief Utility to read file content into a string.
-    */
-    std::string getFileContent(const std::string filename);
-
-    /**
-    * \brief Exits if the OpenCL error code indicates a failure. Dont use this function directly - use HWR_ASSERT_CL_OK
-    */
-    void __assert_cl_ok(cl_int code, const std::string& situation="not specified");
-
-    namespace detail {
-        class GPUAccess;
-    }
+    std::optional<hwr::GPUContext> initGPUContext();
 
     /**
     * \class GPUContext
-    * \brief Encapsulates the OpenCL context, device, queue, etc.
+    * \brief Encapsulates the OpenCL context, device, queue, program, etc.
     */
     class GPUContext {
+    public:
+        /// Accessors
+        cl::Platform    getPlatform() const  { return m_platform; }
+        cl::Device      getDevice()   const  { return m_device;   }
+        cl::Context     getContext()  const  { return m_context;  }
+        cl::CommandQueue getQueue()   const  { return m_queue;    }
+
     private:
-        // Only friend can construct
-        GPUContext(const cl::Platform&     platform,
-                   const cl::Device&       device,
-                   const cl::Context&      context,
-                   const cl::CommandQueue& queue);
+        // Make constructor private so only friend (initGPUContext) can call it.
+        GPUContext(const cl::Platform&    platform,
+                const cl::Device&      device,
+                const cl::Context&     context,
+                const cl::CommandQueue& queue);
 
-        cl::Platform     m_platform;
-        cl::Device       m_device;
-        cl::Context      m_context;
+        // The OpenCL objects that this GPUContext manages
+        cl::Platform    m_platform;
+        cl::Device      m_device;
+        cl::Context     m_context;
         cl::CommandQueue m_queue;
+        cl::Program     m_program;
 
+        // Allow our free function to construct GPUContext
         friend std::optional<GPUContext> initGPUContext();
-        friend class detail::GPUAccess;
     };
 
-    namespace detail {
-        /**
-        * \class GPUAccess
-        * \brief Provides internal access to GPUContext's members.
-        */
-        class GPUAccess {
-            friend class GPUContext;
+    std::string getFileContent(const std::string filename);
 
-        public:
-            static cl::Platform&     getPlatform(GPUContext& ctx)   { return ctx.m_platform; }
-            static cl::Device&       getDevice(GPUContext& ctx)     { return ctx.m_device;   }
-            static cl::Context&      getContext(GPUContext& ctx)    { return ctx.m_context;  }
-            static cl::CommandQueue& getQueue(GPUContext& ctx)      { return ctx.m_queue;    }
-        };
-    }
+    void __assert_cl_ok(cl_int code);
 
-} // namespace hwr
+}
 
 #endif // GPU_CONTEXT_HPP

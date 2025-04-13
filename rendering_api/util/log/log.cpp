@@ -6,6 +6,7 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
+#include <stdexcept>
 
 namespace hwr {
 
@@ -87,6 +88,11 @@ namespace hwr {
 
     void error(const std::string &msg) {
         logMessage("ERROR", ANSI_COLOR_RED, msg);
+    }
+
+    void fatal(const std::string &msg) {
+        logMessage("FATAL", ANSI_COLOR_DARK_RED, msg);
+        throw new std::runtime_error("Runtime error.");
     }
 
 } // namespace hwr

@@ -8,6 +8,7 @@
 #include <stdexcept>
 #include <cassert>
 
+
 namespace hwr{
 
 std::optional<GPUContext> initGPUContext()
@@ -62,15 +63,16 @@ std::optional<std::string> getFileContent(const std::string& filename) {
     return ss.str();
 }
 
+
 GPUContext::GPUContext(const cl::Platform&    platform,
-                       const cl::Device&      device,
-                       const cl::Context&     context,
-                       const cl::CommandQueue& queue)
+                        const cl::Device&      device,
+                        const cl::Context&     context,
+                        const cl::CommandQueue& queue)
     : m_platform(platform)
     , m_device(device)
     , m_context(context)
     , m_queue(queue)
-{}
+{} 
 
 void __assert_cl_ok(cl_int code, const std::string& situation) {
     if (code == CL_SUCCESS)
@@ -134,8 +136,7 @@ void __assert_cl_ok(cl_int code, const std::string& situation) {
         default:                                      errStr = "Unknown OpenCL error"; break;
     }
     
-    HWR_ERR("OpenCL error: " + errStr + " (" + std::to_string(code) + ")\nSituation: "+situation);
-    assert(false); 
+    HWR_FATAL("OpenCL error: " + errStr + " (" + std::to_string(code) + ")\nSituation: "+situation);
 }
 
-}
+} // namespace hwr

@@ -193,6 +193,8 @@ CMakeFiles/app_no_file.dir/main.cpp.o: \
  /usr/include/c++/13/pstl/execution_defs.h /usr/include/c++/13/optional \
  /home/lukasz/HardwareRenderer/rendering_api/util/log/log.hpp \
  /home/lukasz/HardwareRenderer/rendering_api/util/log/log_config.hpp \
+ /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu/gpu_buffer.hpp \
+ /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu/gpu_context.hpp \
  /usr/include/c++/13/cassert /usr/include/assert.h \
  /usr/include/c++/13/iostream /usr/include/c++/13/ostream \
  /usr/include/c++/13/ios /usr/include/c++/13/bits/basic_ios.h \

@@ -4,6 +4,7 @@
 CMakeFiles/app_default.dir/main.cpp.o
  /home/lukasz/HardwareRenderer/main.cpp
  /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu/gpu_assert_macros_detail.hpp
+ /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu/gpu_buffer.hpp
  /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu/gpu_context.hpp
  /home/lukasz/HardwareRenderer/rendering_api/util/log/log.hpp
  /home/lukasz/HardwareRenderer/rendering_api/util/log/log_config.hpp
