@@ -11,7 +11,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)  # Disable compiler-specific extensions like GNU e
 
 set(COMMON_WARNINGS "-Wall" "-Wextra" "-Wpedantic" "-Werror" "-O3")
 
-# Add additional ones if you're using Clang or GCC
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     list(APPEND COMMON_WARNINGS "-Wconversion" "-Wsign-conversion" "-Wshadow")
 endif()
