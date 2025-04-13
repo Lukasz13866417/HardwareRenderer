@@ -1,7 +1,6 @@
 #ifndef GPU_CONTEXT_HPP
 #define GPU_CONTEXT_HPP
-#include "./gpu_assert_macros_detail.hpp"
-#include <CL/opencl.hpp>
+#include "gpu_cl_init.hpp"
 #include <string>
 #include <vector>
 #include <optional>
@@ -53,8 +52,6 @@ namespace hwr{
     };
 
     std::string getFileContent(const std::string filename);
-
-    void __assert_cl_ok(cl_int code);
 
 }
 

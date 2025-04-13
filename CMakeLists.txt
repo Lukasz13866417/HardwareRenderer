@@ -9,7 +9,6 @@ find_package(SDL2_ttf REQUIRED)
 function(add_app_target target_name)
     add_executable(${target_name}
         main.cpp
-#        rendering_api/rendering_pipeline/gpu/gpu_context.cpp
         rendering_api/rendering_pipeline/gpu/gpu_context.cpp
         rendering_api/util/log/log.cpp
         rendering_api/util/math/math_util.cpp
@@ -29,17 +28,16 @@ endfunction()
 
 # Log both in file and console
 add_app_target(app_default)
-target_compile_definitions(app_default PRIVATE LOG_ENABLE=1 LOG_ENABLE_CONSOLE=1 LOG_ENABLE_FILE=1 NO_CL_ASSERT=0)
+target_compile_definitions(app_default PRIVATE LOG_ENABLE=1 LOG_ENABLE_CONSOLE=1 LOG_ENABLE_FILE=1)
 
-
-# Zero logging
+# Zero logging & no asserts
 add_app_target(app_no_debug)
-target_compile_definitions(app_no_debug PRIVATE LOG_ENABLE=0 NO_CL_ASSERT=1)
+target_compile_definitions(app_no_debug PRIVATE NDEBUG)
 
 # Log only to file
 add_app_target(app_no_console)
-target_compile_definitions(app_no_console PRIVATE LOG_ENABLE_CONSOLE=0 NO_CL_ASSERT=0)
+target_compile_definitions(app_no_console PRIVATE LOG_ENABLE=1 LOG_ENABLE_CONSOLE=0 LOG_ENABLE_FILE=1)
 
 # Log only to console
 add_app_target(app_no_file)
-target_compile_definitions(app_no_file PRIVATE LOG_ENABLE_FILE=0 NO_CL_ASSERT=0)
+target_compile_definitions(app_no_file PRIVATE LOG_ENABLE=1 LOG_ENABLE_CONSOLE=1 LOG_ENABLE_FILE=0)

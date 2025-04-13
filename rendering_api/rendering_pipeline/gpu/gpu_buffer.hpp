@@ -2,11 +2,11 @@
 #define GPU_BUFFER_HPP
 
 #include "gpu_context.hpp"
-#include <CL/opencl.hpp>
+#include "../../util/log/log.hpp"
 #include <vector>
 #include <stdexcept>
 #include <type_traits>
-#include <algorithm>  // for std::copy
+#include <algorithm> 
 
 namespace hwr {
 
@@ -21,280 +21,256 @@ protected:
     BaseBuffer(const GPUContext& ctx, size_t elementCount)
         : m_ctx(ctx), m_size(elementCount)
     {
-        static_assert(std::is_trivially_copyable<T>::value, "T must be trivially copyable");
+        static_assert(std::is_trivially_copyable<T>::value, 
+                            "T must be trivially copyable");
     }
 
 public:
     virtual ~BaseBuffer() = default;
     size_t size() const { return m_size; }
+    // Used when we want to pass it to a kernel. 
     const cl::Buffer& getCLBuffer() const { return m_buffer; }
 };
 
-// kernels&host can both read and write.
-template<typename T>
+// These flags determine what can be done with the buffer.
+// More user-friendly than OpenCL’s raw flags.
+// Used only at compile time to deduce actual cl_mem_flags.
+enum BufferFlag {
+    HOST_WRITE,   // Host is allowed to write (used by writeFrom()).
+    HOST_READ,    // Host is allowed to read (used by readTo()).
+    GPU_WRITE,    // Device (kernel) is allowed to write.
+    GPU_READ,     // Device (kernel) is allowed to read.
+
+    // Aliases to match function static_asserts.
+    Writable = HOST_WRITE,   // writeFrom() requires this flag.
+    Readable = HOST_READ     // readTo()   requires this flag.
+};
+
+// Helper to check if a flag is present in the parameter pack
+template<BufferFlag Target, BufferFlag... Flags>
+constexpr inline bool has_flag() {
+    return ((Flags == Target) || ...);
+}
+
+// Helper that translates user-friendly BufferFlags into OpenCL memory flags
+template<BufferFlag Target, BufferFlag... Flags>
+constexpr inline cl_mem_flags deduceFlags(){
+    // Deduce device (GPU) access flags:
+    constexpr bool gpuRead  = has_flag<GPU_READ, Flags...>();
+    constexpr bool gpuWrite = has_flag<GPU_WRITE, Flags...>();
+    cl_mem_flags clFlags = 0;
+    if (gpuRead && !gpuWrite)
+        clFlags |= CL_MEM_READ_ONLY;
+    else if (gpuWrite && !gpuRead)
+        clFlags |= CL_MEM_WRITE_ONLY;
+    else
+        clFlags |= CL_MEM_READ_WRITE; // Default: both read & write.
+        // Same as in OpenCL - default flag is CL_MEM_READ_WRITE.
+
+    // Deduce host access flags:
+    constexpr bool hostRead  = has_flag<HOST_READ, Flags...>();
+    constexpr bool hostWrite = has_flag<HOST_WRITE, Flags...>();
+    if (hostRead && !hostWrite)
+        clFlags |= CL_MEM_HOST_READ_ONLY;
+    else if (hostWrite && !hostRead)
+        clFlags |= CL_MEM_HOST_WRITE_ONLY;
+    // If both or neither are specified, we don’t restrict host access further.
+    return clFlags;
+} 
+
+// The GeneralBuffer class deduces the correct OpenCL flags based on provided
+// template BufferFlag args. It allows using enqueueWriteBuffer() in writeFrom
+// and enqueueReadBuffer() in readTo() if allowed by the host flags.
+
+// TODO add move semantics if data is rvalue reference.
+template<typename T, BufferFlag... Flags>
 class GeneralBuffer : public BaseBuffer<T> {
 public:
-    GeneralBuffer(const GPUContext& ctx, size_t elementCount)
-        : BaseBuffer<T>(ctx, elementCount)
+    // 'data' is an optional vector to initialize the buffer.
+    GeneralBuffer(const GPUContext& ctx, size_t elementCount, 
+                  const std::vector<T> &data = {})
+    : BaseBuffer<T>(ctx, elementCount)
     {
+        
+        cl_mem_flags clFlags = deduceFlags<Flags...>();
+        // Use initial data if provided:
+        T* hostPtr = nullptr;
+        if (!data.empty()) {
+            clFlags |= CL_MEM_COPY_HOST_PTR;
+            hostPtr = data.data();
+        }
+
+        // Create the OpenCL buffer.
         this->m_buffer = cl::Buffer(
             ctx.getContext(),
-            CL_MEM_READ_WRITE,
-            sizeof(T) * elementCount
+            clFlags,
+            sizeof(T) * elementCount,
+            hostPtr
         );
     }
 
-    // Host writes data to the device buffer.
+    // copies data from a host vector to the device buffer.
     void writeFrom(const std::vector<T>& data) {
+        static_assert(has_flag<BufferFlag::Writable, Flags...>(),
+                      "writeFrom() called, but BufferFlag::Writable not set.");
+
         if (data.size() != this->m_size) {
             HWR_FATAL("GeneralBuffer::writeFrom size mismatch");
         }
+
         cl_int err = this->m_ctx.getQueue().enqueueWriteBuffer(
             this->m_buffer, CL_TRUE, 0,
             sizeof(T) * this->m_size,
             data.data()
         );
-        ASSERT_CL_OK(err);
+        HWR_ASSERT_CL_OK(err, "GeneralBuffer::writeFrom");
     }
-    
-    // Host reads data from the device buffer.
+
+    // copies data from the device buffer to a host vector.
     void readTo(std::vector<T>& out) {
+        static_assert(has_flag<BufferFlag::Readable, Flags...>(),
+                      "readTo() called, but BufferFlag::Readable not set.");
+
         out.resize(this->m_size);
         cl_int err = this->m_ctx.getQueue().enqueueReadBuffer(
             this->m_buffer, CL_TRUE, 0,
             sizeof(T) * this->m_size,
             out.data()
         );
-        ASSERT_CL_OK(err);
+        HWR_ASSERT_CL_OK(err, "GeneralBuffer::readTo");
+    }
+};
+template<typename T>
+class HostMappedBuffer; // Forward declaration
+
+template<typename T>
+class MappedPtr {
+    friend class HostMappedBuffer<T>;
+private:
+    T* m_ptr = nullptr;
+    HostMappedBuffer<T>* m_owner = nullptr;
+    MappedPtr(T* ptr, HostMappedBuffer<T>* owner)
+        : m_ptr(ptr), m_owner(owner) {
+            HWR_ASSERT(owner->hasNoMappedPointerYet(), 
+            "Sanity check failed: creating a mapped pointer when owner already has one");
+        }
+    void assertValidity(){
+        HWR_ASSERT(m_owner->isThisMyPointer(m_ptr), "This MappedPtr is no longer valid");
+        HWR_ASSERT(m_ptr, "Dereferencing a null mapped pointer!");
+    }
+
+public:
+    ~MappedPtr() {
+        if (m_owner && m_ptr && m_owner->isThisMyPointer(m_ptr)) {
+            m_owner->unmap();  // Will null m_ptr internally too
+        }
+    }
+
+    // Non-copyable
+    MappedPtr(const MappedPtr&) = delete;
+    MappedPtr& operator=(const MappedPtr&) = delete;
+
+    // Movable
+    MappedPtr(MappedPtr&& other) noexcept
+        : m_ptr(other.m_ptr), m_owner(other.m_owner) {
+        other.m_ptr = nullptr;
+        other.m_owner = nullptr;
+    }
+
+    MappedPtr& operator=(MappedPtr&& other) noexcept {
+        if (this != &other) {
+            if (m_owner && m_ptr) {
+                m_owner->unmap();
+            }
+            m_ptr = other.m_ptr;
+            m_owner = other.m_owner;
+            other.m_ptr = nullptr;
+            other.m_owner = nullptr;
+        }
+        return *this;
+    }
+
+    T& operator*() const {
+        assertValidity();
+        return *m_ptr;
+    }
+
+    T* operator->() const {
+        assertValidity();
+        return m_ptr;
+    }
+
+    explicit operator bool() const {
+        return m_ptr != nullptr && m_owner->isThisMyPointer(m_ptr);
     }
 };
 
-
-// mapping gives direct host access.
 template<typename T>
 class HostMappedBuffer : public BaseBuffer<T> {
+    friend class MappedPtr<T>;
 private:
     T* m_ptr = nullptr;
     bool m_isMapped = false;
+    bool isThisMyPointer(T* what){
+        return m_isMapped && what == m_ptr;
+    }
 
 public:
+    using BaseBuffer<T>::m_ctx;
+    using BaseBuffer<T>::m_size;
+    using BaseBuffer<T>::m_buffer;
+
     HostMappedBuffer(const GPUContext& ctx, size_t count)
         : BaseBuffer<T>(ctx, count)
     {
-        this->m_buffer = cl::Buffer(
+        m_buffer = cl::Buffer(
             ctx.getContext(),
             CL_MEM_READ_WRITE | CL_MEM_ALLOC_HOST_PTR,
             sizeof(T) * count
         );
     }
 
-    // Map the buffer. (User can then modify the memory directly.)
-    T* map(cl_map_flags flags = CL_MAP_READ | CL_MAP_WRITE) {
+    MappedPtr<T> map(cl_map_flags flags = CL_MAP_READ | CL_MAP_WRITE) {
         if (m_isMapped){
-            HWR_FATAL("Buffer already mapped.");
+            HWR_FATAL("HostMappedBuffer::map - Buffer already mapped.");
         }
+
         cl_int err;
-        m_ptr = static_cast<T*>(this->m_ctx.getQueue().enqueueMapBuffer(
-            this->m_buffer, CL_TRUE, flags, 0,
-            sizeof(T) * this->m_size,
+        m_ptr = static_cast<T*>(m_ctx.getQueue().enqueueMapBuffer(
+            m_buffer, CL_TRUE, flags, 0,
+            sizeof(T) * m_size,
             nullptr, nullptr, &err
         ));
-        ASSERT_CL_OK(err);
+        HWR_ASSERT_CL_OK(err, "HostMappedBuffer::map - enqueueMapBuffer");
+
+        MappedPtr<T> res(m_ptr, this);
         m_isMapped = true;
-        return m_ptr;
+        return res;
     }
 
-    // Unmap the buffer.
+
+    bool hasNoMappedPointerYet(){
+        return !m_isMapped;
+    }
+
     void unmap() {
         if (m_ptr) {
-            cl_int err = this->m_ctx.getQueue().enqueueUnmapMemObject(this->m_buffer, m_ptr);
-            ASSERT_CL_OK(err);
-            m_ptr = nullptr;
-            m_isMapped = false;
+            cl_int err = m_ctx.getQueue().enqueueUnmapMemObject(m_buffer, m_ptr);
+            m_ptr = nullptr; 
+            m_isMapped = false; // if user tries to use the pointer, they'll get error.
+            HWR_ASSERT_CL_OK(err, "HostMappedBuffer::unmap - enqueueUnmapMemObject");
+        } else {
+            HWR_ERR("Attempted to unmap an already unmapped buffer.");
         }
-    }
-
-    // Convenience write: map, copy, unmap.
-    void writeFrom(const std::vector<T>& data) {
-        if (data.size() != this->m_size){
-            HWR_FATAL("HostMappedBuffer::writeFrom size mismatch");
-        }
-        T* ptr = this->map(CL_MAP_WRITE);
-        std::copy(data.begin(), data.end(), ptr);
-        this->unmap();
-    }
-
-    // Convenience read: map, copy, unmap.
-    void readTo(std::vector<T>& out) {
-        out.resize(this->m_size);
-        T* ptr = this->map(CL_MAP_READ);
-        std::copy(ptr, ptr + this->m_size, out.begin());
-        this->unmap();
     }
 
     ~HostMappedBuffer() {
-        if (m_ptr) unmap();
-    }
-};
-
-// for buffers that the device reads (CL_MEM_READ_ONLY)
-// Host writes the data (writeFrom provided).
-template<typename T>
-class HostMappedInputBuffer : public BaseBuffer<T> {
-public:
-    HostMappedInputBuffer(const GPUContext& ctx, size_t count)
-        : BaseBuffer<T>(ctx, count)
-    {
-        this->m_buffer = cl::Buffer(
-            ctx.getContext(),
-            CL_MEM_READ_ONLY | CL_MEM_ALLOC_HOST_PTR,
-            sizeof(T) * count
-        );
-    }
-
-    // Write data by mapping with write access.
-    void writeFrom(const std::vector<T>& data) {
-        if (data.size() != this->m_size){
-            HWR_FATAL("HostMappedInputBuffer::writeFrom size mismatch");
+        if (m_ptr) {
+            unmap();
         }
-        cl_int err;
-        T* ptr = static_cast<T*>(this->m_ctx.getQueue().enqueueMapBuffer(
-            this->m_buffer, CL_TRUE, CL_MAP_WRITE, 0,
-            sizeof(T) * this->m_size, nullptr, nullptr, &err
-        ));
-        ASSERT_CL_OK(err);
-        std::copy(data.begin(), data.end(), ptr);
-        err = this->m_ctx.getQueue().enqueueUnmapMemObject(this->m_buffer, ptr);
-        ASSERT_CL_OK(err);
     }
 };
 
-// For buffers that the device writes to (CL_MEM_WRITE_ONLY)
-// Host reads the data (readTo provided).
-template<typename T>
-class HostMappedOutputBuffer : public BaseBuffer<T> {
-public:
-    HostMappedOutputBuffer(const GPUContext& ctx, size_t count)
-        : BaseBuffer<T>(ctx, count)
-    {
-        this->m_buffer = cl::Buffer(
-            ctx.getContext(),
-            CL_MEM_WRITE_ONLY | CL_MEM_ALLOC_HOST_PTR,
-            sizeof(T) * count
-        );
-    }
-
-    // Read data by mapping with read access.
-    void readTo(std::vector<T>& out) {
-        out.resize(this->m_size);
-        cl_int err;
-        T* ptr = static_cast<T*>(this->m_ctx.getQueue().enqueueMapBuffer(
-            this->m_buffer, CL_TRUE, CL_MAP_READ, 0,
-            sizeof(T) * this->m_size, nullptr, nullptr, &err
-        ));
-        ASSERT_CL_OK(err);
-        std::copy(ptr, ptr + this->m_size, out.begin());
-        err = this->m_ctx.getQueue().enqueueUnmapMemObject(this->m_buffer, ptr);
-        ASSERT_CL_OK(err);
-    }
-};
-
-// for input buffers (CL_MEM_READ_ONLY) where the host provides
-// a pointer to pre-allocated memory. Host is allowed to write to the host memory before use.
-template<typename T>
-class HostPinnedInputBuffer : public BaseBuffer<T> {
-public:
-    HostPinnedInputBuffer(const GPUContext& ctx, T* hostPtr, size_t count)
-        : BaseBuffer<T>(ctx, count)
-    {
-        this->m_buffer = cl::Buffer(
-            ctx.getContext(),
-            CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR,
-            sizeof(T) * count,
-            hostPtr
-        );
-    }
-
-    // Write data to the underlying host pointer using enqueueWriteBuffer.
-    void writeFrom(const std::vector<T>& data) {
-        if (data.size() != this->m_size){
-            HWR_FATAL("HostPinnedInputBuffer::writeFrom size mismatch");
-        }
-        cl_int err = this->m_ctx.getQueue().enqueueWriteBuffer(
-            this->m_buffer, CL_TRUE, 0,
-            sizeof(T) * this->m_size,
-            data.data()
-        );
-        ASSERT_CL_OK(err);
-    }
-};
-
-// for output buffers where the host provides
-// a pointer to pre-allocated memory. Host can read the results.
-template<typename T>
-class HostPinnedOutputBuffer : public BaseBuffer<T> {
-public:
-    HostPinnedOutputBuffer(const GPUContext& ctx, T* hostPtr, size_t count)
-        : BaseBuffer<T>(ctx, count)
-    {
-        this->m_buffer = cl::Buffer(
-            ctx.getContext(),
-            CL_MEM_WRITE_ONLY | CL_MEM_USE_HOST_PTR,
-            sizeof(T) * count,
-            hostPtr
-        );
-    }
-
-    // Read data from the underlying host pointer using enqueueReadBuffer.
-    void readTo(std::vector<T>& out) {
-        out.resize(this->m_size);
-        cl_int err = this->m_ctx.getQueue().enqueueReadBuffer(
-            this->m_buffer, CL_TRUE, 0,
-            sizeof(T) * this->m_size,
-            out.data()
-        );
-        ASSERT_CL_OK(err);
-    }
-};
-
-// HostPinnedReadWriteBuffer: using CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR.
-// Both writing to and reading from the buffer are supported via queue operations.
-template<typename T>
-class HostPinnedReadWriteBuffer : public BaseBuffer<T> {
-public:
-    HostPinnedReadWriteBuffer(const GPUContext& ctx, T* hostPtr, size_t count)
-        : BaseBuffer<T>(ctx, count)
-    {
-        this->m_buffer = cl::Buffer(
-            ctx.getContext(),
-            CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
-            sizeof(T) * count,
-            hostPtr
-        );
-    }
-
-    void writeFrom(const std::vector<T>& data) {
-        if (data.size() != this->m_size){
-            HWR_FATAL("HostPinnedReadWriteBuffer::writeFrom size mismatch");
-        }
-        cl_int err = this->m_ctx.getQueue().enqueueWriteBuffer(
-            this->m_buffer, CL_TRUE, 0,
-            sizeof(T) * this->m_size,
-            data.data()
-        );
-        ASSERT_CL_OK(err);
-    }
-    
-    void readTo(std::vector<T>& out) {
-        out.resize(this->m_size);
-        cl_int err = this->m_ctx.getQueue().enqueueReadBuffer(
-            this->m_buffer, CL_TRUE, 0,
-            sizeof(T) * this->m_size,
-            out.data()
-        );
-        ASSERT_CL_OK(err);
-    }
-};
 
 } // namespace hwr
 
