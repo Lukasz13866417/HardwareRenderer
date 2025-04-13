@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(HardwareRenderer LANGUAGES CXX)
 
 find_package(OpenCL REQUIRED)
+# SDL just for the demo.
 find_package(SDL2 REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 
