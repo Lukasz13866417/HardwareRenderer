@@ -1,12 +1,12 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/app_no_debug.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o"
+  "CMakeFiles/app_no_debug.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o.d"
+  "CMakeFiles/app_no_debug.dir/hwr/util/log/log.cpp.o"
+  "CMakeFiles/app_no_debug.dir/hwr/util/log/log.cpp.o.d"
+  "CMakeFiles/app_no_debug.dir/hwr/util/math/math_util.cpp.o"
+  "CMakeFiles/app_no_debug.dir/hwr/util/math/math_util.cpp.o.d"
   "CMakeFiles/app_no_debug.dir/main.cpp.o"
   "CMakeFiles/app_no_debug.dir/main.cpp.o.d"
-  "CMakeFiles/app_no_debug.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o"
-  "CMakeFiles/app_no_debug.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o.d"
-  "CMakeFiles/app_no_debug.dir/rendering_api/util/log/log.cpp.o"
-  "CMakeFiles/app_no_debug.dir/rendering_api/util/log/log.cpp.o.d"
-  "CMakeFiles/app_no_debug.dir/rendering_api/util/math/math_util.cpp.o"
-  "CMakeFiles/app_no_debug.dir/rendering_api/util/math/math_util.cpp.o.d"
   "app_no_debug"
   "app_no_debug.pdb"
 )

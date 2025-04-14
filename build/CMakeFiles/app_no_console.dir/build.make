@@ -83,62 +83,62 @@ CMakeFiles/app_no_console.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_no_console.dir/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/main.cpp -o CMakeFiles/app_no_console.dir/main.cpp.s
 
-CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o: CMakeFiles/app_no_console.dir/flags.make
-CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o: /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu/gpu_context.cpp
-CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o: CMakeFiles/app_no_console.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o -MF CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o.d -o CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o -c /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu/gpu_context.cpp
+CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o: CMakeFiles/app_no_console.dir/flags.make
+CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o: /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.cpp
+CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o: CMakeFiles/app_no_console.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o -MF CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o.d -o CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o -c /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.cpp
 
-CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu/gpu_context.cpp > CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.i
+CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.cpp > CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.i
 
-CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/rendering_api/rendering_pipeline/gpu/gpu_context.cpp -o CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.s
+CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.cpp -o CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.s
 
-CMakeFiles/app_no_console.dir/rendering_api/util/log/log.cpp.o: CMakeFiles/app_no_console.dir/flags.make
-CMakeFiles/app_no_console.dir/rendering_api/util/log/log.cpp.o: /home/lukasz/HardwareRenderer/rendering_api/util/log/log.cpp
-CMakeFiles/app_no_console.dir/rendering_api/util/log/log.cpp.o: CMakeFiles/app_no_console.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/app_no_console.dir/rendering_api/util/log/log.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_no_console.dir/rendering_api/util/log/log.cpp.o -MF CMakeFiles/app_no_console.dir/rendering_api/util/log/log.cpp.o.d -o CMakeFiles/app_no_console.dir/rendering_api/util/log/log.cpp.o -c /home/lukasz/HardwareRenderer/rendering_api/util/log/log.cpp
+CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.o: CMakeFiles/app_no_console.dir/flags.make
+CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.o: /home/lukasz/HardwareRenderer/hwr/util/log/log.cpp
+CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.o: CMakeFiles/app_no_console.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.o -MF CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.o.d -o CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.o -c /home/lukasz/HardwareRenderer/hwr/util/log/log.cpp
 
-CMakeFiles/app_no_console.dir/rendering_api/util/log/log.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_no_console.dir/rendering_api/util/log/log.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/HardwareRenderer/rendering_api/util/log/log.cpp > CMakeFiles/app_no_console.dir/rendering_api/util/log/log.cpp.i
+CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/HardwareRenderer/hwr/util/log/log.cpp > CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.i
 
-CMakeFiles/app_no_console.dir/rendering_api/util/log/log.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_no_console.dir/rendering_api/util/log/log.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/rendering_api/util/log/log.cpp -o CMakeFiles/app_no_console.dir/rendering_api/util/log/log.cpp.s
+CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/hwr/util/log/log.cpp -o CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.s
 
-CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.o: CMakeFiles/app_no_console.dir/flags.make
-CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.o: /home/lukasz/HardwareRenderer/rendering_api/util/math/math_util.cpp
-CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.o: CMakeFiles/app_no_console.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.o -MF CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.o.d -o CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.o -c /home/lukasz/HardwareRenderer/rendering_api/util/math/math_util.cpp
+CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.o: CMakeFiles/app_no_console.dir/flags.make
+CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.o: /home/lukasz/HardwareRenderer/hwr/util/math/math_util.cpp
+CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.o: CMakeFiles/app_no_console.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.o -MF CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.o.d -o CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.o -c /home/lukasz/HardwareRenderer/hwr/util/math/math_util.cpp
 
-CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/HardwareRenderer/rendering_api/util/math/math_util.cpp > CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.i
+CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/HardwareRenderer/hwr/util/math/math_util.cpp > CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.i
 
-CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/rendering_api/util/math/math_util.cpp -o CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.s
+CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/hwr/util/math/math_util.cpp -o CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.s
 
 # Object files for target app_no_console
 app_no_console_OBJECTS = \
 "CMakeFiles/app_no_console.dir/main.cpp.o" \
-"CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o" \
-"CMakeFiles/app_no_console.dir/rendering_api/util/log/log.cpp.o" \
-"CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.o"
+"CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o" \
+"CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.o" \
+"CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.o"
 
 # External object files for target app_no_console
 app_no_console_EXTERNAL_OBJECTS =
 
 app_no_console: CMakeFiles/app_no_console.dir/main.cpp.o
-app_no_console: CMakeFiles/app_no_console.dir/rendering_api/rendering_pipeline/gpu/gpu_context.cpp.o
-app_no_console: CMakeFiles/app_no_console.dir/rendering_api/util/log/log.cpp.o
-app_no_console: CMakeFiles/app_no_console.dir/rendering_api/util/math/math_util.cpp.o
+app_no_console: CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o
+app_no_console: CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.o
+app_no_console: CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.o
 app_no_console: CMakeFiles/app_no_console.dir/build.make
 app_no_console: /usr/lib/x86_64-linux-gnu/libOpenCL.so
 app_no_console: /usr/lib/x86_64-linux-gnu/libSDL2.so

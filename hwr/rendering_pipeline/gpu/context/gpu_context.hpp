@@ -1,6 +1,6 @@
 #ifndef GPU_CONTEXT_HPP
 #define GPU_CONTEXT_HPP
-#include "gpu_cl_init.hpp"
+#include "../gpu_cl_init.hpp"
 #include <string>
 #include <vector>
 #include <optional>

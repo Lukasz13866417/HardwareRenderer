@@ -1,8 +1,8 @@
 #ifndef GPU_BUFFER_HPP
 #define GPU_BUFFER_HPP
 
-#include "gpu_context.hpp"
-#include "../../util/log/log.hpp"
+#include "../context/gpu_context.hpp"
+#include "../../../util/log/log.hpp"
 #include <vector>
 #include <stdexcept>
 #include <type_traits>
@@ -280,26 +280,6 @@ public:
     // Non-copyable
     MappedPtr(const MappedPtr&) = delete;
     MappedPtr& operator=(const MappedPtr&) = delete;
-
-    // Movable
-    MappedPtr(MappedPtr&& other) noexcept
-        : m_ptr(other.m_ptr), m_owner(other.m_owner) {
-        other.m_ptr = nullptr;
-        other.m_owner = nullptr;
-    }
-
-    MappedPtr& operator=(MappedPtr&& other) noexcept {
-        if (this != &other) {
-            if (m_owner && m_ptr) {
-                m_owner->unmap();
-            }
-            m_ptr = other.m_ptr;
-            m_owner = other.m_owner;
-            other.m_ptr = nullptr;
-            other.m_owner = nullptr;
-        }
-        return *this;
-    }
 
     T& operator*() const {
         assertValidity();
