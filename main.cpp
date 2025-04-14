@@ -29,8 +29,11 @@ int main(){
     vec4 vecs[2];
     apb.readTo(std::span<vec4>(vecs,2));
     HWR_SUCCESS("Some vector data has been read.");
-    std::cout<<hwr::to_string(vecs[0])<<std::endl;
-    std::cout<<hwr::to_string(vecs[1])<<std::endl;
+    HWR_SUCCESS(hwr::to_string(vecs[0]));
+    HWR_SUCCESS(hwr::to_string(vecs[1]));
     HWR_INFO("The end.");
 
+    hwr::ConstBuffer cb(gpu_context, 2, std::vector<vec4>{vec4(1,2,3,4),vec4(5,6,7,8)});
+    //cb.readTo(std::span<vec4>(vecs,2)); // shouldn't compile
+    //cb.writeFrom(std::vector<vec4>{vec4(1,2,3,4),vec4(5,6,7,8)}); // shouldn't compile
 }

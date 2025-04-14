@@ -41,10 +41,6 @@ enum BufferFlag {
     HOST_READ,    // Host is allowed to read (used by readTo()).
     GPU_WRITE,    // Device (kernel) is allowed to write.
     GPU_READ,     // Device (kernel) is allowed to read.
-
-    // Aliases to match function static_asserts.
-    Writable = HOST_WRITE,   // writeFrom() requires this flag.
-    Readable = HOST_READ     // readTo()   requires this flag.
 };
 
 // Helper to check if a flag is present in the parameter pack
@@ -138,8 +134,8 @@ public:
 
     // copies data from a host vector to the device buffer.
     void writeFrom(const std::vector<T>& data) {
-        static_assert(has_flag<BufferFlag::Writable, Flags...>(),
-                      "writeFrom() called, but BufferFlag::Writable not set.");
+        static_assert(has_flag<BufferFlag::HOST_WRITE, Flags...>(),
+                      "writeFrom() called, but BufferFlag::HOST_WRITE not set.");
 
         if (data.size() != this->m_size) {
             HWR_FATAL("GeneralBuffer::writeFrom size mismatch");
@@ -162,8 +158,8 @@ public:
 
 
     void writeFrom(std::span<const T> data) {
-        static_assert(has_flag<BufferFlag::Writable, Flags...>(),
-                    "writeFrom(span) called, but BufferFlag::Writable not set.");
+        static_assert(has_flag<BufferFlag::HOST_WRITE, Flags...>(),
+                    "writeFrom(span) called, but BufferFlag::HOST_WRITE not set.");
 
         if (data.size() != this->m_size) {
             HWR_FATAL("GeneralBuffer::writeFrom(span) size mismatch");
@@ -186,8 +182,8 @@ public:
 
     // copies data from the device buffer to a host vector.
     void readTo(std::vector<T>& out) {
-        static_assert(has_flag<BufferFlag::Readable, Flags...>(),
-                      "readTo() called, but BufferFlag::Readable not set.");
+        static_assert(has_flag<BufferFlag::HOST_READ, Flags...>(),
+                      "readTo() called, but BufferFlag::HOST_READ not set.");
 
         out.resize(this->m_size);
         #ifndef NDEBUG
@@ -207,8 +203,8 @@ public:
     }
 
     void readTo(std::span<T> out) {
-        static_assert(has_flag<BufferFlag::Readable, Flags...>(),
-                      "readTo(span) called, but BufferFlag::Readable not set.");
+        static_assert(has_flag<BufferFlag::HOST_READ, Flags...>(),
+                      "readTo(span) called, but BufferFlag::HOST_READ not set.");
     
         if (out.size() != this->m_size) {
             HWR_FATAL("GeneralBuffer::readTo(span) size mismatch");
