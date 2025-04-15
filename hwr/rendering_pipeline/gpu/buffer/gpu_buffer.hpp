@@ -1,5 +1,5 @@
-#ifndef GPU_BUFFER_HPP
-#define GPU_BUFFER_HPP
+#ifndef HWR_GPU_BUFFER_HPP
+#define HWR_GPU_BUFFER_HPP
 
 #include "../context/gpu_context.hpp"
 #include "../../../util/log/log.hpp"
@@ -366,4 +366,4 @@ public:
 
 } // namespace hwr
 
-#endif // GPU_BUFFER_HPP
+#endif // HWR_GPU_BUFFER_HPP

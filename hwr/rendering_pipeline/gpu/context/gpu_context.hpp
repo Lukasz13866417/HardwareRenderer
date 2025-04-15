@@ -1,5 +1,5 @@
-#ifndef GPU_CONTEXT_HPP
-#define GPU_CONTEXT_HPP
+#ifndef HWR_GPU_CONTEXT_HPP
+#define HWR_GPU_CONTEXT_HPP
 #include "../gpu_cl_init.hpp"
 #include <string>
 #include <vector>
@@ -55,4 +55,4 @@ namespace hwr{
 
 }
 
-#endif // GPU_CONTEXT_HPP
+#endif // HWR_GPU_CONTEXT_HPP

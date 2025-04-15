@@ -1,5 +1,5 @@
-#ifndef MATH_UTIL_HPP
-#define MATH_UTIL_HPP
+#ifndef HWR_MATH_UTIL_HPP
+#define HWR_MATH_UTIL_HPP
 
 #include <cstdint>
 #include <cstddef>
@@ -66,4 +66,4 @@ namespace hwr {
 
 } // namespace hwr
 
-#endif // MATH_UTIL_HPP
+#endif // HWR_MATH_UTIL_HPP

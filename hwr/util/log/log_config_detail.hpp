@@ -1,5 +1,5 @@
-#ifndef LOG_CONFIG_DETAIL_HPP
-#define LOG_CONFIG_DETAIL_HPP
+#ifndef HWR_LOG_CONFIG_DETAIL_HPP
+#define HWR_LOG_CONFIG_DETAIL_HPP
 
 #ifdef NDEBUG
     #define HWR_LOG_ENABLE 0
@@ -35,4 +35,4 @@
 #define ANSI_COLOR_YELLOW       "\x1b[33m"
 #define ANSI_COLOR_LIGHT_RED    "\033[1;31m"
 
-#endif // LOG_CONFIG_DETAIL_HPP
+#endif // HWR_LOG_CONFIG_DETAIL_HPP

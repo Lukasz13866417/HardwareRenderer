@@ -2,6 +2,7 @@
 #include <hwr/log.hpp>
 #include <hwr/buffer.hpp>
 #include <hwr/math.hpp>
+#include <hwr/program.hpp>
 #include<cassert>
 #include<iostream>
 
@@ -36,4 +37,8 @@ int main(){
     hwr::ConstBuffer cb(gpu_context, 2, std::vector<vec4>{vec4(1,2,3,4),vec4(5,6,7,8)});
     //cb.readTo(std::span<vec4>(vecs,2)); // shouldn't compile
     //cb.writeFrom(std::vector<vec4>{vec4(1,2,3,4),vec4(5,6,7,8)}); // shouldn't compile
+
+    hwr::Program<float, vec4, vec4, vec4> prog;
+    prog.generateCode();
+    HWR_SUCCESS(prog.generateCode());
 }

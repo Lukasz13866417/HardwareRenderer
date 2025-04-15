@@ -1,5 +1,5 @@
-#ifndef LOG_HPP
-#define LOG_HPP
+#ifndef HWR_LOG_HPP
+#define HWR_LOG_HPP
 #include "log_config_detail.hpp"
 #include "../../rendering_pipeline/gpu/gpu_cl_init.hpp"
 #include "CL/opencl.hpp"
@@ -44,4 +44,4 @@ namespace hwr {
     #define HWR_ASSERT_CL_OK(code, msg)  do {} while(0)
 #endif
 
-#endif // LOG_HPP
+#endif // HWR_LOG_HPP
