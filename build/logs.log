@@ -224,3 +224,13 @@ Situation: KEKW
 [18:02:19.256] [INFO] The end.
 [18:02:19.256] [SUCCESS] XD
 [18:02:19.256] [SUCCESS] 130
+[21:30:58.438] [INIT] ---------------------------------------- Log started at: 2025-04-16 21:30:58 ---------------------------------------- 
+[21:30:58.467] [INFO] OpenCL init OK.
+[21:30:58.467] [DEBUG] SOMETHING!
+[21:30:58.467] [SUCCESS] Everything works because nothing's been tested.
+[21:30:58.467] [SUCCESS] All purpose buffer has been created.
+[21:30:58.467] [SUCCESS] Some vector data has been read.
+[21:30:58.467] [SUCCESS] vec4f(1.000000, 2.000000, 3.000000, 4.000000)
+[21:30:58.467] [SUCCESS] vec4f(5.000000, 6.000000, 7.000000, 8.000000)
+[21:30:58.467] [INFO] The end.
+[21:30:58.467] [SUCCESS] XD

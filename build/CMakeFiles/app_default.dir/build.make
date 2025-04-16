@@ -143,6 +143,7 @@ app_default: CMakeFiles/app_default.dir/build.make
 app_default: /usr/lib/x86_64-linux-gnu/libOpenCL.so
 app_default: /usr/lib/x86_64-linux-gnu/libSDL2.so
 app_default: /usr/lib/x86_64-linux-gnu/libSDL2_ttf.so
+app_default: /usr/lib/x86_64-linux-gnu/libSDL2_ttf.so
 app_default: CMakeFiles/app_default.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable app_default"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/app_default.dir/link.txt --verbose=$(VERBOSE)

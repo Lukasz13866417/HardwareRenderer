@@ -25,7 +25,8 @@ int main(){
 
     HWR_SUCCESS("Everything works because nothing's been tested.");
 
-    hwr::AllPurposeBuffer apb(gpu_context, 2, std::vector<vec4>{vec4(1,2,3,4),vec4(5,6,7,8)});
+    hwr::AllPurposeBuffer apb(gpu_context, 2, 
+                                         std::vector<vec4>{vec4(1,2,3,4),vec4(5,6,7,8)});
     HWR_SUCCESS("All purpose buffer has been created.");
     vec4 vecs[2];
     apb.readTo(std::span<vec4>(vecs,2));
@@ -34,7 +35,8 @@ int main(){
     HWR_SUCCESS(hwr::to_string(vecs[1]));
     HWR_INFO("The end.");
 
-    hwr::ConstBuffer cb(gpu_context, 2, std::vector<vec4>{vec4(1,2,3,4),vec4(5,6,7,8)});
+    hwr::ConstBuffer cb(gpu_context, 2, 
+                                   std::vector<vec4>{vec4(1,2,3,4),vec4(5,6,7,8)});
     //cb.readTo(std::span<vec4>(vecs,2)); // shouldn't compile
     //cb.writeFrom(std::vector<vec4>{vec4(1,2,3,4),vec4(5,6,7,8)}); // shouldn't compile
 
@@ -43,9 +45,7 @@ int main(){
     HWR_SUCCESS(prog.generateCode());
 
     ARG(int,"XD") arg;
-    int64_t code = arg.getCode();
-    ++code;
-    --code;
-    HWR_SUCCESS(std::to_string(code));
+    const char* nm = arg.getName();
+    std::cout<<nm<<std::endl;
 
 }

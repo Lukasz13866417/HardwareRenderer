@@ -143,6 +143,7 @@ app_no_file: CMakeFiles/app_no_file.dir/build.make
 app_no_file: /usr/lib/x86_64-linux-gnu/libOpenCL.so
 app_no_file: /usr/lib/x86_64-linux-gnu/libSDL2.so
 app_no_file: /usr/lib/x86_64-linux-gnu/libSDL2_ttf.so
+app_no_file: /usr/lib/x86_64-linux-gnu/libSDL2_ttf.so
 app_no_file: CMakeFiles/app_no_file.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable app_no_file"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/app_no_file.dir/link.txt --verbose=$(VERBOSE)

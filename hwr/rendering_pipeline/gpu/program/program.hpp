@@ -5,15 +5,10 @@
 #include<string>
 #include<hwr/buffer.hpp>
 
-#define ARG(tp,notAString) hwr::Arg<tp,unString(notAString)>
-
-constexpr int64_t unString(const char* arg){
-
-    return 42 + arg[0];
-}
+#define ARG(tp,notAString) hwr::Arg<tp,hwr::detail::unString(notAString)>
 
 namespace hwr{
-
+    
 namespace detail{
 
     template<typename T>
@@ -32,14 +27,45 @@ namespace detail{
     constexpr bool are_args_valid() {
         return (is_valid_arg_v<Types> && ...);
     }   
-};
 
-template<typename T, int64_t notAString>
+    template<std::size_t N>
+    struct StaticString {
+        char data[N]{};
+
+        constexpr StaticString(const char (&str)[N]) {
+            for (std::size_t i = 0; i < N; ++i)
+                data[i] = str[i];
+        }
+
+        constexpr const char* c_str() const { return data; }
+
+        constexpr std::size_t size() const { return N; }
+
+        constexpr char operator[](std::size_t i) const {
+            return (i < N) ? data[i] : '\0';
+        }
+
+        constexpr bool operator==(const StaticString& other) const {
+            for (std::size_t i = 0; i < N; ++i)
+                if (data[i] != other.data[i]) return false;
+            return true;
+        }
+    };
+
+    template<std::size_t N>
+    constexpr StaticString<N> unString(const char (&str)[N]) {
+        static_assert(N <= 51, "Maximum allowed length for Arg names is 50 characters + null terminator.");
+        return StaticString<N>(str);
+    }
+
+}  // namespace detail
+
+template<typename T, detail::StaticString name>
 class Arg{
     static_assert(detail::is_valid_arg_v<T>, "arg type must be valid (either a buffer of trivially copyable)");
     public:
-        int64_t getCode(){
-            return notAString;
+        const char* getName(){
+            return name.c_str();
         }
 };
 
