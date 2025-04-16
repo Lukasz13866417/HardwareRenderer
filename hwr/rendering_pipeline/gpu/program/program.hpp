@@ -1,96 +1,28 @@
 #ifndef HWR_PROGRAM_HPP
 #define HWR_PROGRAM_HPP
 
-#include<type_traits>
-#include<string>
-#include<hwr/buffer.hpp>
+#include <string>
+#include <type_traits>
+#include "./arg.hpp"
 
-#define ARG(tp,notAString) hwr::Arg<tp,hwr::detail::StaticString(notAString)>
-
-namespace hwr{
-    
-namespace detail{
-
-    template<typename T>
-    struct is_valid_arg : std::bool_constant<std::is_trivially_copyable_v<T>> {};
-
-    template<typename T>
-    struct is_valid_arg<GeneralBuffer<T>> : std::true_type {};
-
-    template<typename T>
-    struct is_valid_arg<HostMappedBuffer<T>> : std::true_type {};
-
-    template<typename T>
-    inline constexpr bool is_valid_arg_v = is_valid_arg<T>::value;
-
-    template<typename... Types>
-    constexpr bool are_args_valid() {
-        return (is_valid_arg_v<Types> && ...);
-    }   
-
-    template<std::size_t N>
-    struct StaticString {
-        char data[N]{};
-
-        constexpr StaticString(const char (&str)[N]) {
-            for (std::size_t i = 0; i < N; ++i)
-                data[i] = str[i];
-        }
-
-        constexpr const char* c_str() const { return data; }
-
-        constexpr std::size_t size() const { return N; }
-
-        constexpr char operator[](std::size_t i) const {
-            return (i < N) ? data[i] : '\0';
-        }
-
-        constexpr bool operator==(const StaticString& other) const {
-            for (std::size_t i = 0; i < N; ++i)
-                if (data[i] != other.data[i]) return false;
-            return true;
-        }
-    };
-
-}  // namespace detail
-
-template<typename T, detail::StaticString name>
-class Arg{
-    static_assert(detail::is_valid_arg_v<T>, "arg type must be valid (either a buffer of trivially copyable)");
-    public:
-        const char* getName(){
-            return name.c_str();
-        }
-};
-
-namespace detail{
-
-    template<typename T>
-    struct is_arg_type : std::false_type {};
-
-    template<typename U, auto Name>
-    struct is_arg_type<hwr::Arg<U, Name>> : std::true_type {};
-
-    template<typename T>
-    inline constexpr bool is_arg_type_v = is_arg_type<T>::value;
-
-    template<typename... Args>
-    constexpr bool are_these_args(){
-        return (is_arg_type_v<Args> && ...);
-    }
-    
-} // namespace detail
+namespace hwr {
 
 template<typename Result, typename... Args>
-class Program{
-    static_assert(detail::are_these_args<Args...>());
-    static_assert(detail::is_valid_arg_v<Result>, "Result must be trivially copyable");
-    public:
-        std::string generateCode(){
-            return "XD";
-        }
+class Program {
+    static_assert(detail::are_these_args<Args...>(), "All Args must be of type Arg<T, Name>");
+    static_assert(detail::is_arg_type_v<Result>, "Result must be an Arg<T, Name>");
+
+private:
+    const std::string code_;
+
+public:
+    Program(const std::string& code) : code_(code) {}
+
+    const std::string& getCode() {
+        return code_;
+    }
 };
 
 } // namespace hwr
 
-#endif // HWR_PROGRAM_HPP 
+#endif // HWR_PROGRAM_HPP

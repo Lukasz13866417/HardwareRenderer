@@ -323,3 +323,66 @@ Situation: KEKW
 [23:59:52.378] [SUCCESS] vec4f(1.000000, 2.000000, 3.000000, 4.000000)
 [23:59:52.378] [SUCCESS] vec4f(5.000000, 6.000000, 7.000000, 8.000000)
 [23:59:52.378] [INFO] The end.
+[00:23:09.827] [INIT] ---------------------------------------- Log started at: 2025-04-17 00:23:09 ---------------------------------------- 
+[00:23:09.856] [INFO] OpenCL init OK.
+[00:23:09.857] [DEBUG] SOMETHING!
+[00:23:09.857] [SUCCESS] Everything works because nothing's been tested.
+[00:23:09.857] [SUCCESS] All purpose buffer has been created.
+[00:23:09.857] [SUCCESS] Some vector data has been read.
+[00:23:09.857] [SUCCESS] vec4f(1.000000, 2.000000, 3.000000, 4.000000)
+[00:23:09.857] [SUCCESS] vec4f(5.000000, 6.000000, 7.000000, 8.000000)
+[00:23:09.857] [INFO] The end.
+[00:31:01.089] [INIT] ---------------------------------------- Log started at: 2025-04-17 00:31:01 ---------------------------------------- 
+[00:31:01.124] [INFO] OpenCL init OK.
+[00:31:01.124] [DEBUG] SOMETHING!
+[00:31:01.124] [SUCCESS] Everything works because nothing's been tested.
+[00:31:01.124] [SUCCESS] All purpose buffer has been created.
+[00:31:01.124] [SUCCESS] Some vector data has been read.
+[00:31:01.124] [SUCCESS] vec4f(1.000000, 2.000000, 3.000000, 4.000000)
+[00:31:01.124] [SUCCESS] vec4f(5.000000, 6.000000, 7.000000, 8.000000)
+[00:31:01.124] [INFO] The end.
+[00:34:53.117] [INIT] ---------------------------------------- Log started at: 2025-04-17 00:34:53 ---------------------------------------- 
+[00:34:53.142] [INFO] OpenCL init OK.
+[00:34:53.142] [DEBUG] SOMETHING!
+[00:34:53.142] [SUCCESS] Everything works because nothing's been tested.
+[00:34:53.142] [SUCCESS] All purpose buffer has been created.
+[00:34:53.143] [SUCCESS] Some vector data has been read.
+[00:34:53.143] [SUCCESS] vec4f(1.000000, 2.000000, 3.000000, 4.000000)
+[00:34:53.143] [SUCCESS] vec4f(5.000000, 6.000000, 7.000000, 8.000000)
+[00:34:53.143] [INFO] The end.
+[00:35:08.117] [INIT] ---------------------------------------- Log started at: 2025-04-17 00:35:08 ---------------------------------------- 
+[00:35:08.150] [INFO] OpenCL init OK.
+[00:35:08.150] [DEBUG] SOMETHING!
+[00:35:08.150] [SUCCESS] Everything works because nothing's been tested.
+[00:35:08.150] [SUCCESS] All purpose buffer has been created.
+[00:35:08.150] [SUCCESS] Some vector data has been read.
+[00:35:08.150] [SUCCESS] vec4f(1.000000, 2.000000, 3.000000, 4.000000)
+[00:35:08.150] [SUCCESS] vec4f(5.000000, 6.000000, 7.000000, 8.000000)
+[00:35:08.150] [INFO] The end.
+[00:35:09.000] [INIT] ---------------------------------------- Log started at: 2025-04-17 00:35:08 ---------------------------------------- 
+[00:35:09.029] [INFO] OpenCL init OK.
+[00:35:09.029] [DEBUG] SOMETHING!
+[00:35:09.029] [SUCCESS] Everything works because nothing's been tested.
+[00:35:09.029] [SUCCESS] All purpose buffer has been created.
+[00:35:09.029] [SUCCESS] Some vector data has been read.
+[00:35:09.029] [SUCCESS] vec4f(1.000000, 2.000000, 3.000000, 4.000000)
+[00:35:09.029] [SUCCESS] vec4f(5.000000, 6.000000, 7.000000, 8.000000)
+[00:35:09.029] [INFO] The end.
+[00:35:14.600] [INIT] ---------------------------------------- Log started at: 2025-04-17 00:35:14 ---------------------------------------- 
+[00:35:14.630] [INFO] OpenCL init OK.
+[00:35:14.630] [DEBUG] SOMETHING!
+[00:35:14.630] [SUCCESS] Everything works because nothing's been tested.
+[00:35:14.630] [SUCCESS] All purpose buffer has been created.
+[00:35:14.630] [SUCCESS] Some vector data has been read.
+[00:35:14.630] [SUCCESS] vec4f(1.000000, 2.000000, 3.000000, 4.000000)
+[00:35:14.630] [SUCCESS] vec4f(5.000000, 6.000000, 7.000000, 8.000000)
+[00:35:14.630] [INFO] The end.
+[01:02:02.251] [INIT] ---------------------------------------- Log started at: 2025-04-17 01:02:02 ---------------------------------------- 
+[01:02:02.277] [INFO] OpenCL init OK.
+[01:02:02.277] [DEBUG] SOMETHING!
+[01:02:02.277] [SUCCESS] Everything works because nothing's been tested.
+[01:02:02.277] [SUCCESS] All purpose buffer has been created.
+[01:02:02.277] [SUCCESS] Some vector data has been read.
+[01:02:02.277] [SUCCESS] vec4f(1.000000, 2.000000, 3.000000, 4.000000)
+[01:02:02.277] [SUCCESS] vec4f(5.000000, 6.000000, 7.000000, 8.000000)
+[01:02:02.277] [INFO] The end.

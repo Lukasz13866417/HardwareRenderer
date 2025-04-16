@@ -45,7 +45,8 @@ int main(){
     const char* nm = arg.getName();
     std::cout<<nm<<std::endl;
 
-    hwr::Program<int, ARG(int,"x"), ARG(int,"y")> prog;
-    std::cout<<prog.generateCode()<<std::endl;
+    hwr::Program<OUT(int,"x"), ARG(int,"x")> A("float x=0;");
+    hwr::Program<OUT(int,"x"), ARG(int,"x")> B("float y=0;");
+    std::cout<<A.getCode()<<" "<<B.getCode()<<std::endl;
 
 }

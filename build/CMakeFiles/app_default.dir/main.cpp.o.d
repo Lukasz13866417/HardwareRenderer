@@ -280,5 +280,6 @@ CMakeFiles/app_default.dir/main.cpp.o: \
  /usr/include/c++/13/tr1/riemann_zeta.tcc \
  /home/lukasz/HardwareRenderer/hwr/include/hwr/program.hpp \
  /home/lukasz/HardwareRenderer/hwr/include/hwr/../../rendering_pipeline/gpu/program/program.hpp \
+ /home/lukasz/HardwareRenderer/hwr/include/hwr/../../rendering_pipeline/gpu/program/./arg.hpp \
  /usr/include/c++/13/iostream /usr/include/c++/13/istream \
  /usr/include/c++/13/bits/istream.tcc
