@@ -304,3 +304,22 @@ Situation: KEKW
 [21:50:42.635] [SUCCESS] vec4f(5.000000, 6.000000, 7.000000, 8.000000)
 [21:50:42.635] [INFO] The end.
 [21:50:42.635] [SUCCESS] XD
+[21:51:45.124] [INIT] ---------------------------------------- Log started at: 2025-04-16 21:51:45 ---------------------------------------- 
+[21:51:45.152] [INFO] OpenCL init OK.
+[21:51:45.152] [DEBUG] SOMETHING!
+[21:51:45.152] [SUCCESS] Everything works because nothing's been tested.
+[21:51:45.153] [SUCCESS] All purpose buffer has been created.
+[21:51:45.153] [SUCCESS] Some vector data has been read.
+[21:51:45.153] [SUCCESS] vec4f(1.000000, 2.000000, 3.000000, 4.000000)
+[21:51:45.153] [SUCCESS] vec4f(5.000000, 6.000000, 7.000000, 8.000000)
+[21:51:45.153] [INFO] The end.
+[21:51:45.153] [SUCCESS] XD
+[23:59:52.347] [INIT] ---------------------------------------- Log started at: 2025-04-16 23:59:52 ---------------------------------------- 
+[23:59:52.378] [INFO] OpenCL init OK.
+[23:59:52.378] [DEBUG] SOMETHING!
+[23:59:52.378] [SUCCESS] Everything works because nothing's been tested.
+[23:59:52.378] [SUCCESS] All purpose buffer has been created.
+[23:59:52.378] [SUCCESS] Some vector data has been read.
+[23:59:52.378] [SUCCESS] vec4f(1.000000, 2.000000, 3.000000, 4.000000)
+[23:59:52.378] [SUCCESS] vec4f(5.000000, 6.000000, 7.000000, 8.000000)
+[23:59:52.378] [INFO] The end.

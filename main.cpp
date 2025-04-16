@@ -5,6 +5,7 @@
 #include <hwr/program.hpp>
 #include<cassert>
 #include<iostream>
+#include<string>
 
 using vec4 = hwr::vec4f;
 
@@ -40,12 +41,11 @@ int main(){
     //cb.readTo(std::span<vec4>(vecs,2)); // shouldn't compile
     //cb.writeFrom(std::vector<vec4>{vec4(1,2,3,4),vec4(5,6,7,8)}); // shouldn't compile
 
-    hwr::Program<float, vec4, vec4, vec4> prog;
-    prog.generateCode();
-    HWR_SUCCESS(prog.generateCode());
-
     ARG(int,"XD") arg;
     const char* nm = arg.getName();
     std::cout<<nm<<std::endl;
+
+    hwr::Program<int, ARG(int,"x"), ARG(int,"y")> prog;
+    std::cout<<prog.generateCode()<<std::endl;
 
 }

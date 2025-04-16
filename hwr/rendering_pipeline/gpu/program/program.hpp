@@ -63,10 +63,28 @@ class Arg{
         }
 };
 
+namespace detail{
+
+    template<typename T>
+    struct is_arg_type : std::false_type {};
+
+    template<typename U, auto Name>
+    struct is_arg_type<hwr::Arg<U, Name>> : std::true_type {};
+
+    template<typename T>
+    inline constexpr bool is_arg_type_v = is_arg_type<T>::value;
+
+    template<typename... Args>
+    constexpr bool are_these_args(){
+        return (is_arg_type_v<Args> && ...);
+    }
+    
+} // namespace detail
+
 template<typename Result, typename... Args>
 class Program{
-    static_assert(detail::are_args_valid<Args...>(), "All Args must be trivially copyable");
-    static_assert(std::is_trivially_copyable_v<Result>, "Result must be trivially copyable");
+    static_assert(detail::are_these_args<Args...>());
+    static_assert(detail::is_valid_arg_v<Result>, "Result must be trivially copyable");
     public:
         std::string generateCode(){
             return "XD";
