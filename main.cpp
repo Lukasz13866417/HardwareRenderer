@@ -41,4 +41,11 @@ int main(){
     hwr::Program<float, vec4, vec4, vec4> prog;
     prog.generateCode();
     HWR_SUCCESS(prog.generateCode());
+
+    ARG(int,"XD") arg;
+    int64_t code = arg.getCode();
+    ++code;
+    --code;
+    HWR_SUCCESS(std::to_string(code));
+
 }

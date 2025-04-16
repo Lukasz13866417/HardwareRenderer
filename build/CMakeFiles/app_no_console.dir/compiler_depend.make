@@ -850,10 +850,12 @@ CMakeFiles/app_no_console.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
   /home/lukasz/HardwareRenderer/hwr/util/log/log.hpp \
   /home/lukasz/HardwareRenderer/hwr/util/log/log_config_detail.hpp \
   /home/lukasz/HardwareRenderer/hwr/util/math/math_util.hpp \
+  /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/program/program.hpp \
   /home/lukasz/HardwareRenderer/hwr/include/hwr/buffer.hpp \
   /home/lukasz/HardwareRenderer/hwr/include/hwr/gpu_context.hpp \
   /home/lukasz/HardwareRenderer/hwr/include/hwr/log.hpp \
   /home/lukasz/HardwareRenderer/hwr/include/hwr/math.hpp \
+  /home/lukasz/HardwareRenderer/hwr/include/hwr/program.hpp \
   /usr/include/CL/cl.h \
   /usr/include/CL/cl_ext.h \
   /usr/include/CL/cl_gl.h \
@@ -1197,6 +1199,8 @@ CMakeFiles/app_no_console.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
 /home/lukasz/HardwareRenderer/hwr/include/hwr/gpu_context.hpp:
 
 /home/lukasz/HardwareRenderer/hwr/include/hwr/buffer.hpp:
+
+/home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/program/program.hpp:
 
 /home/lukasz/HardwareRenderer/main.cpp:
 
@@ -1613,6 +1617,8 @@ CMakeFiles/app_no_console.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
 /usr/include/alloca.h:
 
 /usr/include/c++/13/bits/refwrap.h:
+
+/home/lukasz/HardwareRenderer/hwr/include/hwr/program.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
