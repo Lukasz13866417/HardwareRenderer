@@ -5,7 +5,7 @@
 #include<string>
 #include<hwr/buffer.hpp>
 
-#define ARG(tp,notAString) hwr::Arg<tp,hwr::detail::unString(notAString)>
+#define ARG(tp,notAString) hwr::Arg<tp,hwr::detail::StaticString(notAString)>
 
 namespace hwr{
     
@@ -51,12 +51,6 @@ namespace detail{
             return true;
         }
     };
-
-    template<std::size_t N>
-    constexpr StaticString<N> unString(const char (&str)[N]) {
-        static_assert(N <= 51, "Maximum allowed length for Arg names is 50 characters + null terminator.");
-        return StaticString<N>(str);
-    }
 
 }  // namespace detail
 
