@@ -26,14 +26,14 @@ int main(){
         Float a = 1.0f;
         Float b = 3.0f;
         Float c = a + b;
-        Float d = c * (a - b * (a*a)) * 0.5f;
+        Float d = c * (a - b / (a*a)) * 0.5f;
     }};
     // This will call the lambda passed to the constructor.
     // When the lambda is called, the code inside it is run, 
     // and my custom types (Float etc.) generate the OpenCL code automatically,
     // thanks to operator overloads (+, *, -, /).
     std::string res = sum.compile();
-    // print the compiles OpenCL code.
+    // print the compiled OpenCL code.
     std::cout<<res<<std::endl;
     
     
