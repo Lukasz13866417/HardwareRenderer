@@ -144,6 +144,9 @@ namespace detail {
     template<typename T>
     std::tuple<std::string, std::string, bool> stupidWrapper(const ShaderValueWrapper<T>& wrapper);
 
+    template<typename U>
+    const std::string& getValName(const ShaderValue<U>& shv);
+
 } // namespace detail
 
 template<typename T>
@@ -193,18 +196,15 @@ class ShaderValue{
                 }
             }
 
-        //ShaderValue(const ShaderValueWrapper<T> &from);
-        //ShaderValue(ShaderValueWrapper<T>&& from);
+        template<typename U>
+        friend const std::string& detail::getValName(const ShaderValue<U>& shv);
            
 
     private:
         const std::string type_;
         const std::string expression_;
         const bool is_lvalue_;
-    public:
-        // later will be made private, but this will make code longer.
         const std::string name_;
-    private:
         const std::string def_;
     
         
@@ -213,6 +213,15 @@ class ShaderValue{
     friend class ShaderValueWrapper;
 
 };
+
+namespace detail {
+
+    template<typename T>
+    const std::string& getValName(const ShaderValue<T>& shv) {
+        return shv.name_;
+    }
+
+}
 
 // Used to skip C++ compiler optimization that won't call move ctor like here:
 // Float a = b+c;
@@ -259,73 +268,73 @@ namespace detail {
 template<typename T>
 hwr::ShaderValueWrapper<T> operator+(const hwr::ShaderValue<T>& lhs, const hwr::ShaderValue<T>& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + lhs.name_ + " + " + rhs.name_ + ")");
+    return hwr::ShaderValueWrapper<T>("(" + hwr::detail::getValName(lhs) + " + " + hwr::detail::getValName(rhs) + ")");
 }
 
 template<typename T>
 hwr::ShaderValueWrapper<T> operator-(const hwr::ShaderValue<T>& lhs, const hwr::ShaderValue<T>& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + lhs.name_ + " - " + rhs.name_ + ")");
+    return hwr::ShaderValueWrapper<T>("(" + hwr::detail::getValName(lhs) + " - " + hwr::detail::getValName(rhs) + ")");
 }
 
 template<typename T>
 hwr::ShaderValueWrapper<T> operator*(const hwr::ShaderValue<T>& lhs, const hwr::ShaderValue<T>& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + lhs.name_ + " * " + rhs.name_ + ")");
+    return hwr::ShaderValueWrapper<T>("(" + hwr::detail::getValName(lhs) + " * " + hwr::detail::getValName(rhs) + ")");
 }
 
 template<typename T>
 hwr::ShaderValueWrapper<T> operator/(const hwr::ShaderValue<T>& lhs, const hwr::ShaderValue<T>& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + lhs.name_ + " / " + rhs.name_ + ")");
+    return hwr::ShaderValueWrapper<T>("(" + hwr::detail::getValName(lhs) + " / " + hwr::detail::getValName(rhs) + ")");
 }
 
 template<typename T>
 hwr::ShaderValueWrapper<T> operator+(const hwr::ShaderValue<T>& lhs, const T& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + lhs.name_ + " + " + std::to_string(rhs) + ")");
+    return hwr::ShaderValueWrapper<T>("(" + hwr::detail::getValName(lhs) + " + " + std::to_string(rhs) + ")");
 }
 
 template<typename T>
 hwr::ShaderValueWrapper<T> operator-(const hwr::ShaderValue<T>& lhs, const T& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + lhs.name_ + " - " + std::to_string(rhs) + ")");
+    return hwr::ShaderValueWrapper<T>("(" + hwr::detail::getValName(lhs) + " - " + std::to_string(rhs) + ")");
 }
 
 template<typename T>
 hwr::ShaderValueWrapper<T> operator*(const hwr::ShaderValue<T>& lhs, const T& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + lhs.name_ + " * " + std::to_string(rhs) + ")");
+    return hwr::ShaderValueWrapper<T>("(" + hwr::detail::getValName(lhs) + " * " + std::to_string(rhs) + ")");
 }
 
 template<typename T>
 hwr::ShaderValueWrapper<T> operator/(const hwr::ShaderValue<T>& lhs, const T& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + lhs.name_ + " / " + std::to_string(rhs) + ")");
+    return hwr::ShaderValueWrapper<T>("(" + hwr::detail::getValName(lhs) + " / " + std::to_string(rhs) + ")");
 }
 
 template<typename T>
 hwr::ShaderValueWrapper<T> operator+(const T& lhs, const hwr::ShaderValue<T>& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + std::to_string(lhs) + " + " + rhs.name_ + ")");
+    return hwr::ShaderValueWrapper<T>("(" + std::to_string(lhs) + " + " + hwr::detail::getValName(rhs) + ")");
 }
 
 template<typename T>
 hwr::ShaderValueWrapper<T> operator-(const T& lhs, const hwr::ShaderValue<T>& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + std::to_string(lhs) + " - " + rhs.name_ + ")");
+    return hwr::ShaderValueWrapper<T>("(" + std::to_string(lhs) + " - " + hwr::detail::getValName(rhs) + ")");
 }
 
 template<typename T>
 hwr::ShaderValueWrapper<T> operator*(const T& lhs, const hwr::ShaderValue<T>& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + std::to_string(lhs) + " * " + rhs.name_ + ")");
+    return hwr::ShaderValueWrapper<T>("(" + std::to_string(lhs) + " * " + hwr::detail::getValName(rhs) + ")");
 }
 
 template<typename T>
 hwr::ShaderValueWrapper<T> operator/(const T& lhs, const hwr::ShaderValue<T>& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + std::to_string(lhs) + " / " + rhs.name_ + ")");
+    return hwr::ShaderValueWrapper<T>("(" + std::to_string(lhs) + " / " + hwr::detail::getValName(rhs) + ")");
 }
 
 // === ShaderValue<T> op ShaderValueWrapper<T> ===
@@ -333,25 +342,25 @@ hwr::ShaderValueWrapper<T> operator/(const T& lhs, const hwr::ShaderValue<T>& rh
 template<typename T>
 inline hwr::ShaderValueWrapper<T> operator+(const hwr::ShaderValue<T>& lhs, const hwr::ShaderValueWrapper<T>& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + lhs.name_ + " + " + rhs.expression() + ")");
+    return hwr::ShaderValueWrapper<T>("(" + hwr::detail::getValName(lhs) + " + " + rhs.expression() + ")");
 }
 
 template<typename T>
 inline hwr::ShaderValueWrapper<T> operator-(const hwr::ShaderValue<T>& lhs, const hwr::ShaderValueWrapper<T>& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + lhs.name_ + " - " + rhs.expression() + ")");
+    return hwr::ShaderValueWrapper<T>("(" + hwr::detail::getValName(lhs) + " - " + rhs.expression() + ")");
 }
 
 template<typename T>
 inline hwr::ShaderValueWrapper<T> operator*(const hwr::ShaderValue<T>& lhs, const hwr::ShaderValueWrapper<T>& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + lhs.name_ + " * " + rhs.expression() + ")");
+    return hwr::ShaderValueWrapper<T>("(" + hwr::detail::getValName(lhs) + " * " + rhs.expression() + ")");
 }
 
 template<typename T>
 inline hwr::ShaderValueWrapper<T> operator/(const hwr::ShaderValue<T>& lhs, const hwr::ShaderValueWrapper<T>& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + lhs.name_ + " / " + rhs.expression() + ")");
+    return hwr::ShaderValueWrapper<T>("(" + hwr::detail::getValName(lhs) + " / " + rhs.expression() + ")");
 }
 
 // === ShaderValueWrapper<T> op ShaderValue<T> ===
@@ -359,25 +368,25 @@ inline hwr::ShaderValueWrapper<T> operator/(const hwr::ShaderValue<T>& lhs, cons
 template<typename T>
 inline hwr::ShaderValueWrapper<T> operator+(const hwr::ShaderValueWrapper<T>& lhs, const hwr::ShaderValue<T>& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + lhs.expression() + " + " + rhs.name_ + ")");
+    return hwr::ShaderValueWrapper<T>("(" + lhs.expression() + " + " + hwr::detail::getValName(rhs) + ")");
 }
 
 template<typename T>
 inline hwr::ShaderValueWrapper<T> operator-(const hwr::ShaderValueWrapper<T>& lhs, const hwr::ShaderValue<T>& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + lhs.expression() + " - " + rhs.name_ + ")");
+    return hwr::ShaderValueWrapper<T>("(" + lhs.expression() + " - " + hwr::detail::getValName(rhs) + ")");
 }
 
 template<typename T>
 inline hwr::ShaderValueWrapper<T> operator*(const hwr::ShaderValueWrapper<T>& lhs, const hwr::ShaderValue<T>& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + lhs.expression() + " * " + rhs.name_ + ")");
+    return hwr::ShaderValueWrapper<T>("(" + lhs.expression() + " * " + hwr::detail::getValName(rhs) + ")");
 }
 
 template<typename T>
 inline hwr::ShaderValueWrapper<T> operator/(const hwr::ShaderValueWrapper<T>& lhs, const hwr::ShaderValue<T>& rhs) {
     static_assert(hwr::detail::is_allowed_type_v<T>, "T must be a valid shader type");
-    return hwr::ShaderValueWrapper<T>("(" + lhs.expression() + " / " + rhs.name_ + ")");
+    return hwr::ShaderValueWrapper<T>("(" + lhs.expression() + " / " + hwr::detail::getValName(rhs) + ")");
 }
 
 
