@@ -289,8 +289,6 @@ friend hwr::ShaderValueWrapper<T> operator/(const hwr::ShaderValueWrapper<T>& lh
 };
 
 
-
-
 }  // namespace hwr
 
 
