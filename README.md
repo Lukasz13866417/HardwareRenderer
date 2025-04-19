@@ -25,3 +25,4 @@ hwr::Program sum{[](){
 std::string res = sum.compile();
 std::cout<<res<<std::endl;
 ```
+The language has been made with **state-of-the-art C++ template metaprogramming** 
