@@ -854,6 +854,7 @@ CMakeFiles/app_no_debug.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp \
   /home/lukasz/HardwareRenderer/hwr/include/hwr/gpu_context.hpp \
   /home/lukasz/HardwareRenderer/hwr/include/hwr/log.hpp \
   /home/lukasz/HardwareRenderer/hwr/include/hwr/math.hpp \
+  /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/shader_types_util.hpp \
   /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/shader.hpp \
   /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/shader.hpp \
   /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/types.hpp \
@@ -1209,6 +1210,8 @@ CMakeFiles/app_no_debug.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp \
 /usr/include/c++/13/bits/deque.tcc:
 
 /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/types.hpp:
+
+/home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/shader_types_util.hpp:
 
 /home/lukasz/HardwareRenderer/hwr/include/hwr/math.hpp:
 
