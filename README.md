@@ -5,8 +5,6 @@ This is going to be a cleaner, powerful API, **ISO C++ compliant** (compilable w
 Example:
 ```C++
 hwr::Program sum{[](){
-    // Yes. The language is "inside" C++.
-    // These types are custom types that automatically generate OpenCL kernel code.
     Float a = 1.0f;
     Float b = 3.0f;
     Float c = a + b;
@@ -25,4 +23,4 @@ hwr::Program sum{[](){
 std::string res = sum.compile();
 std::cout<<res<<std::endl;
 ```
-The language has been made with **state-of-the-art C++ template metaprogramming** 
+The language has been made with **state-of-the-art C++ template metaprogramming**. Yes, the language is "inside" C++. Types like ```Int``` are custom types that automatically generate OpenCL kernel code.That means you will get **compile-time** errors (contrary to GLSL). And a way cleaner view of your code. This will be **very easily extensible to do all the 3D math for you**, but you will still have fine-grained control over everything, if you want.
