@@ -850,12 +850,15 @@ CMakeFiles/app_no_console.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
   /home/lukasz/HardwareRenderer/hwr/util/log/log.hpp \
   /home/lukasz/HardwareRenderer/hwr/util/log/log_config_detail.hpp \
   /home/lukasz/HardwareRenderer/hwr/util/math/math_util.hpp \
-  /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/program/program.hpp \
   /home/lukasz/HardwareRenderer/hwr/include/hwr/buffer.hpp \
   /home/lukasz/HardwareRenderer/hwr/include/hwr/gpu_context.hpp \
   /home/lukasz/HardwareRenderer/hwr/include/hwr/log.hpp \
   /home/lukasz/HardwareRenderer/hwr/include/hwr/math.hpp \
-  /home/lukasz/HardwareRenderer/hwr/include/hwr/program.hpp \
+  /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/shader.hpp \
+  /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/shader.hpp \
+  /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/types.hpp \
+  /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/shader.hpp \
+  /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/types.hpp \
   /usr/include/CL/cl.h \
   /usr/include/CL/cl_ext.h \
   /usr/include/CL/cl_gl.h \
@@ -891,6 +894,7 @@ CMakeFiles/app_no_console.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
   /usr/include/c++/13/bits/cpp_type_traits.h \
   /usr/include/c++/13/bits/cxxabi_forced.h \
   /usr/include/c++/13/bits/cxxabi_init_exception.h \
+  /usr/include/c++/13/bits/deque.tcc \
   /usr/include/c++/13/bits/enable_special_members.h \
   /usr/include/c++/13/bits/erase_if.h \
   /usr/include/c++/13/bits/exception.h \
@@ -945,6 +949,7 @@ CMakeFiles/app_no_console.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
   /usr/include/c++/13/bits/stl_algobase.h \
   /usr/include/c++/13/bits/stl_bvector.h \
   /usr/include/c++/13/bits/stl_construct.h \
+  /usr/include/c++/13/bits/stl_deque.h \
   /usr/include/c++/13/bits/stl_function.h \
   /usr/include/c++/13/bits/stl_heap.h \
   /usr/include/c++/13/bits/stl_iterator.h \
@@ -953,6 +958,7 @@ CMakeFiles/app_no_console.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
   /usr/include/c++/13/bits/stl_pair.h \
   /usr/include/c++/13/bits/stl_raw_storage_iter.h \
   /usr/include/c++/13/bits/stl_relops.h \
+  /usr/include/c++/13/bits/stl_stack.h \
   /usr/include/c++/13/bits/stl_tempbuf.h \
   /usr/include/c++/13/bits/stl_uninitialized.h \
   /usr/include/c++/13/bits/stl_vector.h \
@@ -987,6 +993,7 @@ CMakeFiles/app_no_console.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
   /usr/include/c++/13/cwctype \
   /usr/include/c++/13/debug/assertions.h \
   /usr/include/c++/13/debug/debug.h \
+  /usr/include/c++/13/deque \
   /usr/include/c++/13/exception \
   /usr/include/c++/13/ext/aligned_buffer.h \
   /usr/include/c++/13/ext/alloc_traits.h \
@@ -1015,6 +1022,7 @@ CMakeFiles/app_no_console.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
   /usr/include/c++/13/pstl/pstl_config.h \
   /usr/include/c++/13/ratio \
   /usr/include/c++/13/span \
+  /usr/include/c++/13/stack \
   /usr/include/c++/13/stdexcept \
   /usr/include/c++/13/stdlib.h \
   /usr/include/c++/13/streambuf \
@@ -1192,6 +1200,16 @@ CMakeFiles/app_no_console.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
 
 /usr/include/c++/13/pstl/glue_algorithm_defs.h:
 
+/usr/include/c++/13/deque:
+
+/usr/include/c++/13/bits/stl_stack.h:
+
+/usr/include/c++/13/bits/stl_deque.h:
+
+/usr/include/c++/13/bits/deque.tcc:
+
+/home/lukasz/HardwareRenderer/hwr/include/hwr/shader/types.hpp:
+
 /home/lukasz/HardwareRenderer/hwr/include/hwr/math.hpp:
 
 /home/lukasz/HardwareRenderer/hwr/include/hwr/log.hpp:
@@ -1199,8 +1217,6 @@ CMakeFiles/app_no_console.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
 /home/lukasz/HardwareRenderer/hwr/include/hwr/gpu_context.hpp:
 
 /home/lukasz/HardwareRenderer/hwr/include/hwr/buffer.hpp:
-
-/home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/program/program.hpp:
 
 /home/lukasz/HardwareRenderer/main.cpp:
 
@@ -1470,6 +1486,8 @@ CMakeFiles/app_no_console.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
 
 /usr/include/x86_64-linux-gnu/asm/errno.h:
 
+/home/lukasz/HardwareRenderer/hwr/include/hwr/shader/shader.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/stdlib.h:
 
 /usr/include/c++/13/bits/locale_facets.h:
@@ -1534,6 +1552,8 @@ CMakeFiles/app_no_console.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
 
 /home/lukasz/HardwareRenderer/hwr/util/log/log_config_detail.hpp:
 
+/usr/include/c++/13/stack:
+
 /usr/include/x86_64-linux-gnu/bits/mathcalls.h:
 
 /usr/include/c++/13/bits/stl_relops.h:
@@ -1578,6 +1598,8 @@ CMakeFiles/app_no_console.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
 
 /usr/include/c++/13/bits/basic_string.h:
 
+/home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/shader.hpp:
+
 /usr/include/CL/cl_gl.h:
 
 /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/gpu_cl_init.hpp:
@@ -1617,8 +1639,6 @@ CMakeFiles/app_no_console.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
 /usr/include/alloca.h:
 
 /usr/include/c++/13/bits/refwrap.h:
-
-/home/lukasz/HardwareRenderer/hwr/include/hwr/program.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
@@ -1693,6 +1713,8 @@ CMakeFiles/app_no_console.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
 /usr/include/c++/13/bits/memory_resource.h:
 
 /usr/include/c++/13/streambuf:
+
+/home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/types.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 

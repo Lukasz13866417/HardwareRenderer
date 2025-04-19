@@ -2,7 +2,8 @@
 #include <hwr/log.hpp>
 #include <hwr/buffer.hpp>
 #include <hwr/math.hpp>
-#include <hwr/program.hpp>
+#include <hwr/shader/types.hpp>
+#include <hwr/shader/shader.hpp>
 #include<cassert>
 #include<iostream>
 #include<string>
@@ -10,8 +11,6 @@
 using vec4 = hwr::vec4f;
 
 int main(){
-
-    HWR_LOG_INIT();
 
     std::optional<hwr::GPUContext> _gpuContext = hwr::initGPUContext();
     if(!_gpuContext){
@@ -21,32 +20,14 @@ int main(){
     hwr::GPUContext gpu_context = _gpuContext.value();
     HWR_DEBUG("SOMETHING!");
 
-    //HWR_ASSERT(false,"WTF");
-    //HWR_ASSERT_CL_OK(1,"HUH");
-
-    HWR_SUCCESS("Everything works because nothing's been tested.");
-
-    hwr::AllPurposeBuffer apb(gpu_context, 2, 
-                                         std::vector<vec4>{vec4(1,2,3,4),vec4(5,6,7,8)});
-    HWR_SUCCESS("All purpose buffer has been created.");
-    vec4 vecs[2];
-    apb.readTo(std::span<vec4>(vecs,2));
-    HWR_SUCCESS("Some vector data has been read.");
-    HWR_SUCCESS(hwr::to_string(vecs[0]));
-    HWR_SUCCESS(hwr::to_string(vecs[1]));
-    HWR_INFO("The end.");
-
-    hwr::ConstBuffer cb(gpu_context, 2, 
-                                   std::vector<vec4>{vec4(1,2,3,4),vec4(5,6,7,8)});
-    //cb.readTo(std::span<vec4>(vecs,2)); // shouldn't compile
-    //cb.writeFrom(std::vector<vec4>{vec4(1,2,3,4),vec4(5,6,7,8)}); // shouldn't compile
-
-    ARG(int,"XD") arg;
-    const char* nm = arg.getName();
-    std::cout<<nm<<std::endl;
-
-    hwr::Program<OUT(int,"x"), ARG(int,"x")> A("float x=0;");
-    hwr::Program<OUT(int,"x"), ARG(int,"x")> B("float y=0;");
-    std::cout<<A.getCode()<<" "<<B.getCode()<<std::endl;
-
+    hwr::Program sum{[](){
+        Float a = 1.0f;
+        Float b = 3.0f;
+        Float c = a + b;
+        Float d = c * (a - b);
+    }};
+    std::string res = sum.compile();
+    std::cout<<res<<std::endl;
+    
+    
 }

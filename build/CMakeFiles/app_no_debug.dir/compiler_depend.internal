@@ -854,12 +854,15 @@ CMakeFiles/app_no_debug.dir/main.cpp.o
  /home/lukasz/HardwareRenderer/hwr/util/log/log.hpp
  /home/lukasz/HardwareRenderer/hwr/util/log/log_config_detail.hpp
  /home/lukasz/HardwareRenderer/hwr/util/math/math_util.hpp
- /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/program/program.hpp
  /home/lukasz/HardwareRenderer/hwr/include/hwr/buffer.hpp
  /home/lukasz/HardwareRenderer/hwr/include/hwr/gpu_context.hpp
  /home/lukasz/HardwareRenderer/hwr/include/hwr/log.hpp
  /home/lukasz/HardwareRenderer/hwr/include/hwr/math.hpp
- /home/lukasz/HardwareRenderer/hwr/include/hwr/program.hpp
+ /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/shader.hpp
+ /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/shader.hpp
+ /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/types.hpp
+ /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/shader.hpp
+ /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/types.hpp
  /usr/include/CL/cl.h
  /usr/include/CL/cl_ext.h
  /usr/include/CL/cl_gl.h
@@ -895,6 +898,7 @@ CMakeFiles/app_no_debug.dir/main.cpp.o
  /usr/include/c++/13/bits/cpp_type_traits.h
  /usr/include/c++/13/bits/cxxabi_forced.h
  /usr/include/c++/13/bits/cxxabi_init_exception.h
+ /usr/include/c++/13/bits/deque.tcc
  /usr/include/c++/13/bits/enable_special_members.h
  /usr/include/c++/13/bits/erase_if.h
  /usr/include/c++/13/bits/exception.h
@@ -949,6 +953,7 @@ CMakeFiles/app_no_debug.dir/main.cpp.o
  /usr/include/c++/13/bits/stl_algobase.h
  /usr/include/c++/13/bits/stl_bvector.h
  /usr/include/c++/13/bits/stl_construct.h
+ /usr/include/c++/13/bits/stl_deque.h
  /usr/include/c++/13/bits/stl_function.h
  /usr/include/c++/13/bits/stl_heap.h
  /usr/include/c++/13/bits/stl_iterator.h
@@ -957,6 +962,7 @@ CMakeFiles/app_no_debug.dir/main.cpp.o
  /usr/include/c++/13/bits/stl_pair.h
  /usr/include/c++/13/bits/stl_raw_storage_iter.h
  /usr/include/c++/13/bits/stl_relops.h
+ /usr/include/c++/13/bits/stl_stack.h
  /usr/include/c++/13/bits/stl_tempbuf.h
  /usr/include/c++/13/bits/stl_uninitialized.h
  /usr/include/c++/13/bits/stl_vector.h
@@ -991,6 +997,7 @@ CMakeFiles/app_no_debug.dir/main.cpp.o
  /usr/include/c++/13/cwctype
  /usr/include/c++/13/debug/assertions.h
  /usr/include/c++/13/debug/debug.h
+ /usr/include/c++/13/deque
  /usr/include/c++/13/exception
  /usr/include/c++/13/ext/aligned_buffer.h
  /usr/include/c++/13/ext/alloc_traits.h
@@ -1019,6 +1026,7 @@ CMakeFiles/app_no_debug.dir/main.cpp.o
  /usr/include/c++/13/pstl/pstl_config.h
  /usr/include/c++/13/ratio
  /usr/include/c++/13/span
+ /usr/include/c++/13/stack
  /usr/include/c++/13/stdexcept
  /usr/include/c++/13/stdlib.h
  /usr/include/c++/13/streambuf

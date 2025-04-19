@@ -25,6 +25,7 @@ function(add_app_target target_name)
         hwr/rendering_pipeline/gpu/context/gpu_context.cpp
         hwr/util/log/log.cpp
         hwr/util/math/math_util.cpp
+
     )
     target_include_directories(${target_name} PRIVATE 
         "${CMAKE_CURRENT_SOURCE_DIR}/hwr/include"
