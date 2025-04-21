@@ -27,7 +27,7 @@ int main(){
         Float b = 3.0f;
         Float c = a + b;
         Float d = c * (a - b / (a*a)) * 0.5f;
-
+        
         Int x = 1;
         Int y = 3;
         Int z = x + y;
@@ -37,6 +37,8 @@ int main(){
         Double q = 3.321;
         Double r = p + q;
         Double s = r / (p*q*r*2.0 + 1.1);
+
+        Double different_types = a*x;
     }};
     // This will call the lambda passed to the constructor.
     // When the lambda is called, the code inside it is run, 

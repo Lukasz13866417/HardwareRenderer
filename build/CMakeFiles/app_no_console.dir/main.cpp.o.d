@@ -285,6 +285,8 @@ CMakeFiles/app_no_console.dir/main.cpp.o: \
  /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
  /usr/include/c++/13/bits/stl_stack.h \
  /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/././shader_types_util.hpp \
+ /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/./././static_string.hpp \
+ /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/././static_string.hpp \
  /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/shader.hpp \
  /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/shader.hpp \
  /usr/include/c++/13/iostream /usr/include/c++/13/istream \
