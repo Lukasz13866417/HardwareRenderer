@@ -25,20 +25,16 @@ int main(){
     hwr::Program sum{[](){
         Float a = 1.0f;
         Float b = 3.0f;
-        Float c = a + b;
-        Float d = c * (a - b / (a*a)) * 0.5f;
         
         Int x = 1;
         Int y = 3;
-        Int z = x + y;
-        Int v = z / (x*y*z*2 + 1);
 
         Double p = 1.123;
         Double q = 3.321;
-        Double r = p + q;
-        Double s = r / (p*q*r*2.0 + 1.1);
 
-        Double different_types = a*x;
+        Double A = a*x*q + b*y*p + x+y+a+b + p/q;
+
+        Bool xd = 3*x == y;
     }};
     // This will call the lambda passed to the constructor.
     // When the lambda is called, the code inside it is run, 

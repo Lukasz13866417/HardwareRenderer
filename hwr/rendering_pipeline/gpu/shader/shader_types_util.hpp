@@ -46,7 +46,7 @@ namespace hwr {
 
     template<>
     std::string toOpenCLCode(bool what){
-        return std::to_string(what);
+        return what ? "true" : "false";
     }
 
     
@@ -278,6 +278,11 @@ namespace hwr {
     template<>
     struct OpenCLTypeName<double> {
         static constexpr std::string_view value = "double";
+    };
+
+    template<>
+    struct OpenCLTypeName<bool> {
+        static constexpr std::string_view value = "bool";
     };
 
     // Convenience helper

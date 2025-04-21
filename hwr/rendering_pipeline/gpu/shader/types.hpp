@@ -9,5 +9,6 @@
 using Float = hwr::ShaderValue<float>;
 using Int = hwr::ShaderValue<int>;
 using Double = hwr::ShaderValue<double>;
+using Bool = hwr::ShaderValue<bool>;
 
 #endif // SHADER_TYPES_HPP
