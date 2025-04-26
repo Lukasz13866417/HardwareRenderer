@@ -10,7 +10,11 @@
 
 using vec4 = hwr::vec4f;
 
-HWR_STRUCT(sample_struct, float x; float y; float z;);
+HWR_STRUCT(sample_struct, 
+    float x; 
+    float y; 
+    float z;
+);
 
 int main(){
 
