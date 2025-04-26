@@ -23,9 +23,12 @@ int main(){
 
     //  shader. Is compiled to OpenCL code.
     hwr::Program sum{[](){
-        Float fl = 1;
-        HWR_FOR(Int a = 0; a < 10; ++a) {
-            HWR_FOR(Int b = 0; b < 10; ++b) {
+        //Float f = 1.0;
+        //Double d = 2.0f;
+        //Double xd = f + d;
+        Float fl = 1.0f;
+        HWR_FOR(Int32 a = 0; a < 10; ++a) {
+            HWR_FOR(Int32 b = 0; b < 10; ++b) {
                 HWR_IF(a+b==0){
                     Double xd = -1.0f + fl;
                 }

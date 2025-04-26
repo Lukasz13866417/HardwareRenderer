@@ -14,7 +14,7 @@
 template<hwr::AllowedShaderType T, hwr::AllowedShaderType U>                                   \
 requires hwr::is_op_allowed_v<T, U, hwr::StaticString{#OP}>                                    \
 inline hwr::ShaderRValue<hwr::binary_result_type_t<T, U, hwr::StaticString{#OP}>>              \
-operator OP(const hwr::ShaderValue<T>& lhs, const hwr::ShaderValue<U>& rhs)                   \
+operator OP(const hwr::ShaderValue<T>& lhs, const hwr::ShaderValue<U>& rhs)                    \
 {                                                                                              \
     using result_t = hwr::binary_result_type_t<T, U, hwr::StaticString{#OP}>;                  \
     return hwr::ShaderRValue<result_t>(hwr::detail::make_expr(                                 \
@@ -253,148 +253,129 @@ namespace detail {
     const std::string& getValName(const ShaderValue<U>& shv);
 
 } // namespace detail
-
 template<typename T>
-class ShaderValue{
+class ShaderValue {
     static_assert(is_allowed_type_v<T>, "T must be valid shader type");
-    public:
-        const std::string& getDefinition(){
-            return def_;
+
+public:
+    const std::string& getDefinition() { return def_; }
+
+    const std::string& getOpenCLType() const { return type_; }
+
+    ShaderValue(const ShaderRValue<T>& rhs)
+        : ShaderValue(
+            std::string(opencl_type_name_v<T>),
+            detail::getExpression(rhs)
+        ) {}
+
+    ShaderValue(T from)
+        : ShaderValue(
+            std::string(opencl_type_name_v<T>),
+            toOpenCLCode(from)
+        ) {}
+
+    template<typename U>
+    requires (is_allowed_type_v<U> && !std::is_same_v<U, T>)
+    ShaderValue(const ShaderRValue<U>& rhs)
+        : ShaderValue(
+            std::string(opencl_type_name_v<T>),
+            makeConversionCode<U>(detail::getExpression(rhs))
+        ) {}
+
+    template<typename U>
+    requires (is_allowed_type_v<U> && !std::is_same_v<U, T>)
+    ShaderValue(const ShaderValue<U>& other)
+        : ShaderValue(
+            std::string(opencl_type_name_v<T>),
+            makeConversionCode<U>("(" + other.name_ + ")")
+        ) {}
+
+    ShaderValue(const ShaderValue<T>& rhs)
+        : ShaderValue(
+            std::string(opencl_type_name_v<T>),
+            rhs.expression_
+        ) {}
+
+    // Assignment operators
+
+    template<typename U>
+    requires(is_allowed_type_v<U>)
+    void operator=(const ShaderValue<U>& rhs) {
+        detail::program_context::appendToProgramCode(
+            name_ + " = " + makeConversionCode<U>(detail::expr(rhs)) + ";"
+        );
+    }
+
+    template<typename U>
+    requires(is_allowed_type_v<U>)
+    void operator=(const ShaderRValue<U>& rhs) {
+        detail::program_context::appendToProgramCode(
+            name_ + " = " + makeConversionCode<U>(detail::expr(rhs)) + ";"
+        );
+    }
+
+    void operator=(T v) {
+        detail::program_context::appendToProgramCode(
+            name_ + " = " + toOpenCLCode(v) + ";"
+        );
+    }
+
+    operator bool() {
+        int32_t res = detail::program_context::get_counter();
+        if (res > 0 && detail::program_context::is_forloop_header_being_generated()) {
+            detail::program_context::replace_possible_comma_with_semicolon();
+            detail::program_context::appendToProgramCode(name_ + ";");
+            detail::program_context::replace_possible_comma_with_semicolon();
         }
-        
-        // Get the OpenCL type name corresponding to this ShaderValue
-        const std::string& getOpenCLType() const {
-            return type_;
+        HWR_INFO("counter: " + std::to_string(res));
+        if (res > 0) detail::program_context::decr_counter();
+        detail::program_context::unset_first_def();
+        return res > 0;
+    }
+
+protected:
+    ShaderValue(const std::string& type, const std::string& expr)
+        : type_(type), expression_(expr),
+          name_(detail::program_context::make_temp_name()),
+          def_(type_ + " " + name_ + " = " + expression_ + ";") {
+              
+        HWR_DEBUG("Appending code to program: " + def_);
+
+        if (detail::program_context::is_forloop_header_being_generated()) {
+            if (detail::program_context::is_first_def()) {
+                detail::program_context::appendToProgramCode(def_);
+            } else {
+                detail::program_context::appendToProgramCode(name_ + " = " + expression_ + ";");
+            }
+        } else {
+            detail::program_context::appendToProgramCode(def_);
         }
+        detail::program_context::push_opencl_type(type_);
+    }
 
-        public:
-            ShaderValue(const ShaderRValue<T>& rhs)
-            : ShaderValue(
-                std::string(opencl_type_name_v<T>),  // type
-                detail::getExpression(rhs)  // expression
-            ) {
-            }
-    
+private:
+    const std::string type_;
+    const std::string expression_;
+    const std::string name_;
+    const std::string def_;
 
-            ShaderValue(T from) 
-                : ShaderValue(std::string(opencl_type_name_v<T>), 
-                              toOpenCLCode(from))
-                         {
-            }
-
-            template<typename U>
-            requires (
-                is_allowed_type_v<U> &&
-                is_shader_convertible_v<U, T> &&
-                !std::is_same_v<U, T>
-            )
-            ShaderValue(const ShaderRValue<U>& rhs)
-            : ShaderValue(
-                std::string(opencl_type_name_v<T>),  // type
-                "(" + std::string(opencl_type_name_v<T>) + ")"
-                + detail::getExpression(rhs)  // expression
-            ) {
-            }
-
-
-            template<typename U>
-            requires (
-                is_allowed_type_v<U> &&
-                is_shader_convertible_v<U, T> &&
-                !std::is_same_v<U, T>
-            )
-            ShaderValue(const ShaderValue<U>& other)
-                : ShaderValue(std::string(opencl_type_name_v<T>), 
-                              "(" + std::string(opencl_type_name_v<T>) + ")(" + other.name_ + ")")
-            {}
-
-            ShaderValue(const ShaderValue<T>& rhs)
-                : ShaderValue(std::string(opencl_type_name_v<T>), rhs.expression_)
-                {}
-
-            // Assignment operator for shading DSL: a = expr
-            template<typename U>
-            requires(is_allowed_type_v<U> && is_shader_convertible_v<U, T>)
-            void operator=(const ShaderValue<U>& rhs) {
-                detail::program_context::appendToProgramCode(
-                    name_ + " = " + detail::expr(rhs) + ";"
-                );
-            }
-
-            template<typename U>
-            requires(is_allowed_type_v<U> && is_shader_convertible_v<U, T>)
-            void operator=(const ShaderRValue<U>& rhs) {
-                detail::program_context::appendToProgramCode(
-                    name_ + " = " + detail::expr(rhs) + ";"
-                );
-            }
-
-            void operator=(T v) {
-                detail::program_context::appendToProgramCode(
-                    name_ + " = " + toOpenCLCode(v) + ";"
-                );
-            }
-
-            operator bool(){
-                int32_t res = detail::program_context::get_counter();
-                if(res > 0 && detail::program_context::is_forloop_header_being_generated()){
-                    detail::program_context::replace_possible_comma_with_semicolon();
-                    detail::program_context::appendToProgramCode(
-                        name_+";"
-                    );
-                    detail::program_context::replace_possible_comma_with_semicolon();
-                }
-                
-                HWR_INFO("counter: "+std::to_string(res));
-                if(res>0){
-                    detail::program_context::decr_counter();
-                }
-                detail::program_context::unset_first_def();
-                return res>0;
-            }
-
-    protected:
-        ShaderValue(const std::string& type, const std::string& expr)
-            : type_(type), expression_(expr),
-              name_(detail::program_context::make_temp_name()),
-              def_ (type_ + " " + name_ + " = " + expression_ + ";" )
-            {
-                HWR_DEBUG("Appending code to program: " + def_);
-                if(detail::program_context::is_forloop_header_being_generated()){
-                    if(detail::program_context::is_first_def()){
-                        detail::program_context::appendToProgramCode(
-                            def_);
-                    }else{
-                        detail::program_context::appendToProgramCode(
-                            name_ + " = " + expression_ + ";");
-                    }
-                }else{
-                    detail::program_context::appendToProgramCode(
-                        def_);
-                }
-                // Always push type to stack for later extraction
-                detail::program_context::push_opencl_type(type_);
-            }
-
-        template<typename U>
-        friend const std::string& detail::getValName(const ShaderValue<U>& v);
-           
-
-    private:
-        const std::string type_;
-        const std::string expression_;
-        const std::string name_;
-        const std::string def_;
-    
-        
-
-    template<typename>
-    friend class ShaderRValue;
+    template<typename U>
+    std::string makeConversionCode(const std::string& expr) const {
+        if constexpr (is_shader_convertible_v<U, T>) {
+            return expr; // No cast needed
+        } else {
+            return "(" + std::string(opencl_type_name_v<T>) + ")(" + expr + ")";
+        }
+    }
 
     template<typename>
     friend class ShaderValue;
-
+    template<typename>
+    friend class ShaderRValue;
+    template<typename U>
+    friend const std::string& detail::getValName(const ShaderValue<U>& v);
 };
+
 
 namespace detail {
 
@@ -446,7 +427,6 @@ public:
     }
 };
 
-
 namespace detail {
 
     // impl of forward declared.
@@ -491,37 +471,38 @@ namespace hwr::detail
 } // namespace hwr::detail
 
 
-// === Global operator overloads for ShaderValue ===b
-
 HWR_DEFINE_SHADER_BINARY_OP(+)
 HWR_DEFINE_SHADER_BINARY_OP(-)
 HWR_DEFINE_SHADER_BINARY_OP(*)
 HWR_DEFINE_SHADER_BINARY_OP(/)
 HWR_DEFINE_SHADER_BINARY_OP(%)
-HWR_DEFINE_SHADER_BINARY_OP(==)
-HWR_DEFINE_SHADER_BINARY_OP(!=)
-HWR_DEFINE_SHADER_BINARY_OP(<=)
-HWR_DEFINE_SHADER_BINARY_OP(>=)
-HWR_DEFINE_SHADER_BINARY_OP(>)
-HWR_DEFINE_SHADER_BINARY_OP(<)
+HWR_DEFINE_SHADER_BINARY_OP(<<)
+HWR_DEFINE_SHADER_BINARY_OP(>>)
+HWR_DEFINE_SHADER_BINARY_OP(&)
+HWR_DEFINE_SHADER_BINARY_OP(|)
+HWR_DEFINE_SHADER_BINARY_OP(^)
 
-// Compound assignment operators
 HWR_DEFINE_SHADER_BINARY_OP(+=)
 HWR_DEFINE_SHADER_BINARY_OP(-=)
 HWR_DEFINE_SHADER_BINARY_OP(*=)
 HWR_DEFINE_SHADER_BINARY_OP(/=)
-
-// Bitwise operators (integers only)
-HWR_DEFINE_SHADER_BINARY_OP(<<)
-HWR_DEFINE_SHADER_BINARY_OP(>>)
+HWR_DEFINE_SHADER_BINARY_OP(%=)
 HWR_DEFINE_SHADER_BINARY_OP(<<=)
 HWR_DEFINE_SHADER_BINARY_OP(>>=)
-HWR_DEFINE_SHADER_BINARY_OP(&)
-HWR_DEFINE_SHADER_BINARY_OP(|)
-HWR_DEFINE_SHADER_BINARY_OP(^)
 HWR_DEFINE_SHADER_BINARY_OP(&=)
 HWR_DEFINE_SHADER_BINARY_OP(|=)
 HWR_DEFINE_SHADER_BINARY_OP(^=)
+
+HWR_DEFINE_SHADER_BINARY_OP(&&)
+HWR_DEFINE_SHADER_BINARY_OP(||)
+
+HWR_DEFINE_SHADER_BINARY_OP(==)
+HWR_DEFINE_SHADER_BINARY_OP(!=)
+HWR_DEFINE_SHADER_BINARY_OP(<)
+HWR_DEFINE_SHADER_BINARY_OP(<=)
+HWR_DEFINE_SHADER_BINARY_OP(>)
+HWR_DEFINE_SHADER_BINARY_OP(>=)
+
 
 // === Unary operators ===
 namespace hwr {
@@ -581,173 +562,6 @@ inline ShaderValue<T>& operator--(ShaderValue<T>& v, int) { // postfix --
     return v;
 }
 
-// ---- Compound assignment operators ----
-
-template<AllowedShaderType T, AllowedShaderType U>
-requires(is_op_allowed_v<T, U, StaticString{"+="}> && is_shader_convertible_v<U, T>)
-inline ShaderValue<T>& operator+=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " += " + detail::expr(rhs) + ";"
-    );
-    return lhs;
-}
-
-template<AllowedShaderType T, AllowedShaderType U>
-requires(is_op_allowed_v<T, U, StaticString{"-="}> && is_shader_convertible_v<U, T>)
-inline ShaderValue<T>& operator-=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " -= " + detail::expr(rhs) + ";"
-    );
-    return lhs;
-}
-
-template<AllowedShaderType T, AllowedShaderType U>
-requires(is_op_allowed_v<T, U, StaticString{"*="}> && is_shader_convertible_v<U, T>)
-inline ShaderValue<T>& operator*=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " *= " + detail::expr(rhs) + ";"
-    );
-    return lhs;
-}
-
-template<AllowedShaderType T, AllowedShaderType U>
-requires(is_op_allowed_v<T, U, StaticString{"/="}> && is_shader_convertible_v<U, T>)
-inline ShaderValue<T>& operator/=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " /= " + detail::expr(rhs) + ";"
-    );
-    return lhs;
-}
-
-// For primitive operands
-template<AllowedShaderType T, AllowedShaderType U>
-requires(is_op_allowed_v<T, U, StaticString{"+="}> && is_shader_convertible_v<U, T>)
-inline ShaderValue<T>& operator+=(ShaderValue<T>& lhs, const U& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " += " + detail::expr(rhs) + ";"
-    );
-    return lhs;
-}
-
-template<AllowedShaderType T, AllowedShaderType U>
-requires(is_op_allowed_v<T, U, StaticString{"-="}> && is_shader_convertible_v<U, T>)
-inline ShaderValue<T>& operator-=(ShaderValue<T>& lhs, const U& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " -= " + detail::expr(rhs) + ";"
-    );
-    return lhs;
-}
-
-template<AllowedShaderType T, AllowedShaderType U>
-requires(is_op_allowed_v<T, U, StaticString{"*="}> && is_shader_convertible_v<U, T>)
-inline ShaderValue<T>& operator*=(ShaderValue<T>& lhs, const U& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " *= " + detail::expr(rhs) + ";"
-    );
-    return lhs;
-}
-
-template<AllowedShaderType T, AllowedShaderType U>
-requires(is_op_allowed_v<T, U, StaticString{"/="}> && is_shader_convertible_v<U, T>)
-inline ShaderValue<T>& operator/=(ShaderValue<T>& lhs, const U& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " /= " + detail::expr(rhs) + ";"
-    );
-    return lhs;
-}
-
-// Bitwise compound assignments for integers
-template<AllowedShaderType T, AllowedShaderType U>
-requires(is_op_allowed_v<T, U, StaticString{"<<="}> && std::is_same_v<T, int> && std::is_same_v<U, int>)
-inline ShaderValue<T>& operator<<=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " <<= " + detail::expr(rhs) + ";"
-    );
-    return lhs;
-}
-
-template<AllowedShaderType T, AllowedShaderType U>
-requires(is_op_allowed_v<T, U, StaticString{">>="}> && std::is_same_v<T, int> && std::is_same_v<U, int>)
-inline ShaderValue<T>& operator>>=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " >>= " + detail::expr(rhs) + ";"
-    );
-    return lhs;
-}
-
-template<AllowedShaderType T, AllowedShaderType U>
-requires(is_op_allowed_v<T, U, StaticString{"&="}> && std::is_same_v<T, int> && std::is_same_v<U, int>)
-inline ShaderValue<T>& operator&=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " &= " + detail::expr(rhs) + ";"
-    );
-    return lhs;
-}
-
-template<AllowedShaderType T, AllowedShaderType U>
-requires(is_op_allowed_v<T, U, StaticString{"|="}> && std::is_same_v<T, int> && std::is_same_v<U, int>)
-inline ShaderValue<T>& operator|=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " |= " + detail::expr(rhs) + ";"
-    );
-    return lhs;
-}
-
-template<AllowedShaderType T, AllowedShaderType U>
-requires(is_op_allowed_v<T, U, StaticString{"^="}> && std::is_same_v<T, int> && std::is_same_v<U, int>)
-inline ShaderValue<T>& operator^=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " ^= " + detail::expr(rhs) + ";"
-    );
-    return lhs;
-}
-
-// With primitive operands
-template<AllowedShaderType T>
-requires(std::is_same_v<T, int>)
-inline ShaderValue<T>& operator<<=(ShaderValue<T>& lhs, const int& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " <<= " + std::to_string(rhs) + ";"
-    );
-    return lhs;
-}
-
-template<AllowedShaderType T>
-requires(std::is_same_v<T, int>)
-inline ShaderValue<T>& operator>>=(ShaderValue<T>& lhs, const int& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " >>= " + std::to_string(rhs) + ";"
-    );
-    return lhs;
-}
-
-template<AllowedShaderType T>
-requires(std::is_same_v<T, int>)
-inline ShaderValue<T>& operator&=(ShaderValue<T>& lhs, const int& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " &= " + std::to_string(rhs) + ";"
-    );
-    return lhs;
-}
-
-template<AllowedShaderType T>
-requires(std::is_same_v<T, int>)
-inline ShaderValue<T>& operator|=(ShaderValue<T>& lhs, const int& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " |= " + std::to_string(rhs) + ";"
-    );
-    return lhs;
-}
-
-template<AllowedShaderType T>
-requires(std::is_same_v<T, int>)
-inline ShaderValue<T>& operator^=(ShaderValue<T>& lhs, const int& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " ^= " + std::to_string(rhs) + ";"
-    );
-    return lhs;
-}
-
 // ---- Logical NOT ! ----
 
 template<AllowedShaderType T>
@@ -758,17 +572,6 @@ inline ShaderRValue<bool> operator!(const ShaderValue<T>& v) {
 template<AllowedShaderType T>
 inline ShaderRValue<bool> operator!(const ShaderRValue<T>& v) {
     return ShaderRValue<bool>("(!" + detail::expr(v) + ")");
-}
-
-// ---- Modulo for integers ----
-
-template<AllowedShaderType T>
-requires(std::is_same_v<T, int>)
-inline ShaderValue<T>& operator%=(ShaderValue<T>& lhs, const int& rhs) {
-    detail::program_context::appendToProgramCode(
-        detail::expr(lhs) + " %= " + std::to_string(rhs) + ";"
-    );
-    return lhs;
 }
 
 } // namespace hwr

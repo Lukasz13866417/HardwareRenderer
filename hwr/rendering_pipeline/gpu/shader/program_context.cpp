@@ -8,10 +8,10 @@ namespace hwr::detail::program_context {
 
     namespace {
 
-    int32_t counter=0;
-    std::vector<Program*> s_program_stack;
-    std::vector<std::string> s_type_stack;
-    std::vector<std::string> s_rvalue_expr_stack;
+        int32_t counter=0;
+        std::vector<Program*> s_program_stack;
+        std::vector<std::string> s_type_stack;
+        std::vector<std::string> s_rvalue_expr_stack;
 
     }
         

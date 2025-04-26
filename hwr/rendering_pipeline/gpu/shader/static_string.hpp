@@ -25,7 +25,19 @@ struct StaticString {
             if (value[i] != other.value[i]) return false;
         return true;
     }
+
+    // Compare with string literals (const char*)
+    template<std::size_t M>
+    constexpr bool operator==(const char (&other)[M]) const {
+        if (N != M) return false; // Size must match including '\0'
+        for (std::size_t i = 0; i < N; ++i)
+            if (value[i] != other[i]) return false;
+        return true;
+    }
+
 };
+
+
 
 } // namespace hwr
 
