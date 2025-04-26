@@ -128,4 +128,72 @@ int32_t countUpdateOperations(const std::string& upd) {
     return count;
 }
 
+
+std::vector<std::string> extractVariableNames(const std::string& code)
+{
+    std::vector<std::string> names;
+
+    // --- helper lambdas ----------------------------------------------------
+    auto stripInitializer = [](std::string s) -> std::string {
+        auto pos = s.find_first_of("=[{(");
+        if (pos != std::string::npos) s.erase(pos);
+        // remove any trailing array-extent:  var[10]
+        pos = s.find('[');
+        if (pos != std::string::npos) s.erase(pos);
+        return trim(s);
+    };
+
+    auto harvestFromDecl = [&](std::string decl) {
+        decl = trim(decl);
+        if (decl.empty()) return;
+
+        // Skip leading attributes such as [[nodiscard]] or alignas(...)
+        std::size_t start = 0, depth = 0;
+        for (; start < decl.size(); ++start) {
+            char ch = decl[start];
+            if (ch == '[' || ch == '(' || ch == '{' || ch == '<') ++depth;
+            else if (ch == ']' || ch == ')' || ch == '}' || ch == '>') --depth;
+            else if (std::isspace(static_cast<unsigned char>(ch)) && depth == 0) break;
+        }
+        if (start == decl.size()) return;          // malformed: no whitespace
+
+        // After the type part, split the remainder on top-level commas.
+        std::string afterType = decl.substr(start);
+        std::string current;
+        depth = 0;
+        for (char ch : afterType) {
+            if (ch == '(' || ch == '{' || ch == '[' || ch == '<') ++depth;
+            else if (ch == ')' || ch == '}' || ch == ']' || ch == '>') --depth;
+
+            if (ch == ',' && depth == 0) {
+                auto id = stripInitializer(current);
+                if (!id.empty()) names.push_back(id);
+                current.clear();
+            } else {
+                current += ch;
+            }
+        }
+        auto id = stripInitializer(current);
+        if (!id.empty()) names.push_back(id);
+    };
+
+    // --- split the whole string on top-level semicolons --------------------
+    std::string current;
+    int depth = 0;
+    for (char ch : code) {
+        if (ch == '(' || ch == '{' || ch == '[' || ch == '<') ++depth;
+        else if (ch == ')' || ch == '}' || ch == ']' || ch == '>') --depth;
+
+        if (ch == ';' && depth == 0) {
+            harvestFromDecl(current);
+            current.clear();
+        } else {
+            current += ch;
+        }
+    }
+    harvestFromDecl(current);        // last declaration (no trailing ';')
+
+    return names;
+}
+
 } // namespace hwr::detail

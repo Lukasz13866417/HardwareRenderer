@@ -10,6 +10,8 @@
 
 using vec4 = hwr::vec4f;
 
+HWR_STRUCT(sample_struct, float x; float y; float z;);
+
 int main(){
 
     std::optional<hwr::GPUContext> _gpuContext = hwr::initGPUContext();
@@ -36,6 +38,8 @@ int main(){
             Float fl2 = 1;
             fl -= a;
             ++a;
+
+            Float x;
         }
     }};
     // This will call the lambda passed to the constructor.
@@ -45,6 +49,10 @@ int main(){
     std::string res = sum.compile();
     // print the compiled OpenCL code.
     std::cout<<res<<std::endl;
+
+
+    std::string code = sample_struct::opencl_def.compile();
+    std::cout<<code<<std::endl;
     
     
 }

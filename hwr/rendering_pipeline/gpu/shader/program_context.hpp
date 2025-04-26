@@ -46,6 +46,13 @@ namespace hwr::detail::program_context {
 
     std::string make_temp_name();
 
+    void set_struct_def();
+    void unset_struct_def();
+    bool is_struct_being_defined();
+
+    void push_field_name(const std::string& name);
+    const std::string& pop_field_name();
+    
 } // namespace hwr::detail::program_context
 
 #endif // HWR_PROGRAM_CONTEXT_HPP 

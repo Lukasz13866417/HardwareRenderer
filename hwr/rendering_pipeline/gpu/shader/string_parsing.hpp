@@ -35,4 +35,6 @@ int32_t countInitDeclarations(const std::string& init);
 // Returns -1 if the input is invalid, otherwise the count (0 if empty).
 int32_t countUpdateOperations(const std::string& upd);
 
+std::vector<std::string> extractVariableNames(const std::string& code);
+
 }; // namespace hwr::detail

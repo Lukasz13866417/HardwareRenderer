@@ -146,4 +146,32 @@ namespace hwr::detail::program_context {
         temp_counter -= k;
     }
 
+    namespace{
+        bool _is_struct_being_defined = false;
+    }
+
+    void set_struct_def(){
+        _is_struct_being_defined = true;
+    }
+    void unset_struct_def(){
+        _is_struct_being_defined = false;
+    }
+    bool is_struct_being_defined(){
+        return _is_struct_being_defined;
+    }
+
+    namespace{
+        std::vector<std::string> names;
+    }
+
+    void push_field_name(const std::string& name){
+        names.push_back(name);
+    }
+    const std::string& pop_field_name(){
+        HWR_ASSERT(names.size()>0, "No names available");
+        const std::string& res = names.back();
+        names.pop_back();
+        return res;
+    }
+
 } // namespace hwr::detail::program_context 

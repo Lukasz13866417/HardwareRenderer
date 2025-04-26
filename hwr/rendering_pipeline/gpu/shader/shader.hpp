@@ -253,6 +253,7 @@ namespace detail {
     const std::string& getValName(const ShaderValue<U>& shv);
 
 } // namespace detail
+
 template<typename T>
 class ShaderValue {
     static_assert(is_allowed_type_v<T>, "T must be valid shader type");
@@ -273,6 +274,33 @@ public:
             std::string(opencl_type_name_v<T>),
             toOpenCLCode(from)
         ) {}
+
+    ShaderValue()
+        : type_(std::string(opencl_type_name_v<T>)), 
+        expression_(""),
+        name_(
+            detail::program_context::is_struct_being_defined() ?
+             detail::program_context::pop_field_name() 
+             : detail::program_context::make_temp_name()
+        ),
+        def_(type_ + " " + name_ + ";") 
+    {
+        if(detail::program_context::is_struct_being_defined()){
+            detail::program_context::appendToProgramCode(
+                def_
+            );
+        }
+    }
+
+    ShaderValue(const std::string &name)
+        : type_(std::string(opencl_type_name_v<T>)), expression_(""),
+        name_(name),
+        def_(type_ + " " + name_ + ";") 
+    {
+        detail::program_context::appendToProgramCode(
+            def_
+        );
+    }
 
     template<typename U>
     requires (is_allowed_type_v<U> && !std::is_same_v<U, T>)
@@ -656,5 +684,44 @@ for (__VA_ARGS__,hwr::detail::program_context::undo_last_k_appends(HWR_CONCAT(_h
          hwr::detail::program_context::appendToProgramCode(                     \
              std::string("}")                                                 \
          ), HWR_CONCAT(_hwr_else_once_, __LINE__) = false)
+
+
+
+// Disable strict pedantic and unused warnings
+#if defined(__GNUC__) || defined(__clang__)
+    #define HWR_DISABLE_ANON_STRUCT_WARNINGS         \
+        _Pragma("GCC diagnostic push")                \
+        _Pragma("GCC diagnostic ignored \"-Wpedantic\"") \
+        _Pragma("GCC diagnostic ignored \"-Wunused-variable\"")
+    #define HWR_RESTORE_WARNINGS                      \
+        _Pragma("GCC diagnostic pop")
+#else
+    #define HWR_DISABLE_ANON_STRUCT_WARNINGS
+    #define HWR_RESTORE_WARNINGS
+#endif
+
+
+#define HWR_STRUCT(name, fields)                           \
+    HWR_DISABLE_ANON_STRUCT_WARNINGS                       \
+    struct HWR_CONCAT(name, _internal_sized) { fields };    \
+    struct name {                                           \
+        union {                                             \
+            struct { fields };                              \
+            char raw[sizeof(HWR_CONCAT(name, _internal_sized))]; \
+        };                                                  \
+        static ::hwr::Program opencl_def;                   \
+    };                                                      \
+    ::hwr::Program name::opencl_def{[](){                   \
+        ::hwr::detail::program_context::appendToProgramCode("struct " #name " {"); \
+        ::hwr::detail::program_context::appendToProgramCode("union {"); \
+        ::hwr::detail::program_context::appendToProgramCode("struct {"); \
+        ::hwr::detail::program_context::appendToProgramCode(HWR_STRINGIFY(fields)); \
+        ::hwr::detail::program_context::appendToProgramCode("};"); \
+        ::hwr::detail::program_context::appendToProgramCode("char raw[" + std::to_string(sizeof(HWR_CONCAT(name, _internal_sized))) + "];"); \
+        ::hwr::detail::program_context::appendToProgramCode("};"); \
+        ::hwr::detail::program_context::appendToProgramCode("};"); \
+    }};                                                     \
+    HWR_RESTORE_WARNINGS
+
 
 #endif // HWR_SHADER_HPP
