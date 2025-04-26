@@ -5,39 +5,25 @@ This is going to be a cleaner, powerful API, **ISO C++ compliant** (compilable w
 Example:
 ```C++
 //  shader. Is compiled to OpenCL code.
-    hwr::Program shader{[](){
-        // Variables with all basic types
-        Float a = 1.0f;
-        Int x = 5;
-        Double p = 3.14159;
-        Bool isEven = false;
-
-        a *= 2.0f;
-        x %= 3;       
-        
-        HWR_IF(x == 2) {
-            a += p;
-            isEven = true;
-        } HWR_ELSE_IF(x == 1) {
-            a -= p;
-            isEven = false;
-        } HWR_ELSE {
-            a = 0.0f;
-        }
-        
-        Int sum = 0;
-        HWR_FOR(Int i = 0, i < 10, ++i) {
-            sum += i;
-            Int mask = 1 << 2;
-            HWR_IF(i & mask) {
-                sum *= 2;
+    hwr::Program sum{[](){
+        Float fl = 1;
+        HWR_FOR(Int a = 0; a < 10; ++a) {
+            HWR_FOR(Int b = 0; b < 10; ++b) {
+                HWR_IF(a+b==0){
+                    Double xd = -1.0f + fl;
+                }
             }
+            Float fl2 = 1;
+            fl -= a;
+            ++a;
         }
     }};
     // This will call the lambda passed to the constructor.
-    // The language is "inside" C++ - the code inside the lambda is analyzed
-    // and translated to OpenCL at runtime, with full compile-time type checking.
-    std::string code = shader.compile();
-    std::cout << code << std::endl;
+    // When the lambda is called, the code inside it is run, 
+    // and my custom types (Float etc.) generate the OpenCL code automatically,
+    // thanks to operator overloads (+, *, -, / etc).
+    std::string res = sum.compile();
+    // print the compiled OpenCL code.
+    std::cout<<res<<std::endl;
 ```
 The language has been made with **state-of-the-art C++ template metaprogramming**. Yes, the language is "inside" C++. Types like ```Int``` are custom types that automatically generate OpenCL kernel code.That means you will get **compile-time** errors (contrary to GLSL). And a way cleaner view of your code. This will be **very easily extensible to do all the 3D math for you**, but you will still have fine-grained control over everything, if you want.
