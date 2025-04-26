@@ -8,10 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.cpp" "CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o" "gcc" "CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o.d"
-  "/home/lukasz/HardwareRenderer/hwr/util/log/log.cpp" "CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o" "gcc" "CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o.d"
-  "/home/lukasz/HardwareRenderer/hwr/util/math/math_util.cpp" "CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o" "gcc" "CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o.d"
-  "/home/lukasz/HardwareRenderer/main.cpp" "CMakeFiles/app_default.dir/main.cpp.o" "gcc" "CMakeFiles/app_default.dir/main.cpp.o.d"
+  "/home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.cpp" "CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o" "gcc" "CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o.d"
+  "/home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/program_context.cpp" "CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.o" "gcc" "CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.o.d"
+  "/home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp" "CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o" "gcc" "CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o.d"
+  "/home/lukasz/Desktop/HardwareRenderer/hwr/util/log/log.cpp" "CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o" "gcc" "CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o.d"
+  "/home/lukasz/Desktop/HardwareRenderer/hwr/util/math/math_util.cpp" "CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o" "gcc" "CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o.d"
+  "/home/lukasz/Desktop/HardwareRenderer/main.cpp" "CMakeFiles/app_default.dir/main.cpp.o" "gcc" "CMakeFiles/app_default.dir/main.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

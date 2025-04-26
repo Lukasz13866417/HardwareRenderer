@@ -1,7 +1,7 @@
 CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o: \
- /home/lukasz/HardwareRenderer/hwr/util/math/math_util.cpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/util/math/math_util.cpp \
  /usr/include/stdc-predef.h \
- /home/lukasz/HardwareRenderer/hwr/util/math/math_util.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/util/math/math_util.hpp \
  /usr/include/c++/13/cstdint \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \

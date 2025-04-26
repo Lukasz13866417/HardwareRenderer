@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o"
   "CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o.d"
+  "CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.o"
+  "CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.o.d"
   "CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.o"
   "CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.o.d"
   "CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.o"

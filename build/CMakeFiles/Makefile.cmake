@@ -7,10 +7,10 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/home/lukasz/HardwareRenderer/CMakeLists.txt"
+  "/home/lukasz/Desktop/HardwareRenderer/CMakeLists.txt"
   "CMakeFiles/3.28.3/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.28.3/CMakeSystem.cmake"
-  "/home/lukasz/HardwareRenderer/cmake/modules/FindSDL2_ttf.cmake"
+  "/home/lukasz/Desktop/HardwareRenderer/cmake/modules/FindSDL2_ttf.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/SDL2/sdl2-config-version.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/SDL2/sdl2-config.cmake"
   "/usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake"
@@ -50,7 +50,4 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/app_default.dir/DependInfo.cmake"
-  "CMakeFiles/app_no_debug.dir/DependInfo.cmake"
-  "CMakeFiles/app_no_console.dir/DependInfo.cmake"
-  "CMakeFiles/app_no_file.dir/DependInfo.cmake"
   )

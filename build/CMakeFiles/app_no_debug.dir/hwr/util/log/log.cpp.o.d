@@ -1,9 +1,9 @@
 CMakeFiles/app_no_debug.dir/hwr/util/log/log.cpp.o: \
- /home/lukasz/HardwareRenderer/hwr/util/log/log.cpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/util/log/log.cpp \
  /usr/include/stdc-predef.h \
- /home/lukasz/HardwareRenderer/hwr/util/log/log.hpp \
- /home/lukasz/HardwareRenderer/hwr/util/log/log_config_detail.hpp \
- /home/lukasz/HardwareRenderer/hwr/util/log/../../rendering_pipeline/gpu/gpu_cl_init.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/util/log/log.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/util/log/log_config_detail.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/util/log/../../rendering_pipeline/gpu/gpu_cl_init.hpp \
  /usr/include/CL/opencl.hpp /usr/include/CL/opencl.h /usr/include/CL/cl.h \
  /usr/include/CL/cl_version.h /usr/include/CL/cl_platform.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \

@@ -1,6 +1,10 @@
 file(REMOVE_RECURSE
   "CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o"
   "CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o.d"
+  "CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.o"
+  "CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.o.d"
+  "CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o"
+  "CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o.d"
   "CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o"
   "CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o.d"
   "CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o"

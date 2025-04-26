@@ -26,7 +26,8 @@ function(add_app_target target_name)
         hwr/rendering_pipeline/gpu/context/gpu_context.cpp
         hwr/util/log/log.cpp
         hwr/util/math/math_util.cpp
-
+        hwr/rendering_pipeline/gpu/shader/program_context.cpp
+        hwr/rendering_pipeline/gpu/shader/string_parsing.cpp
     )
     target_include_directories(${target_name} PRIVATE 
         "${CMAKE_CURRENT_SOURCE_DIR}/hwr/include"
@@ -45,14 +46,15 @@ endfunction()
 add_app_target(app_default)
 target_compile_definitions(app_default PRIVATE LOG_ENABLE=1 LOG_ENABLE_CONSOLE=1 LOG_ENABLE_FILE=1)
 
+
 # Zero logging & no asserts
-add_app_target(app_no_debug)
-target_compile_definitions(app_no_debug PRIVATE NDEBUG)
+#add_app_target(app_no_debug)
+#target_compile_definitions(app_no_debug PRIVATE NDEBUG)
 
 # Log only to file
-add_app_target(app_no_console)
-target_compile_definitions(app_no_console PRIVATE LOG_ENABLE=1 LOG_ENABLE_CONSOLE=0 LOG_ENABLE_FILE=1)
+#add_app_target(app_no_console)
+#target_compile_definitions(app_no_console PRIVATE LOG_ENABLE=1 LOG_ENABLE_CONSOLE=0 LOG_ENABLE_FILE=1)
 
 # Log only to console
-add_app_target(app_no_file)
-target_compile_definitions(app_no_file PRIVATE LOG_ENABLE=1 LOG_ENABLE_CONSOLE=1 LOG_ENABLE_FILE=0)
+#add_app_target(app_no_file)
+#target_compile_definitions(app_no_file PRIVATE LOG_ENABLE=1 LOG_ENABLE_CONSOLE=1 LOG_ENABLE_FILE=0)

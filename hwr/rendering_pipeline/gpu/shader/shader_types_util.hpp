@@ -30,22 +30,22 @@ namespace hwr {
     }
 
     template<>
-    std::string toOpenCLCode(int what){
+    inline std::string toOpenCLCode(int what){
         return std::to_string(what);
     }
 
     template<>
-    std::string toOpenCLCode(double what){
+    inline std::string toOpenCLCode(double what){
         return std::to_string(what);
     }
 
     template<>
-    std::string toOpenCLCode(float what){
+    inline std::string toOpenCLCode(float what){
         return std::to_string(what);
     }
 
     template<>
-    std::string toOpenCLCode(bool what){
+    inline std::string toOpenCLCode(bool what){
         return what ? "true" : "false";
     }
 
@@ -65,6 +65,7 @@ namespace hwr {
     DEFINE_OP(int,    int,    "-");
     DEFINE_OP(int,    int,    "*");
     DEFINE_OP(int,    int,    "/");
+    DEFINE_OP(int,    int,    "%");  // Modulo operator for integers
 
     DEFINE_OP(float,  float,  "+");
     DEFINE_OP(float,  float,  "-");
@@ -133,6 +134,61 @@ namespace hwr {
     DEFINE_OP(float,  float,  ">=");
     DEFINE_OP(double, double, ">=");
 
+    // Compound assignments
+    DEFINE_OP(int,    int,    "+=");
+    DEFINE_OP(float,  float,  "+=");
+    DEFINE_OP(double, double, "+=");
+    DEFINE_OP(int,    float,  "+=");
+    DEFINE_OP(float,  int,    "+=");
+    DEFINE_OP(double, int,    "+=");
+    DEFINE_OP(int,    double, "+=");
+    DEFINE_OP(double, float,  "+=");
+    DEFINE_OP(float,  double, "+=");
+
+    DEFINE_OP(int,    int,    "-=");
+    DEFINE_OP(float,  float,  "-=");
+    DEFINE_OP(double, double, "-=");
+    DEFINE_OP(int,    float,  "-=");
+    DEFINE_OP(float,  int,    "-=");
+    DEFINE_OP(double, int,    "-=");
+    DEFINE_OP(int,    double, "-=");
+    DEFINE_OP(double, float,  "-=");
+    DEFINE_OP(float,  double, "-=");
+
+    DEFINE_OP(int,    int,    "*=");
+    DEFINE_OP(float,  float,  "*=");
+    DEFINE_OP(double, double, "*=");
+    DEFINE_OP(int,    float,  "*=");
+    DEFINE_OP(float,  int,    "*=");
+    DEFINE_OP(double, int,    "*=");
+    DEFINE_OP(int,    double, "*=");
+    DEFINE_OP(double, float,  "*=");
+    DEFINE_OP(float,  double, "*=");
+
+    DEFINE_OP(int,    int,    "/=");
+    DEFINE_OP(float,  float,  "/=");
+    DEFINE_OP(double, double, "/=");
+    DEFINE_OP(int,    float,  "/=");
+    DEFINE_OP(float,  int,    "/=");
+    DEFINE_OP(double, int,    "/=");
+    DEFINE_OP(int,    double, "/=");
+    DEFINE_OP(double, float,  "/=");
+    DEFINE_OP(float,  double, "/=");
+
+    DEFINE_OP(int,    int,    "%=");  // Modulo assignment
+
+    // Bitwise operations (integers only)
+    DEFINE_OP(int, int, "<<");
+    DEFINE_OP(int, int, ">>");
+    DEFINE_OP(int, int, "<<=");
+    DEFINE_OP(int, int, ">>=");
+    DEFINE_OP(int, int, "&");
+    DEFINE_OP(int, int, "|");
+    DEFINE_OP(int, int, "^");
+    DEFINE_OP(int, int, "&=");
+    DEFINE_OP(int, int, "|=");
+    DEFINE_OP(int, int, "^=");
+
     template<typename T, typename U, StaticString Op>
     struct binary_result_type;
 
@@ -149,6 +205,7 @@ namespace hwr {
     DEFINE_BINARY_RESULT(int, int, "-", int)
     DEFINE_BINARY_RESULT(int, int, "*", int)
     DEFINE_BINARY_RESULT(int, int, "/", int)
+    DEFINE_BINARY_RESULT(int, int, "%", int)  // Modulo result type
 
     // float
     DEFINE_BINARY_RESULT(float, float, "+", float)
@@ -222,7 +279,60 @@ namespace hwr {
     DEFINE_BINARY_RESULT(float, float, ">=", bool)
     DEFINE_BINARY_RESULT(double, double, ">=", bool)
 
+    // Compound assignment result types
+    DEFINE_BINARY_RESULT(int, int, "+=", int)
+    DEFINE_BINARY_RESULT(float, float, "+=", float)
+    DEFINE_BINARY_RESULT(double, double, "+=", double)
+    DEFINE_BINARY_RESULT(int, float, "+=", float)
+    DEFINE_BINARY_RESULT(float, int, "+=", float)
+    DEFINE_BINARY_RESULT(double, int, "+=", double)
+    DEFINE_BINARY_RESULT(int, double, "+=", double)
+    DEFINE_BINARY_RESULT(double, float, "+=", double)
+    DEFINE_BINARY_RESULT(float, double, "+=", double)
 
+    DEFINE_BINARY_RESULT(int, int, "-=", int)
+    DEFINE_BINARY_RESULT(float, float, "-=", float)
+    DEFINE_BINARY_RESULT(double, double, "-=", double)
+    DEFINE_BINARY_RESULT(int, float, "-=", float)
+    DEFINE_BINARY_RESULT(float, int, "-=", float)
+    DEFINE_BINARY_RESULT(double, int, "-=", double)
+    DEFINE_BINARY_RESULT(int, double, "-=", double)
+    DEFINE_BINARY_RESULT(double, float, "-=", double)
+    DEFINE_BINARY_RESULT(float, double, "-=", double)
+
+    DEFINE_BINARY_RESULT(int, int, "*=", int)
+    DEFINE_BINARY_RESULT(float, float, "*=", float)
+    DEFINE_BINARY_RESULT(double, double, "*=", double)
+    DEFINE_BINARY_RESULT(int, float, "*=", float)
+    DEFINE_BINARY_RESULT(float, int, "*=", float)
+    DEFINE_BINARY_RESULT(double, int, "*=", double)
+    DEFINE_BINARY_RESULT(int, double, "*=", double)
+    DEFINE_BINARY_RESULT(double, float, "*=", double)
+    DEFINE_BINARY_RESULT(float, double, "*=", double)
+
+    DEFINE_BINARY_RESULT(int, int, "/=", int)
+    DEFINE_BINARY_RESULT(float, float, "/=", float)
+    DEFINE_BINARY_RESULT(double, double, "/=", double)
+    DEFINE_BINARY_RESULT(int, float, "/=", float)
+    DEFINE_BINARY_RESULT(float, int, "/=", float)
+    DEFINE_BINARY_RESULT(double, int, "/=", double)
+    DEFINE_BINARY_RESULT(int, double, "/=", double)
+    DEFINE_BINARY_RESULT(double, float, "/=", double)
+    DEFINE_BINARY_RESULT(float, double, "/=", double)
+
+    DEFINE_BINARY_RESULT(int, int, "%=", int)  // Modulo assignment result
+
+    // Bitwise operations result types (integers only)
+    DEFINE_BINARY_RESULT(int, int, "<<", int)
+    DEFINE_BINARY_RESULT(int, int, ">>", int)
+    DEFINE_BINARY_RESULT(int, int, "<<=", int)
+    DEFINE_BINARY_RESULT(int, int, ">>=", int)
+    DEFINE_BINARY_RESULT(int, int, "&", int)
+    DEFINE_BINARY_RESULT(int, int, "|", int)
+    DEFINE_BINARY_RESULT(int, int, "^", int)
+    DEFINE_BINARY_RESULT(int, int, "&=", int)
+    DEFINE_BINARY_RESULT(int, int, "|=", int)
+    DEFINE_BINARY_RESULT(int, int, "^=", int)
 
     // Primary template
     template<typename From, typename To>

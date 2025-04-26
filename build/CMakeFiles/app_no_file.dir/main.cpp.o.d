@@ -1,8 +1,9 @@
 CMakeFiles/app_no_file.dir/main.cpp.o: \
- /home/lukasz/HardwareRenderer/main.cpp /usr/include/stdc-predef.h \
- /home/lukasz/HardwareRenderer/hwr/include/hwr/gpu_context.hpp \
- /home/lukasz/HardwareRenderer/hwr/include/../rendering_pipeline/gpu/context/gpu_context.hpp \
- /home/lukasz/HardwareRenderer/hwr/include/../rendering_pipeline/gpu/context/../gpu_cl_init.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/main.cpp \
+ /usr/include/stdc-predef.h \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/hwr/gpu_context.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/../rendering_pipeline/gpu/context/gpu_context.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/../rendering_pipeline/gpu/context/../gpu_cl_init.hpp \
  /usr/include/CL/opencl.hpp /usr/include/CL/opencl.h /usr/include/CL/cl.h \
  /usr/include/CL/cl_version.h /usr/include/CL/cl_platform.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
@@ -243,18 +244,18 @@ CMakeFiles/app_no_file.dir/main.cpp.o: \
  /usr/include/c++/13/bits/ranges_algobase.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h /usr/include/c++/13/optional \
- /home/lukasz/HardwareRenderer/hwr/include/hwr/log.hpp \
- /home/lukasz/HardwareRenderer/hwr/include/../util/log/log.hpp \
- /home/lukasz/HardwareRenderer/hwr/include/../util/log/log_config_detail.hpp \
- /home/lukasz/HardwareRenderer/hwr/include/../util/log/../../rendering_pipeline/gpu/gpu_cl_init.hpp \
- /home/lukasz/HardwareRenderer/hwr/include/hwr/buffer.hpp \
- /home/lukasz/HardwareRenderer/hwr/include/../rendering_pipeline/gpu/buffer/gpu_buffer.hpp \
- /home/lukasz/HardwareRenderer/hwr/include/../rendering_pipeline/gpu/buffer/../context/gpu_context.hpp \
- /home/lukasz/HardwareRenderer/hwr/include/../rendering_pipeline/gpu/buffer/../../../util/log/log.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/hwr/log.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/../util/log/log.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/../util/log/log_config_detail.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/../util/log/../../rendering_pipeline/gpu/gpu_cl_init.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/hwr/buffer.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/../rendering_pipeline/gpu/buffer/gpu_buffer.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/../rendering_pipeline/gpu/buffer/../context/gpu_context.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/../rendering_pipeline/gpu/buffer/../../../util/log/log.hpp \
  /usr/include/c++/13/algorithm /usr/include/c++/13/bits/ranges_algo.h \
  /usr/include/c++/13/pstl/glue_algorithm_defs.h /usr/include/c++/13/span \
- /home/lukasz/HardwareRenderer/hwr/include/hwr/math.hpp \
- /home/lukasz/HardwareRenderer/hwr/include/../util/math/math_util.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/hwr/math.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/../util/math/math_util.hpp \
  /usr/include/c++/13/cassert /usr/include/assert.h \
  /usr/include/c++/13/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
@@ -278,16 +279,17 @@ CMakeFiles/app_no_file.dir/main.cpp.o: \
  /usr/include/c++/13/tr1/poly_hermite.tcc \
  /usr/include/c++/13/tr1/poly_laguerre.tcc \
  /usr/include/c++/13/tr1/riemann_zeta.tcc \
- /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/types.hpp \
- /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/types.hpp \
- /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/./shader.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/hwr/shader/types.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/types.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/./shader.hpp \
  /usr/include/c++/13/stack /usr/include/c++/13/deque \
  /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
  /usr/include/c++/13/bits/stl_stack.h \
- /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/././shader_types_util.hpp \
- /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/./././static_string.hpp \
- /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/././static_string.hpp \
- /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/shader.hpp \
- /home/lukasz/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/shader.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/././shader_types_util.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/./././static_string.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/././static_string.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/././program_context.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/hwr/shader/shader.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/include/hwr/shader/../../../rendering_pipeline/gpu/shader/shader.hpp \
  /usr/include/c++/13/iostream /usr/include/c++/13/istream \
  /usr/include/c++/13/bits/istream.tcc

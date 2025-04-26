@@ -23,23 +23,22 @@ int main(){
 
     //  shader. Is compiled to OpenCL code.
     hwr::Program sum{[](){
-        Float a = 1.0f;
-        Float b = 3.0f;
-        
-        Int x = 1;
-        Int y = 3;
-
-        Double p = 1.123;
-        Double q = 3.321;
-
-        Double A = a*x*q + b*y*p + x+y+a+b + p/q;
-
-        Bool xd = 3*x == y;
+        Float fl = 1;
+        HWR_FOR(Int a = 0; a < 10; ++a) {
+            HWR_FOR(Int b = 0; b < 10; ++b) {
+                HWR_IF(a+b==0){
+                    Double xd = -1.0f + fl;
+                }
+            }
+            Float fl2 = 1;
+            fl -= a;
+            ++a;
+        }
     }};
     // This will call the lambda passed to the constructor.
     // When the lambda is called, the code inside it is run, 
     // and my custom types (Float etc.) generate the OpenCL code automatically,
-    // thanks to operator overloads (+, *, -, /).
+    // thanks to operator overloads (+, *, -, / etc).
     std::string res = sum.compile();
     // print the compiled OpenCL code.
     std::cout<<res<<std::endl;

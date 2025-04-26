@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lukasz/HardwareRenderer
+CMAKE_SOURCE_DIR = /home/lukasz/Desktop/HardwareRenderer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lukasz/HardwareRenderer/build
+CMAKE_BINARY_DIR = /home/lukasz/Desktop/HardwareRenderer/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/app_default.dir/depend.make
@@ -70,67 +70,97 @@ include CMakeFiles/app_default.dir/progress.make
 include CMakeFiles/app_default.dir/flags.make
 
 CMakeFiles/app_default.dir/main.cpp.o: CMakeFiles/app_default.dir/flags.make
-CMakeFiles/app_default.dir/main.cpp.o: /home/lukasz/HardwareRenderer/main.cpp
+CMakeFiles/app_default.dir/main.cpp.o: /home/lukasz/Desktop/HardwareRenderer/main.cpp
 CMakeFiles/app_default.dir/main.cpp.o: CMakeFiles/app_default.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/app_default.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_default.dir/main.cpp.o -MF CMakeFiles/app_default.dir/main.cpp.o.d -o CMakeFiles/app_default.dir/main.cpp.o -c /home/lukasz/HardwareRenderer/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/Desktop/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/app_default.dir/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_default.dir/main.cpp.o -MF CMakeFiles/app_default.dir/main.cpp.o.d -o CMakeFiles/app_default.dir/main.cpp.o -c /home/lukasz/Desktop/HardwareRenderer/main.cpp
 
 CMakeFiles/app_default.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_default.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/HardwareRenderer/main.cpp > CMakeFiles/app_default.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/Desktop/HardwareRenderer/main.cpp > CMakeFiles/app_default.dir/main.cpp.i
 
 CMakeFiles/app_default.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_default.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/main.cpp -o CMakeFiles/app_default.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/Desktop/HardwareRenderer/main.cpp -o CMakeFiles/app_default.dir/main.cpp.s
 
 CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o: CMakeFiles/app_default.dir/flags.make
-CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o: /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.cpp
+CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o: /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.cpp
 CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o: CMakeFiles/app_default.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o -MF CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o.d -o CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o -c /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/Desktop/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o -MF CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o.d -o CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o -c /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.cpp
 
 CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.cpp > CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.cpp > CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.i
 
 CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.cpp -o CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.cpp -o CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.s
 
 CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o: CMakeFiles/app_default.dir/flags.make
-CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o: /home/lukasz/HardwareRenderer/hwr/util/log/log.cpp
+CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o: /home/lukasz/Desktop/HardwareRenderer/hwr/util/log/log.cpp
 CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o: CMakeFiles/app_default.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o -MF CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o.d -o CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o -c /home/lukasz/HardwareRenderer/hwr/util/log/log.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/Desktop/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o -MF CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o.d -o CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o -c /home/lukasz/Desktop/HardwareRenderer/hwr/util/log/log.cpp
 
 CMakeFiles/app_default.dir/hwr/util/log/log.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_default.dir/hwr/util/log/log.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/HardwareRenderer/hwr/util/log/log.cpp > CMakeFiles/app_default.dir/hwr/util/log/log.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/Desktop/HardwareRenderer/hwr/util/log/log.cpp > CMakeFiles/app_default.dir/hwr/util/log/log.cpp.i
 
 CMakeFiles/app_default.dir/hwr/util/log/log.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_default.dir/hwr/util/log/log.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/hwr/util/log/log.cpp -o CMakeFiles/app_default.dir/hwr/util/log/log.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/Desktop/HardwareRenderer/hwr/util/log/log.cpp -o CMakeFiles/app_default.dir/hwr/util/log/log.cpp.s
 
 CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o: CMakeFiles/app_default.dir/flags.make
-CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o: /home/lukasz/HardwareRenderer/hwr/util/math/math_util.cpp
+CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o: /home/lukasz/Desktop/HardwareRenderer/hwr/util/math/math_util.cpp
 CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o: CMakeFiles/app_default.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o -MF CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o.d -o CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o -c /home/lukasz/HardwareRenderer/hwr/util/math/math_util.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/Desktop/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o -MF CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o.d -o CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o -c /home/lukasz/Desktop/HardwareRenderer/hwr/util/math/math_util.cpp
 
 CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/HardwareRenderer/hwr/util/math/math_util.cpp > CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/Desktop/HardwareRenderer/hwr/util/math/math_util.cpp > CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.i
 
 CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/HardwareRenderer/hwr/util/math/math_util.cpp -o CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/Desktop/HardwareRenderer/hwr/util/math/math_util.cpp -o CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.s
+
+CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.o: CMakeFiles/app_default.dir/flags.make
+CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.o: /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/program_context.cpp
+CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.o: CMakeFiles/app_default.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/Desktop/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.o -MF CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.o.d -o CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.o -c /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/program_context.cpp
+
+CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/program_context.cpp > CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.i
+
+CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/program_context.cpp -o CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.s
+
+CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o: CMakeFiles/app_default.dir/flags.make
+CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o: /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp
+CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o: CMakeFiles/app_default.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lukasz/Desktop/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o -MF CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o.d -o CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o -c /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp
+
+CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp > CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.i
+
+CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp -o CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.s
 
 # Object files for target app_default
 app_default_OBJECTS = \
 "CMakeFiles/app_default.dir/main.cpp.o" \
 "CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o" \
 "CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o" \
-"CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o"
+"CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o" \
+"CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.o" \
+"CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o"
 
 # External object files for target app_default
 app_default_EXTERNAL_OBJECTS =
@@ -139,13 +169,15 @@ app_default: CMakeFiles/app_default.dir/main.cpp.o
 app_default: CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o
 app_default: CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o
 app_default: CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o
+app_default: CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.o
+app_default: CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o
 app_default: CMakeFiles/app_default.dir/build.make
 app_default: /usr/lib/x86_64-linux-gnu/libOpenCL.so
 app_default: /usr/lib/x86_64-linux-gnu/libSDL2.so
 app_default: /usr/lib/x86_64-linux-gnu/libSDL2_ttf.so
 app_default: /usr/lib/x86_64-linux-gnu/libSDL2_ttf.so
 app_default: CMakeFiles/app_default.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/lukasz/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable app_default"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/lukasz/Desktop/HardwareRenderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable app_default"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/app_default.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -157,6 +189,6 @@ CMakeFiles/app_default.dir/clean:
 .PHONY : CMakeFiles/app_default.dir/clean
 
 CMakeFiles/app_default.dir/depend:
-	cd /home/lukasz/HardwareRenderer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lukasz/HardwareRenderer /home/lukasz/HardwareRenderer /home/lukasz/HardwareRenderer/build /home/lukasz/HardwareRenderer/build /home/lukasz/HardwareRenderer/build/CMakeFiles/app_default.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/lukasz/Desktop/HardwareRenderer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lukasz/Desktop/HardwareRenderer /home/lukasz/Desktop/HardwareRenderer /home/lukasz/Desktop/HardwareRenderer/build /home/lukasz/Desktop/HardwareRenderer/build /home/lukasz/Desktop/HardwareRenderer/build/CMakeFiles/app_default.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/app_default.dir/depend
 

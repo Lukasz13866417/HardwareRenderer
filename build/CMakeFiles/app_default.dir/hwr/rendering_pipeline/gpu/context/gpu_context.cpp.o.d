@@ -1,9 +1,9 @@
 CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o: \
- /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.cpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.cpp \
  /usr/include/stdc-predef.h \
- /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/context/../../../util/log/log.hpp \
- /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/context/../../../util/log/log_config_detail.hpp \
- /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/context/../../../util/log/../../rendering_pipeline/gpu/gpu_cl_init.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/context/../../../util/log/log.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/context/../../../util/log/log_config_detail.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/context/../../../util/log/../../rendering_pipeline/gpu/gpu_cl_init.hpp \
  /usr/include/CL/opencl.hpp /usr/include/CL/opencl.h /usr/include/CL/cl.h \
  /usr/include/CL/cl_version.h /usr/include/CL/cl_platform.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
@@ -244,8 +244,8 @@ CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o:
  /usr/include/c++/13/bits/ranges_algobase.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h \
- /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.hpp \
- /home/lukasz/HardwareRenderer/hwr/rendering_pipeline/gpu/context/../gpu_cl_init.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/context/gpu_context.hpp \
+ /home/lukasz/Desktop/HardwareRenderer/hwr/rendering_pipeline/gpu/context/../gpu_cl_init.hpp \
  /usr/include/c++/13/optional /usr/include/c++/13/fstream \
  /usr/include/c++/13/istream /usr/include/c++/13/bits/istream.tcc \
  /usr/include/c++/13/bits/codecvt.h \

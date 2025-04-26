@@ -7,6 +7,8 @@
 
 #include "./shader_types_util.hpp"
 #include "./static_string.hpp"
+#include "./program_context.hpp"
+#include "./string_parsing.hpp"
 
 #define HWR_DEFINE_SHADER_BINARY_OP(OP)                                                        \
 template<hwr::AllowedShaderType T, hwr::AllowedShaderType U>                                   \
@@ -89,45 +91,20 @@ operator OP(const hwr::ShaderRValue<T>& lhs, const hwr::ShaderRValue<U>& rhs)   
         hwr::detail::expr(lhs), #OP, hwr::detail::expr(rhs)));                                 \
 }
 
-
-
 namespace hwr {
+    template<typename T> class ShaderValue; // forward decl
+    template<typename T> class ShaderRValue; // forward decl
 
-template<typename T>
-class ShaderRValue;
+    namespace detail {
+        template<typename T> std::string expr(const ShaderValue<T>& v);
+        template<typename T> std::string expr(const ShaderRValue<T>& v);
+        template<typename T> std::string expr(const T& v);
+    }
 
-template<typename T>
-class ShaderValue;
-
-class Program;
+    class Program;
 
 
 namespace detail {
-
-    namespace program_context {
-
-       static std::stack<Program*> s_program_stack;
-
-        void push_program(Program& p) {
-            s_program_stack.push(&p);
-        }
-
-        void pop_program() {
-            if (!s_program_stack.empty()) {
-                s_program_stack.pop();
-            }
-        }
-
-        Program& current_program() {
-            assert(!s_program_stack.empty());
-            return *s_program_stack.top();
-        }
-
-        // implemented later in the file
-        void appendToProgramCode(Program& p, const std::string& line); 
-
-    }  // namespace program_context 
-    
 
 
     template<typename T>
@@ -171,12 +148,58 @@ namespace detail {
 class Program {
 
 private:
-    std::string code_;
+    int32_t _remaining_to_ignore = 0;
+    std::vector<std::string> code_;
     std::function<void()> compilable_fn_;
     bool compiled_ = false;
 
-    void append(const std::string& line) {
-        code_ += line + "\n";
+
+    void append(const std::string& what) {
+        if(what.empty()){
+            HWR_FATAL("Appending empty code is illegal");
+        }
+        if(!detail::program_context::is_forloop_header_being_generated()){
+            if (_remaining_to_ignore == 0) {
+                code_.push_back(what);
+            } else {
+                --_remaining_to_ignore;
+            }
+        }else{
+            if(code_.empty()){
+                code_.push_back(what);
+            }else{
+                code_.back() += what;
+            }
+            if(what.back() == ';'){
+                code_.back().back() = ',';
+            }
+        }
+    }
+
+    void replace_possible_comma_with_semicolon(){
+        if(code_.empty()){
+            HWR_FATAL("Program has no code");
+        }else{
+            code_.back().back() = ';';
+        }
+    }
+
+    void remove_last_char(){
+        if(code_.empty()){
+            HWR_FATAL("Program has no code");
+        }else{
+            code_.back().pop_back();
+        }
+    }
+
+    void ignore_next_k_appends(int32_t k){
+        _remaining_to_ignore = k;
+    }
+
+    void undo_last_k_appends(int32_t k){
+        while(k--){
+            code_.pop_back();
+        }
     }
 
 public:
@@ -197,34 +220,32 @@ public:
         // Pop after generation
         detail::program_context::pop_program();
         compiled_ = true;
-        return code_;
+        std::string res="";
+        for(const std::string& str : code_){
+            res += str+"\n";
+        }
+        return res;
     }
 
     // Accessor for ProgramContext
     friend void detail::program_context::push_program(Program& p);
-    friend void detail::program_context::appendToProgramCode(Program& p, 
+    friend void detail::program_context::appendToProgramCode(
                                                         const std::string& s);
+    friend void detail::program_context::replace_possible_comma_with_semicolon();
+    friend void detail::program_context::remove_last_char();
+
+    friend void detail::program_context::ignore_next_k_appends(int32_t k);
+    friend void detail::program_context::undo_last_k_appends(int32_t k);
 
 }; 
 
 namespace detail {
-    namespace program_context {
-        inline void appendToProgramCode(Program& p, const std::string& line) {
-            p.append(line);
-        }
-    }
-
-    inline int temp_counter = 0;
-
-    inline std::string make_temp_name() {
-        return "tmp" + std::to_string(temp_counter++);
-    }
-
-    const std::string COMMON_RVALUE_NAME = "";
-    const std::string COMMON_RVALUE_DEFINITION = "";
-    
     
 
+    const inline std::string COMMON_RVALUE_NAME = "";
+    const inline std::string COMMON_RVALUE_DEFINITION = "";
+    
+    
     template<typename T>
     std::string getExpression(const ShaderRValue<T>& wrapper);
 
@@ -240,13 +261,19 @@ class ShaderValue{
         const std::string& getDefinition(){
             return def_;
         }
+        
+        // Get the OpenCL type name corresponding to this ShaderValue
+        const std::string& getOpenCLType() const {
+            return type_;
+        }
 
         public:
             ShaderValue(const ShaderRValue<T>& rhs)
             : ShaderValue(
                 std::string(opencl_type_name_v<T>),  // type
                 detail::getExpression(rhs)  // expression
-            ) {}
+            ) {
+            }
     
 
             ShaderValue(T from) 
@@ -266,7 +293,8 @@ class ShaderValue{
                 std::string(opencl_type_name_v<T>),  // type
                 "(" + std::string(opencl_type_name_v<T>) + ")"
                 + detail::getExpression(rhs)  // expression
-            ) {}
+            ) {
+            }
 
 
             template<typename U>
@@ -284,17 +312,68 @@ class ShaderValue{
                 : ShaderValue(std::string(opencl_type_name_v<T>), rhs.expression_)
                 {}
 
-            
+            // Assignment operator for shading DSL: a = expr
+            template<typename U>
+            requires(is_allowed_type_v<U> && is_shader_convertible_v<U, T>)
+            void operator=(const ShaderValue<U>& rhs) {
+                detail::program_context::appendToProgramCode(
+                    name_ + " = " + detail::expr(rhs) + ";"
+                );
+            }
+
+            template<typename U>
+            requires(is_allowed_type_v<U> && is_shader_convertible_v<U, T>)
+            void operator=(const ShaderRValue<U>& rhs) {
+                detail::program_context::appendToProgramCode(
+                    name_ + " = " + detail::expr(rhs) + ";"
+                );
+            }
+
+            void operator=(T v) {
+                detail::program_context::appendToProgramCode(
+                    name_ + " = " + toOpenCLCode(v) + ";"
+                );
+            }
+
+            operator bool(){
+                int32_t res = detail::program_context::get_counter();
+                if(res > 0 && detail::program_context::is_forloop_header_being_generated()){
+                    detail::program_context::replace_possible_comma_with_semicolon();
+                    detail::program_context::appendToProgramCode(
+                        name_+";"
+                    );
+                    detail::program_context::replace_possible_comma_with_semicolon();
+                }
+                
+                HWR_INFO("counter: "+std::to_string(res));
+                if(res>0){
+                    detail::program_context::decr_counter();
+                }
+                detail::program_context::unset_first_def();
+                return res>0;
+            }
 
     protected:
         ShaderValue(const std::string& type, const std::string& expr)
             : type_(type), expression_(expr),
-              name_(detail::make_temp_name()),
+              name_(detail::program_context::make_temp_name()),
               def_ (type_ + " " + name_ + " = " + expression_ + ";" )
             {
                 HWR_DEBUG("Appending code to program: " + def_);
-                detail::program_context::appendToProgramCode(
-                    detail::program_context::current_program(), def_);
+                if(detail::program_context::is_forloop_header_being_generated()){
+                    if(detail::program_context::is_first_def()){
+                        detail::program_context::appendToProgramCode(
+                            def_);
+                    }else{
+                        detail::program_context::appendToProgramCode(
+                            name_ + " = " + expression_ + ";");
+                    }
+                }else{
+                    detail::program_context::appendToProgramCode(
+                        def_);
+                }
+                // Always push type to stack for later extraction
+                detail::program_context::push_opencl_type(type_);
             }
 
         template<typename U>
@@ -348,6 +427,23 @@ public:
 
     std::string expr_;
 
+    operator bool(){
+        int32_t res = detail::program_context::get_counter();
+        if(res > 0 && detail::program_context::is_forloop_header_being_generated()){
+            detail::program_context::replace_possible_comma_with_semicolon();
+            detail::program_context::appendToProgramCode(
+               
+                expr_+";"
+            );
+            detail::program_context::replace_possible_comma_with_semicolon();
+        }
+        HWR_INFO("counter: "+std::to_string(res));
+        if(res>0){
+            detail::program_context::decr_counter();
+        }
+        detail::program_context::unset_first_def();
+        return res>0;
+    }
 };
 
 
@@ -401,11 +497,361 @@ HWR_DEFINE_SHADER_BINARY_OP(+)
 HWR_DEFINE_SHADER_BINARY_OP(-)
 HWR_DEFINE_SHADER_BINARY_OP(*)
 HWR_DEFINE_SHADER_BINARY_OP(/)
+HWR_DEFINE_SHADER_BINARY_OP(%)
 HWR_DEFINE_SHADER_BINARY_OP(==)
+HWR_DEFINE_SHADER_BINARY_OP(!=)
 HWR_DEFINE_SHADER_BINARY_OP(<=)
 HWR_DEFINE_SHADER_BINARY_OP(>=)
 HWR_DEFINE_SHADER_BINARY_OP(>)
 HWR_DEFINE_SHADER_BINARY_OP(<)
 
+// Compound assignment operators
+HWR_DEFINE_SHADER_BINARY_OP(+=)
+HWR_DEFINE_SHADER_BINARY_OP(-=)
+HWR_DEFINE_SHADER_BINARY_OP(*=)
+HWR_DEFINE_SHADER_BINARY_OP(/=)
+
+// Bitwise operators (integers only)
+HWR_DEFINE_SHADER_BINARY_OP(<<)
+HWR_DEFINE_SHADER_BINARY_OP(>>)
+HWR_DEFINE_SHADER_BINARY_OP(<<=)
+HWR_DEFINE_SHADER_BINARY_OP(>>=)
+HWR_DEFINE_SHADER_BINARY_OP(&)
+HWR_DEFINE_SHADER_BINARY_OP(|)
+HWR_DEFINE_SHADER_BINARY_OP(^)
+HWR_DEFINE_SHADER_BINARY_OP(&=)
+HWR_DEFINE_SHADER_BINARY_OP(|=)
+HWR_DEFINE_SHADER_BINARY_OP(^=)
+
+// === Unary operators ===
+namespace hwr {
+
+// ---- Unary minus ----
+
+template<AllowedShaderType T>
+requires(!std::is_same_v<T, bool>)
+inline ShaderRValue<T> operator-(const ShaderValue<T>& v) {
+    return ShaderRValue<T>("(-" + detail::expr(v) + ")");
+}
+
+template<AllowedShaderType T>
+requires(!std::is_same_v<T, bool>)
+inline ShaderRValue<T> operator-(const ShaderRValue<T>& v) {
+    return ShaderRValue<T>("(-" + detail::expr(v) + ")");
+}
+
+// ---- Prefix ++ / -- ----
+
+template<AllowedShaderType T>
+requires(!std::is_same_v<T, bool>)
+inline ShaderValue<T>& operator++(ShaderValue<T>& v) { // prefix ++
+    detail::program_context::appendToProgramCode(
+  
+        detail::expr(v) + "++;"
+    );
+    return v;
+}
+
+template<AllowedShaderType T>
+requires(!std::is_same_v<T, bool>)
+inline ShaderValue<T>& operator--(ShaderValue<T>& v) { // prefix --
+    detail::program_context::appendToProgramCode(
+        detail::expr(v) + "--;"
+    );
+    return v;
+}
+
+// ---- Postfix ++ / -- ----
+
+template<AllowedShaderType T>
+requires(!std::is_same_v<T, bool>)
+inline ShaderValue<T>& operator++(ShaderValue<T>& v, int) { // postfix ++
+    detail::program_context::appendToProgramCode(
+        detail::expr(v) + "++;"
+    );
+    return v;
+}
+
+template<AllowedShaderType T>
+requires(!std::is_same_v<T, bool>)
+inline ShaderValue<T>& operator--(ShaderValue<T>& v, int) { // postfix --
+    detail::program_context::appendToProgramCode(
+        detail::expr(v) + "--;"
+    );
+    return v;
+}
+
+// ---- Compound assignment operators ----
+
+template<AllowedShaderType T, AllowedShaderType U>
+requires(is_op_allowed_v<T, U, StaticString{"+="}> && is_shader_convertible_v<U, T>)
+inline ShaderValue<T>& operator+=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " += " + detail::expr(rhs) + ";"
+    );
+    return lhs;
+}
+
+template<AllowedShaderType T, AllowedShaderType U>
+requires(is_op_allowed_v<T, U, StaticString{"-="}> && is_shader_convertible_v<U, T>)
+inline ShaderValue<T>& operator-=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " -= " + detail::expr(rhs) + ";"
+    );
+    return lhs;
+}
+
+template<AllowedShaderType T, AllowedShaderType U>
+requires(is_op_allowed_v<T, U, StaticString{"*="}> && is_shader_convertible_v<U, T>)
+inline ShaderValue<T>& operator*=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " *= " + detail::expr(rhs) + ";"
+    );
+    return lhs;
+}
+
+template<AllowedShaderType T, AllowedShaderType U>
+requires(is_op_allowed_v<T, U, StaticString{"/="}> && is_shader_convertible_v<U, T>)
+inline ShaderValue<T>& operator/=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " /= " + detail::expr(rhs) + ";"
+    );
+    return lhs;
+}
+
+// For primitive operands
+template<AllowedShaderType T, AllowedShaderType U>
+requires(is_op_allowed_v<T, U, StaticString{"+="}> && is_shader_convertible_v<U, T>)
+inline ShaderValue<T>& operator+=(ShaderValue<T>& lhs, const U& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " += " + detail::expr(rhs) + ";"
+    );
+    return lhs;
+}
+
+template<AllowedShaderType T, AllowedShaderType U>
+requires(is_op_allowed_v<T, U, StaticString{"-="}> && is_shader_convertible_v<U, T>)
+inline ShaderValue<T>& operator-=(ShaderValue<T>& lhs, const U& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " -= " + detail::expr(rhs) + ";"
+    );
+    return lhs;
+}
+
+template<AllowedShaderType T, AllowedShaderType U>
+requires(is_op_allowed_v<T, U, StaticString{"*="}> && is_shader_convertible_v<U, T>)
+inline ShaderValue<T>& operator*=(ShaderValue<T>& lhs, const U& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " *= " + detail::expr(rhs) + ";"
+    );
+    return lhs;
+}
+
+template<AllowedShaderType T, AllowedShaderType U>
+requires(is_op_allowed_v<T, U, StaticString{"/="}> && is_shader_convertible_v<U, T>)
+inline ShaderValue<T>& operator/=(ShaderValue<T>& lhs, const U& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " /= " + detail::expr(rhs) + ";"
+    );
+    return lhs;
+}
+
+// Bitwise compound assignments for integers
+template<AllowedShaderType T, AllowedShaderType U>
+requires(is_op_allowed_v<T, U, StaticString{"<<="}> && std::is_same_v<T, int> && std::is_same_v<U, int>)
+inline ShaderValue<T>& operator<<=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " <<= " + detail::expr(rhs) + ";"
+    );
+    return lhs;
+}
+
+template<AllowedShaderType T, AllowedShaderType U>
+requires(is_op_allowed_v<T, U, StaticString{">>="}> && std::is_same_v<T, int> && std::is_same_v<U, int>)
+inline ShaderValue<T>& operator>>=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " >>= " + detail::expr(rhs) + ";"
+    );
+    return lhs;
+}
+
+template<AllowedShaderType T, AllowedShaderType U>
+requires(is_op_allowed_v<T, U, StaticString{"&="}> && std::is_same_v<T, int> && std::is_same_v<U, int>)
+inline ShaderValue<T>& operator&=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " &= " + detail::expr(rhs) + ";"
+    );
+    return lhs;
+}
+
+template<AllowedShaderType T, AllowedShaderType U>
+requires(is_op_allowed_v<T, U, StaticString{"|="}> && std::is_same_v<T, int> && std::is_same_v<U, int>)
+inline ShaderValue<T>& operator|=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " |= " + detail::expr(rhs) + ";"
+    );
+    return lhs;
+}
+
+template<AllowedShaderType T, AllowedShaderType U>
+requires(is_op_allowed_v<T, U, StaticString{"^="}> && std::is_same_v<T, int> && std::is_same_v<U, int>)
+inline ShaderValue<T>& operator^=(ShaderValue<T>& lhs, const ShaderValue<U>& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " ^= " + detail::expr(rhs) + ";"
+    );
+    return lhs;
+}
+
+// With primitive operands
+template<AllowedShaderType T>
+requires(std::is_same_v<T, int>)
+inline ShaderValue<T>& operator<<=(ShaderValue<T>& lhs, const int& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " <<= " + std::to_string(rhs) + ";"
+    );
+    return lhs;
+}
+
+template<AllowedShaderType T>
+requires(std::is_same_v<T, int>)
+inline ShaderValue<T>& operator>>=(ShaderValue<T>& lhs, const int& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " >>= " + std::to_string(rhs) + ";"
+    );
+    return lhs;
+}
+
+template<AllowedShaderType T>
+requires(std::is_same_v<T, int>)
+inline ShaderValue<T>& operator&=(ShaderValue<T>& lhs, const int& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " &= " + std::to_string(rhs) + ";"
+    );
+    return lhs;
+}
+
+template<AllowedShaderType T>
+requires(std::is_same_v<T, int>)
+inline ShaderValue<T>& operator|=(ShaderValue<T>& lhs, const int& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " |= " + std::to_string(rhs) + ";"
+    );
+    return lhs;
+}
+
+template<AllowedShaderType T>
+requires(std::is_same_v<T, int>)
+inline ShaderValue<T>& operator^=(ShaderValue<T>& lhs, const int& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " ^= " + std::to_string(rhs) + ";"
+    );
+    return lhs;
+}
+
+// ---- Logical NOT ! ----
+
+template<AllowedShaderType T>
+inline ShaderRValue<bool> operator!(const ShaderValue<T>& v) {
+    return ShaderRValue<bool>("(!" + detail::expr(v) + ")");
+}
+
+template<AllowedShaderType T>
+inline ShaderRValue<bool> operator!(const ShaderRValue<T>& v) {
+    return ShaderRValue<bool>("(!" + detail::expr(v) + ")");
+}
+
+// ---- Modulo for integers ----
+
+template<AllowedShaderType T>
+requires(std::is_same_v<T, int>)
+inline ShaderValue<T>& operator%=(ShaderValue<T>& lhs, const int& rhs) {
+    detail::program_context::appendToProgramCode(
+        detail::expr(lhs) + " %= " + std::to_string(rhs) + ";"
+    );
+    return lhs;
+}
+
+} // namespace hwr
+
+// Helper to extract OpenCL type from a ShaderValue initialization
+#define HWR_GET_OPENCL_TYPE(var_type, var_name, var_init)    \
+    var_type var_name = var_init;                           \
+    std::string _opencl_type = hwr::detail::program_context::pop_opencl_type();
+
+// Helpers to concatenate tokens for unique loop variables
+#define HWR_CONCAT_INNER(a, b) a##b
+#define HWR_CONCAT(a, b) HWR_CONCAT_INNER(a, b)
+
+#define HWR_STRINGIFY(x) #x
+
+#define HWR_FOR(...) \
+auto HWR_CONCAT(_hwr_for_parsed_, __LINE__) = hwr::detail::parseForHeader(HWR_STRINGIFY(__VA_ARGS__));  \
+if(!HWR_CONCAT(_hwr_for_parsed_, __LINE__)){    \
+    HWR_FATAL("Invalid forloop header"); \
+} \
+auto [HWR_CONCAT(_hwr_for_init_, __LINE__),HWR_CONCAT(_hwr_for_cond_, __LINE__),HWR_CONCAT(_hwr_for_upd_, __LINE__)] = HWR_CONCAT(_hwr_for_parsed_, __LINE__).value().tie(); \
+{ \
+    hwr::detail::program_context::appendToProgramCode(std::string("for(")); \
+    hwr::detail::program_context::set_forloop_header_generation(); \
+    hwr::detail::program_context::incr_counter();                  \
+    hwr::detail::program_context::set_first_def();                      \
+    for (__VA_ARGS__) {} \
+    hwr::detail::program_context::remove_last_char();                  \
+    hwr::detail::program_context::appendToProgramCode(std::string("){")); \
+    hwr::detail::program_context::unset_forloop_header_generation(); \
+} \
+hwr::detail::program_context::incr_counter();                  \
+int32_t HWR_CONCAT(_hwr_for_declcount_, __LINE__) = hwr::detail::countInitDeclarations(HWR_CONCAT(_hwr_for_init_, __LINE__)); \
+hwr::detail::program_context::rollback_name_counter(HWR_CONCAT(_hwr_for_declcount_, __LINE__)); \
+int32_t HWR_CONCAT(_hwr_for_updcount_, __LINE__) = hwr::detail::countUpdateOperations(HWR_CONCAT(_hwr_for_upd_, __LINE__)); \
+assert(HWR_CONCAT(_hwr_for_declcount_, __LINE__)!=-1); \
+assert(HWR_CONCAT(_hwr_for_updcount_, __LINE__)!=-1); \
+hwr::detail::program_context::ignore_next_k_appends(HWR_CONCAT(_hwr_for_declcount_, __LINE__)); \
+for (__VA_ARGS__,hwr::detail::program_context::undo_last_k_appends(HWR_CONCAT(_hwr_for_updcount_, __LINE__)), hwr::detail::program_context::appendToProgramCode(std::string("}")))  \
+
+
+         
+// C++-style while loop
+#define HWR_WHILE(cond)                                                         \
+    for (bool HWR_CONCAT(_hwr_while_once_, __LINE__) =                          \
+             (hwr::detail::program_context::appendToProgramCode(                \
+                  std::string("while(") + hwr::detail::expr(cond) + std::string(") {")), true);                             \
+         HWR_CONCAT(_hwr_while_once_, __LINE__);                                \
+         hwr::detail::program_context::appendToProgramCode(                     \
+             std::string("}")                                                 \
+         ), HWR_CONCAT(_hwr_while_once_, __LINE__) = false)
+
+// C++-style if statement injection
+#define HWR_IF(cond)                                                             \
+    for (bool HWR_CONCAT(_hwr_if_once_, __LINE__) =                             \
+             (hwr::detail::program_context::appendToProgramCode(                \
+                  std::string("if(") + hwr::detail::expr(cond) + std::string(") {") \
+              ), true);                                                        \
+         HWR_CONCAT(_hwr_if_once_, __LINE__);                                    \
+         hwr::detail::program_context::appendToProgramCode(                     \
+             std::string("}")                                                 \
+         ), HWR_CONCAT(_hwr_if_once_, __LINE__) = false)
+
+// C++-style else if statement injection
+#define HWR_ELSE_IF(cond)                                                        \
+    for (bool HWR_CONCAT(_hwr_else_if_once_, __LINE__) =                         \
+             (hwr::detail::program_context::appendToProgramCode(                \
+                  std::string("else if(") + hwr::detail::expr(cond) + std::string(") {") \
+              ), true);                                                        \
+         HWR_CONCAT(_hwr_else_if_once_, __LINE__);                               \
+         hwr::detail::program_context::appendToProgramCode(                     \
+             std::string("}")                                                 \
+         ), HWR_CONCAT(_hwr_else_if_once_, __LINE__) = false)
+
+// C++-style else statement injection
+#define HWR_ELSE                                                                 \
+    for (bool HWR_CONCAT(_hwr_else_once_, __LINE__) =                            \
+             (hwr::detail::program_context::appendToProgramCode(                \
+                  std::string("else {")                                       \
+              ), true);                                                        \
+         HWR_CONCAT(_hwr_else_once_, __LINE__);                                  \
+         hwr::detail::program_context::appendToProgramCode(                     \
+             std::string("}")                                                 \
+         ), HWR_CONCAT(_hwr_else_once_, __LINE__) = false)
 
 #endif // HWR_SHADER_HPP

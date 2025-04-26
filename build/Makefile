@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lukasz/HardwareRenderer
+CMAKE_SOURCE_DIR = /home/lukasz/Desktop/HardwareRenderer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lukasz/HardwareRenderer/build
+CMAKE_BINARY_DIR = /home/lukasz/Desktop/HardwareRenderer/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lukasz/HardwareRenderer/build/CMakeFiles /home/lukasz/HardwareRenderer/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lukasz/Desktop/HardwareRenderer/build/CMakeFiles /home/lukasz/Desktop/HardwareRenderer/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lukasz/HardwareRenderer/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lukasz/Desktop/HardwareRenderer/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -129,54 +129,12 @@ app_default/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/build
 .PHONY : app_default/fast
 
-#=============================================================================
-# Target rules for targets named app_no_debug
-
-# Build rule for target.
-app_no_debug: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 app_no_debug
-.PHONY : app_no_debug
-
-# fast build rule for target.
-app_no_debug/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/build
-.PHONY : app_no_debug/fast
-
-#=============================================================================
-# Target rules for targets named app_no_console
-
-# Build rule for target.
-app_no_console: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 app_no_console
-.PHONY : app_no_console
-
-# fast build rule for target.
-app_no_console/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/build
-.PHONY : app_no_console/fast
-
-#=============================================================================
-# Target rules for targets named app_no_file
-
-# Build rule for target.
-app_no_file: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 app_no_file
-.PHONY : app_no_file
-
-# fast build rule for target.
-app_no_file/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/build
-.PHONY : app_no_file/fast
-
 hwr/rendering_pipeline/gpu/context/gpu_context.o: hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o
 .PHONY : hwr/rendering_pipeline/gpu/context/gpu_context.o
 
 # target to build an object file
 hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o
 .PHONY : hwr/rendering_pipeline/gpu/context/gpu_context.cpp.o
 
 hwr/rendering_pipeline/gpu/context/gpu_context.i: hwr/rendering_pipeline/gpu/context/gpu_context.cpp.i
@@ -185,9 +143,6 @@ hwr/rendering_pipeline/gpu/context/gpu_context.i: hwr/rendering_pipeline/gpu/con
 # target to preprocess a source file
 hwr/rendering_pipeline/gpu/context/gpu_context.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.i
 .PHONY : hwr/rendering_pipeline/gpu/context/gpu_context.cpp.i
 
 hwr/rendering_pipeline/gpu/context/gpu_context.s: hwr/rendering_pipeline/gpu/context/gpu_context.cpp.s
@@ -196,10 +151,55 @@ hwr/rendering_pipeline/gpu/context/gpu_context.s: hwr/rendering_pipeline/gpu/con
 # target to generate assembly for a file
 hwr/rendering_pipeline/gpu/context/gpu_context.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/hwr/rendering_pipeline/gpu/context/gpu_context.cpp.s
 .PHONY : hwr/rendering_pipeline/gpu/context/gpu_context.cpp.s
+
+hwr/rendering_pipeline/gpu/shader/program_context.o: hwr/rendering_pipeline/gpu/shader/program_context.cpp.o
+.PHONY : hwr/rendering_pipeline/gpu/shader/program_context.o
+
+# target to build an object file
+hwr/rendering_pipeline/gpu/shader/program_context.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.o
+.PHONY : hwr/rendering_pipeline/gpu/shader/program_context.cpp.o
+
+hwr/rendering_pipeline/gpu/shader/program_context.i: hwr/rendering_pipeline/gpu/shader/program_context.cpp.i
+.PHONY : hwr/rendering_pipeline/gpu/shader/program_context.i
+
+# target to preprocess a source file
+hwr/rendering_pipeline/gpu/shader/program_context.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.i
+.PHONY : hwr/rendering_pipeline/gpu/shader/program_context.cpp.i
+
+hwr/rendering_pipeline/gpu/shader/program_context.s: hwr/rendering_pipeline/gpu/shader/program_context.cpp.s
+.PHONY : hwr/rendering_pipeline/gpu/shader/program_context.s
+
+# target to generate assembly for a file
+hwr/rendering_pipeline/gpu/shader/program_context.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/program_context.cpp.s
+.PHONY : hwr/rendering_pipeline/gpu/shader/program_context.cpp.s
+
+hwr/rendering_pipeline/gpu/shader/string_parsing.o: hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o
+.PHONY : hwr/rendering_pipeline/gpu/shader/string_parsing.o
+
+# target to build an object file
+hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o
+.PHONY : hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.o
+
+hwr/rendering_pipeline/gpu/shader/string_parsing.i: hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.i
+.PHONY : hwr/rendering_pipeline/gpu/shader/string_parsing.i
+
+# target to preprocess a source file
+hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.i
+.PHONY : hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.i
+
+hwr/rendering_pipeline/gpu/shader/string_parsing.s: hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.s
+.PHONY : hwr/rendering_pipeline/gpu/shader/string_parsing.s
+
+# target to generate assembly for a file
+hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.s
+.PHONY : hwr/rendering_pipeline/gpu/shader/string_parsing.cpp.s
 
 hwr/util/log/log.o: hwr/util/log/log.cpp.o
 .PHONY : hwr/util/log/log.o
@@ -207,9 +207,6 @@ hwr/util/log/log.o: hwr/util/log/log.cpp.o
 # target to build an object file
 hwr/util/log/log.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/hwr/util/log/log.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/hwr/util/log/log.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/hwr/util/log/log.cpp.o
 .PHONY : hwr/util/log/log.cpp.o
 
 hwr/util/log/log.i: hwr/util/log/log.cpp.i
@@ -218,9 +215,6 @@ hwr/util/log/log.i: hwr/util/log/log.cpp.i
 # target to preprocess a source file
 hwr/util/log/log.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/hwr/util/log/log.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/hwr/util/log/log.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/hwr/util/log/log.cpp.i
 .PHONY : hwr/util/log/log.cpp.i
 
 hwr/util/log/log.s: hwr/util/log/log.cpp.s
@@ -229,9 +223,6 @@ hwr/util/log/log.s: hwr/util/log/log.cpp.s
 # target to generate assembly for a file
 hwr/util/log/log.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/hwr/util/log/log.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/hwr/util/log/log.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/hwr/util/log/log.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/hwr/util/log/log.cpp.s
 .PHONY : hwr/util/log/log.cpp.s
 
 hwr/util/math/math_util.o: hwr/util/math/math_util.cpp.o
@@ -240,9 +231,6 @@ hwr/util/math/math_util.o: hwr/util/math/math_util.cpp.o
 # target to build an object file
 hwr/util/math/math_util.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/hwr/util/math/math_util.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/hwr/util/math/math_util.cpp.o
 .PHONY : hwr/util/math/math_util.cpp.o
 
 hwr/util/math/math_util.i: hwr/util/math/math_util.cpp.i
@@ -251,9 +239,6 @@ hwr/util/math/math_util.i: hwr/util/math/math_util.cpp.i
 # target to preprocess a source file
 hwr/util/math/math_util.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/hwr/util/math/math_util.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/hwr/util/math/math_util.cpp.i
 .PHONY : hwr/util/math/math_util.cpp.i
 
 hwr/util/math/math_util.s: hwr/util/math/math_util.cpp.s
@@ -262,9 +247,6 @@ hwr/util/math/math_util.s: hwr/util/math/math_util.cpp.s
 # target to generate assembly for a file
 hwr/util/math/math_util.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/hwr/util/math/math_util.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/hwr/util/math/math_util.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/hwr/util/math/math_util.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/hwr/util/math/math_util.cpp.s
 .PHONY : hwr/util/math/math_util.cpp.s
 
 main.o: main.cpp.o
@@ -273,9 +255,6 @@ main.o: main.cpp.o
 # target to build an object file
 main.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/main.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/main.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/main.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -284,9 +263,6 @@ main.i: main.cpp.i
 # target to preprocess a source file
 main.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/main.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/main.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/main.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -295,9 +271,6 @@ main.s: main.cpp.s
 # target to generate assembly for a file
 main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_default.dir/build.make CMakeFiles/app_default.dir/main.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_debug.dir/build.make CMakeFiles/app_no_debug.dir/main.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_console.dir/build.make CMakeFiles/app_no_console.dir/main.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/app_no_file.dir/build.make CMakeFiles/app_no_file.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -309,12 +282,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... app_default"
-	@echo "... app_no_console"
-	@echo "... app_no_debug"
-	@echo "... app_no_file"
 	@echo "... hwr/rendering_pipeline/gpu/context/gpu_context.o"
 	@echo "... hwr/rendering_pipeline/gpu/context/gpu_context.i"
 	@echo "... hwr/rendering_pipeline/gpu/context/gpu_context.s"
+	@echo "... hwr/rendering_pipeline/gpu/shader/program_context.o"
+	@echo "... hwr/rendering_pipeline/gpu/shader/program_context.i"
+	@echo "... hwr/rendering_pipeline/gpu/shader/program_context.s"
+	@echo "... hwr/rendering_pipeline/gpu/shader/string_parsing.o"
+	@echo "... hwr/rendering_pipeline/gpu/shader/string_parsing.i"
+	@echo "... hwr/rendering_pipeline/gpu/shader/string_parsing.s"
 	@echo "... hwr/util/log/log.o"
 	@echo "... hwr/util/log/log.i"
 	@echo "... hwr/util/log/log.s"
